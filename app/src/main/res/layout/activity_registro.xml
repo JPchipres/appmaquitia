@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".registro">
+
+    <!--Caja de layouts padre-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="15dp">
+
+        <!--Caja de layouts btn regresar-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_style"
+                android:drawableLeft="@drawable/arrow"
+                android:paddingStart="5dp"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <!--Caja de layouts botones-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_oscuro"
+                    android:fontFamily="@font/urbanist"
+                    android:text="Ingresa tus Datos"
+                    android:textSize="35sp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_oscuro"
+                    android:fontFamily="@font/urbanist"
+                    android:text="¡Comienza Ahora!"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.7"
+                android:orientation="vertical"
+                android:gravity="bottom">
+
+                <EditText
+                    android:id="@+id/etnombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Ingresa tu nombre"
+
+                    android:paddingLeft="20dp"
+                    android:background="@drawable/edittext_radius"
+                    app:cornerRadius="8dp"
+                    android:paddingVertical="10dp"
+                    android:inputType="textPersonName|textCapWords"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/urbanist"/>
+
+                <EditText
+                    android:id="@+id/etmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:background="@drawable/edittext_radius"
+                    android:hint="Ingresa tu email"
+                    android:paddingLeft="20dp"
+                    android:paddingVertical="10dp"
+                    android:inputType="textEmailAddress"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/urbanist"/>
+                <EditText
+                    android:id="@+id/etpass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:hint="Ingresa tu contraseña"
+
+                    android:paddingLeft="20dp"
+                    android:background="@drawable/edittext_radius"
+                    app:cornerRadius="8dp"
+                    android:paddingVertical="10dp"
+                    android:inputType="textPassword"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/urbanist"/>
+
+                <EditText
+                    android:id="@+id/etpassconfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:background="@drawable/edittext_radius"
+                    android:hint="Confirma tu contraseña"
+                    android:paddingLeft="20dp"
+                    android:paddingVertical="10dp"
+                    android:inputType="textPassword"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/urbanist"/>
+
+                <Button
+                    android:id="@+id/btnregistrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_ini"
+                    android:textColor="@color/white"
+                    android:text="Entrar"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    app:cornerRadius="8dp"
+                    android:padding="12dp"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".5"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/btnregistrarAso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_ini"
+                    android:textColor="@color/white"
+                    android:text="Registro asociación"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    app:cornerRadius="8dp"
+                    android:padding="12dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/urbanist"
+                    android:text="Recuperar Contraseña"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/urbanist"
+                    android:text="Registrarse"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:fontFamily="@font/urbanist"
+                    android:text="O inicia sesion con:"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".3"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/facebook"
+                    android:layout_gravity=""
+                    android:layout_marginEnd="20dp"/>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/google"
+                    android:layout_marginStart="20dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

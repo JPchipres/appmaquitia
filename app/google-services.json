@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "836531711868",
+    "project_id": "maquitia",
+    "storage_bucket": "maquitia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836531711868:android:8e306d9ae700c46e2a7ef9",
+        "android_client_info": {
+          "package_name": "com.example.appmaquitia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgmKUclBTtVKOb5J56zXV58V8B4E0RXyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836531711868:android:a4f24f06e54824e62a7ef9",
+        "android_client_info": {
+          "package_name": "com.idevs.maquitiapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgmKUclBTtVKOb5J56zXV58V8B4E0RXyg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

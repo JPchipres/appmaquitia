@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".codigo_otp">
+
+    <LinearLayout
+        android:id="@+id/ll_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_style"
+            android:drawableLeft="@drawable/arrow"
+            android:paddingStart="5dp"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_text"
+        android:layout_below="@+id/ll_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verificación OTP"
+            android:gravity="left"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="35sp"
+            app:fontFamily="@font/urbanist_bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Introduce el codigo enviado directamente a tu correo."
+            android:gravity="left"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/gris_fuerte"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_codigos"
+        android:layout_below="@+id/ll_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="40dp">
+
+        <EditText
+            android:id="@+id/et_codigo1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:hint="0"
+            android:textColorHint="@color/gris_fuerte"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            style="@style/edittextStyle2"/>
+        <EditText
+            android:id="@+id/et_codigo2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:hint="0"
+            android:textColorHint="@color/gris_fuerte"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            style="@style/edittextStyle2"/>
+        <EditText
+            android:id="@+id/et_codigo3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:hint="0"
+            android:textColorHint="@color/gris_fuerte"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            style="@style/edittextStyle2"/>
+        <EditText
+            android:id="@+id/et_codigo4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:hint="0"
+            android:textColorHint="@color/gris_fuerte"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            style="@style/edittextStyle2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_verificar"
+        android:layout_below="@id/ll_codigos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_verificar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="Verificar"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:background="@drawable/button2_style"
+            app:fontFamily="@font/urbanist_semibold"
+            android:layout_margin="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_reenvio"
+        android:layout_below="@+id/ll_verificar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_reenvio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="¿No ha recibido el código?"
+            android:textColor="@color/black"
+            app:fontFamily="@font/urbanist_medium"
+            android:textSize="15sp"/>
+        <Button
+            android:id="@+id/btn_reenviar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reenviar"
+            android:textSize="15sp"
+            android:textColor="@color/aqua"
+            app:fontFamily="@font/urbanist_bold"
+            android:background="@drawable/button3_style"
+            android:layout_margin="15dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
