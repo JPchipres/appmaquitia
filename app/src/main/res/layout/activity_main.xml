@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/logo"
+                app:layout_constraintStart_toStartOf="parent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnInicioSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"
+                android:text="Iniciar Sesión"
+                android:fontFamily="@font/urbanist_bold"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                app:cornerRadius="8dp"
+                android:padding="16dp"/>
+
+            <Button
+                android:id="@+id/btnRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_register"
+                style="?attr/materialButtonOutlinedStyle"
+                app:strokeColor="@color/buttons"
+                app:strokeWidth="1dp"
+                android:textColor="@color/buttons"
+                app:cornerRadius="8dp"
+                android:padding="16dp"
+
+                android:text="Registrarse"
+                android:fontFamily="@font/urbanist"
+                android:textStyle="bold"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+
+                android:textColor="@color/buttons"
+                android:textSize="17sp"
+                android:text="Continuar sin registrarse"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

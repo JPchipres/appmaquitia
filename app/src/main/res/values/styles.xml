@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="edittextStyle">
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@drawable/edittext_details</item>
+    </style>
+    <style name="edittextStyle2">
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@drawable/edittext2_details</item>
+    </style>
+</resources>
