@@ -14,7 +14,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/button_style"
-        android:drawableLeft="@drawable/arrow"
         android:paddingStart="5dp"
         android:textSize="30sp" />
 
@@ -101,5 +100,11 @@
         android:textColor="@color/white"
         android:backgroundTint="@color/turquesa"
         android:text="Registrar Asociación" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tt"
+        android:text="PRUEBAS"
+        android:layout_below="@id/registroAsociacion"/>
 
 </RelativeLayout>
