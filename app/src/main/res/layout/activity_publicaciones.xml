@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dp"
-        tools:context=".publicaciones">
+    android:padding="4dp"
+    tools:context=".publicaciones">
 
 
         <ImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="140dp"
-            app:srcCompat="@drawable/logo"
-            />
+            app:srcCompat="@drawable/logo" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -34,23 +28,38 @@
             android:drawableLeft="@drawable/search"
             android:drawablePadding="5dp"
             android:id="@+id/buscar"
-            android:hint="Search"
-            />
-        <LinearLayout
+            android:hint="Search" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buscar">
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/buscar">
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/buscar"
-                android:id="@+id/cardviewlist"
-                android:divider="@color/gris"
-                android:dividerHeight="2dp"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buscar"
+            android:id="@+id/cardviewlist"
+            android:divider="@color/gris"
+            android:dividerHeight="2dp"/>
+    </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navbar"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/nabvar_background"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="30dp"
+        app:menu="@menu/navbar_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/gris_medio"
+        app:itemRippleColor="@color/white"
+        app:labelVisibilityMode="unlabeled"
+        >
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
-    </RelativeLayout>
+
+</RelativeLayout>
 
 
-</ScrollView>
+
