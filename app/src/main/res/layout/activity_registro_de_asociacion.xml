@@ -89,22 +89,34 @@
         android:fontFamily="@font/urbanist"
         android:hint="Confirmar contraseña"/>
 
-    <Button
-        android:id="@+id/registroAsociacion"
+    <LinearLayout
+        android:id="@+id/ll_botones"
+        android:layout_below="@+id/confirmacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/confirmacion"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="50dp"
-        android:padding="20dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/turquesa"
-        android:text="Registrar Asociación" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tt"
-        android:text="PRUEBAS"
-        android:layout_below="@id/registroAsociacion"/>
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/busquedaDatos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="50dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/turquesa"
+            android:text="Buscar datos OSC"/>
+        <Button
+            android:id="@+id/registroAsociacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="50dp"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/turquesa"
+            android:text="Registrar Asociación" />
+    </LinearLayout>
 
 </RelativeLayout>
