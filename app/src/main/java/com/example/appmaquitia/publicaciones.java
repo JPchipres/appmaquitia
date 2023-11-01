@@ -25,7 +25,7 @@ public class publicaciones extends AppCompatActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publicaciones);
+        setContentView(R.layout.activity_publicaciones_inicio);
         Lista = findViewById(R.id.cardviewlist);
         publicaciones = setNombreYImagen();
         CustomAdapter adapter = new CustomAdapter(this, publicaciones);
