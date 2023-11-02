@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gris">#F5F5F5</color>
+    <color name="gris">#B3D3D3D3</color>
+    <color name="gris2">#8A8A8A</color>
     <color name="gris_fuerte">#8391A1</color>
     <color name="aqua">#35C2C1</color>
     <color name="background"> #F5F5F5F5</color>
@@ -10,4 +11,5 @@
     <color name="turquesa">#005555</color>
     <color name="gris_oscuro">#1E232C</color>
     <color name="verde">#18C07A</color>
+    <color name="background_chat">#c7c8a9</color>
 </resources>
