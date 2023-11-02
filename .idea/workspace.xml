@@ -9,16 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83911d8b-0001-4572-a314-910974907434" name="Changes" comment="prueba">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/OSC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml" afterDir="false" />
-    </list>
+    <list default="true" id="83911d8b-0001-4572-a314-910974907434" name="Changes" comment="Registro de OSC con alerts y validaciones" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697933707184</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Registro de OSC con alerts y validaciones">
+      <created>1698960805313</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698960805314</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,6 +215,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="prueba" />
-    <option name="LAST_COMMIT_MESSAGE" value="prueba" />
+    <MESSAGE value="Registro de OSC con alerts y validaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Registro de OSC con alerts y validaciones" />
   </component>
 </project>

@@ -1,0 +1,100 @@
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <targetSelectedWithDropDown>\r\n      <Target>\r\n        <type value=\"QUICK_BOOT_TARGET\" />\r\n        <deviceKey>\r\n          <Key>\r\n            <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n            <value value=\"C:\\Users\\hecto\\.android\\avd\\Pixel_3a_API_34_V2.avd\" />\r\n          </Key>\r\n        </deviceKey>\r\n      </Target>\r\n    </targetSelectedWithDropDown>\r\n    <timeTargetWasSelectedWithDropDown value=\"2023-10-29T18:04:22.684073300Z\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	(revision 69a1bf470879ef469c9104e1c10ac9cb507ca2cc)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1698765839270)
+@@ -7,11 +7,11 @@
+         <deviceKey>
+           <Key>
+             <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\hecto\.android\avd\Pixel_3a_API_34_V2.avd" />
++            <value value="C:\Users\hecto\.android\avd\Pixel_3a_API_34_MAQ.avd" />
+           </Key>
+         </deviceKey>
+       </Target>
+     </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2023-10-29T18:04:22.684073300Z" />
++    <timeTargetWasSelectedWithDropDown value="2023-10-31T15:22:16.422428900Z" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AndroidLayouts\">\r\n    <shared>\r\n      <config />\r\n    </shared>\r\n  </component>\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"NONE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"83911d8b-0001-4572-a314-910974907434\" name=\"Changes\" comment=\"prueba\">\r\n      <change afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/OSC.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/build.gradle\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/build.gradle\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/AndroidManifest.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/AndroidManifest.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[C:\\Users\\hecto\\.android\\avd\\Pixel_3a_API_34_V2.avd]\" />\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$/app\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"appmaquitia\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"appmaquitia\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"appmaquitia\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"appmaquitia\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"other\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"3f770d6a-04e9-4a20-9d5f-5d855630c4bc\" />\r\n        <option name=\"url\" value=\"https://github.com/JPchipres/appmaquitia.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2X5mGB9hcM3IuCcjES6el2x3wWH\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/hecto/AndroidStudioProjects/base_de_datos&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\">\r\n      <module name=\"appmaquitia.app.main\" />\r\n      <option name=\"DEPLOY\" value=\"true\" />\r\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\r\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\r\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\r\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\r\n      <option name=\"ALL_USERS\" value=\"false\" />\r\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\r\n      <option name=\"CLEAR_APP_STORAGE\" value=\"false\" />\r\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\r\n      <option name=\"MODE\" value=\"default_activity\" />\r\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\r\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\r\n      <option name=\"INSPECTION_WITHOUT_ACTIVITY_RESTART\" value=\"false\" />\r\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\r\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\r\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\r\n      <Auto>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Auto>\r\n      <Hybrid>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Hybrid>\r\n      <Java>\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Java>\r\n      <Native>\r\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\r\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\r\n        <option name=\"WORKING_DIR\" value=\"\" />\r\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\r\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\r\n        <option name=\"ATTACH_ON_WAIT_FOR_DEBUGGER\" value=\"false\" />\r\n        <option name=\"DEBUG_SANDBOX_SDK\" value=\"false\" />\r\n      </Native>\r\n      <Profilers>\r\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Java/Kotlin Method Sample (legacy)\" />\r\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\r\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\r\n      </Profilers>\r\n      <option name=\"DEEP_LINK\" value=\"\" />\r\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\r\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\r\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\r\n      <method v=\"2\">\r\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"83911d8b-0001-4572-a314-910974907434\" name=\"Changes\" comment=\"\" />\r\n      <created>1697927216334</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1697927216334</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"prueba\">\r\n      <created>1697933707184</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1697933707184</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"prueba\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"prueba\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 69a1bf470879ef469c9104e1c10ac9cb507ca2cc)
++++ b/.idea/workspace.xml	(date 1698959254801)
+@@ -9,23 +9,23 @@
+     <option name="autoReloadType" value="NONE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="83911d8b-0001-4572-a314-910974907434" name="Changes" comment="prueba">
+-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/OSC.java" afterDir="false" />
++    <list default="true" id="83911d8b-0001-4572-a314-910974907434" name="Changes" comment="Registro de OSC con detalles por realizar">
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/alertdialog_style.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_osc_data.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/btn_osc_register.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/MainActivity.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/pruebas.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/OSC.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/OSC.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/appmaquitia/registro_de_asociacion.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registro_de_asociacion.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\hecto\.android\avd\Pixel_3a_API_34_V2.avd]" />
++  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\hecto\.android\avd\Pixel_3a_API_34_MAQ.avd]" />
+   <component name="ExternalProjectsData">
+     <projectState path="$PROJECT_DIR$">
+       <ProjectState />
+@@ -73,6 +73,7 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="Class" />
++        <option value="resourceFile" />
+       </list>
+     </option>
+   </component>
+@@ -202,7 +203,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1697933707184</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Registro de OSC con detalles por realizar">
++      <created>1698604916778</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1698604916778</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -218,6 +226,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="prueba" />
+-    <option name="LAST_COMMIT_MESSAGE" value="prueba" />
++    <MESSAGE value="Registro de OSC con detalles por realizar" />
++    <option name="LAST_COMMIT_MESSAGE" value="Registro de OSC con detalles por realizar" />
+   </component>
+ </project>
+\ No newline at end of file
