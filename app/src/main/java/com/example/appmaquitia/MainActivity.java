@@ -10,7 +10,7 @@ import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button registro;
+    Button registro, iniciar;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,23 @@ public class MainActivity extends AppCompatActivity {
         registro = (Button) findViewById(R.id.btnRegistro);
         i = new Intent(MainActivity.this, PublicacionesActivity.class); //Intent que dirije a lo que estoy trabajando actualmente
         startActivity(i);
+
+        iniciar = (Button) findViewById(R.id.btnInicioSesion);
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = new Intent(MainActivity.this, registro.class);
+                i = new Intent(MainActivity.this, publicaciones.class);
+
+                //i = new Intent(MainActivity.this, registro.class);
                 startActivity(i);
 
+            }
+        });
+        iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i = new Intent(MainActivity.this, login.class);
+                startActivity(i);
             }
         });
     }

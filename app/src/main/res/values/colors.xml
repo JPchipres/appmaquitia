@@ -12,4 +12,5 @@
     <color name="gris_oscuro">#1E232C</color>
     <color name="verde">#18C07A</color>
     <color name="background_chat">#c7c8a9</color>
+    <color name="gris_medio">#818181</color>
 </resources>
