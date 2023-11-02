@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registro = (Button) findViewById(R.id.btnRegistro);
-        i = new Intent(MainActivity.this, registro_de_asociacion.class); //Intent que dirije a lo que estoy trabajando actualmente
+        //i = new Intent(MainActivity.this, registro_de_asociacion.class); //Intent que dirije a lo que estoy trabajando actualmente
         startActivity(i);
         registro.setOnClickListener(new View.OnClickListener() {
             @Override

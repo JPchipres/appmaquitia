@@ -8,4 +8,11 @@
         <item name="android:textSize">20dp</item>
         <item name="android:background">@drawable/edittext2_details</item>
     </style>
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/alertdialog_style</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="textStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

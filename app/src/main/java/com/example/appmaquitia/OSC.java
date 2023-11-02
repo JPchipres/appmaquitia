@@ -19,6 +19,9 @@ public class OSC {
     private String actividades;
     private String descripcion;
     private String topic;
+    private String foto;
+    private String password;
+
 
     public OSC(){
 
@@ -168,8 +171,25 @@ public class OSC {
         this.topic = topic;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public OSC(String cluni, String nombre, String rfc, String figura, String status, String representantes, String correo, String telefono, String entidad, String municipio,
-               String colonia, String calle, String num_ext, String num_int, String cp, String actividades, String descripcion, String topic){
+               String colonia, String calle, String num_ext, String num_int, String cp, String actividades, String descripcion, String topic, String foto,
+               String password){
         this.cluni = cluni;
         this.nombre = nombre;
         this.rfc = rfc;
@@ -188,5 +208,7 @@ public class OSC {
         this.actividades = actividades;
         this.descripcion = descripcion;
         this.topic = topic;
+        this.foto = foto;
+        this.password = password;
     }
 }

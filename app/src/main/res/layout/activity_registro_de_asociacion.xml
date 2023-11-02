@@ -40,6 +40,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edit_text"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
         android:hint="Nombre de la asociacion"/>
     <EditText
@@ -51,6 +52,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edit_text"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
         android:hint="CLUNI"/>
     <EditText
@@ -63,6 +65,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edit_text"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
         android:hint="Email"/>
     <EditText
@@ -75,6 +78,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edit_text"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
         android:hint="Contraseña"/>
     <EditText
@@ -87,6 +91,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edit_text"
         android:textSize="16dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
         android:hint="Confirmar contraseña"/>
 
@@ -105,7 +110,7 @@
             android:layout_marginTop="50dp"
             android:padding="20dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/turquesa"
+            android:background="@drawable/btn_osc_data"
             android:text="Buscar datos OSC"/>
         <Button
             android:id="@+id/registroAsociacion"
@@ -116,8 +121,8 @@
             android:layout_marginTop="50dp"
             android:padding="20dp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/turquesa"
-            android:text="Registrar Asociación" />
+            android:background="@drawable/btn_osc_register"
+            android:text="Registrar Asociación"/>
     </LinearLayout>
 
 </RelativeLayout>
