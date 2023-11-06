@@ -3,6 +3,7 @@ package com.example.appmaquitia;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
@@ -23,12 +25,16 @@ import com.example.appmaquitia.databinding.ActivityPublicacionesBinding;
 import com.example.appmaquitia.modelos.Anuncio;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +47,11 @@ import java.util.Random;
 //ESTA ES LA VISTA DE LAS ORGANIZACIONES PARA CREAR ANUNCIOS
 public class PublicacionesActivity extends AppCompatActivity {
     private ActivityPublicacionesBinding b;
+    Uri imageuri;
+    private static final int SELECT_PICTURE = 1;
+    private boolean imagenCargada  = false;
+    private String asociacionID = "4WZHbfJDD7QhbqBjUNop"; //dinamicamente se cambiará
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +59,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         View v = b.getRoot();
         setContentView(v);
 
-        cargarAnuncios("4WZHbfJDD7QhbqBjUNop");
-
+        cargarAnuncios(asociacionID);
 
         b.btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,15 +83,25 @@ public class PublicacionesActivity extends AppCompatActivity {
         b.btnEnviarAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!b.etNuevoAnuncio.getText().toString().equals("")) {
-                    crearAnuncio("4WZHbfJDD7QhbqBjUNop");
+                if(imagenCargada) {
+                    subirImagen(imageuri);
+                }else {
+                    if(!b.etNuevoAnuncio.getText().toString().equals("")) {
+                        crearAnuncio(asociacionID,"");
+                    }
                 }
             }});
+        b.btnCargarImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarImagen();
+            }
+        });
     }
-    //Esta función se encarga de traer todos los anuncios de cada organización y establece un escuchador para que el recyclerview de se actualicé automaticamente cada que
-    //se agrega un nuevo anuncio, lo que ayuda a que el usuario no tenga que recargar la ventana
-    //recibe como parametro el id de la organización para que el usuario decida cual chat verbu
     public void cargarAnuncios(String organizacionID) {
+        //Esta función se encarga de traer todos los anuncios de cada organización y establece un escuchador para que el recyclerview de se actualicé automaticamente cada que
+        //se agrega un nuevo anuncio, lo que ayuda a que el usuario no tenga que recargar la ventana
+        //recibe como parametro el id de la organización para que el usuario decida cual chat verbu
         CollectionReference anunciosRef = FirebaseFirestore.getInstance().collection("organizaciones/"+organizacionID+"/anuncios");
 
         anunciosRef.orderBy("fecha_hora", Query.Direction.ASCENDING).addSnapshotListener((queryDocumentSnapshot, e) -> {
@@ -121,42 +141,82 @@ public class PublicacionesActivity extends AppCompatActivity {
         intent.setData(Uri.parse(url));
         startActivity(intent);
     }
-
-    public void crearAnuncio(String organizacionID) {
-
+    public void crearAnuncio(String organizacionID, String imagen) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        SoundPool soundPool;
-        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-        int sonidoConfirmacion = soundPool.load(this, R.raw.sonido_success, 1);
-        int sonidoFallo = soundPool.load(this,R.raw.sonido_error,1);
-
         Date fecha_hora= new Date();
         Timestamp ts = new Timestamp(fecha_hora);
         Map<String, Object> anuncio = new HashMap<>();
         anuncio.put("cuerpo", b.etNuevoAnuncio.getText().toString());
         anuncio.put("fecha_hora", ts);
-        anuncio.put("imagen", "");
-
+        anuncio.put("imagen", imagen);
+        //esto es provicional debe cambiar
         db.collection("organizaciones")
                 .document(organizacionID)
                 .collection("anuncios")
-                .document()//esto es provicional debe cambiar
+                .document()
                 .set(anuncio)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(PublicacionesActivity.this, "Se creo un nuevo anuncio", Toast.LENGTH_SHORT).show();
-                        soundPool.play(sonidoConfirmacion, 1.0f, 1.0f, 0, 0, 1.0f);
-                        b.etNuevoAnuncio.setText("");
+                        restablecerInput();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(PublicacionesActivity.this, "No se pudo crear un nuevo anuncio", Toast.LENGTH_SHORT).show();
-                        soundPool.play(sonidoFallo, 1.0f, 1.0f, 0, 0, 1.0f);
                     }
                 });
+    }
+    public void cargarImagen() {
+        Intent abrirGaleria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(abrirGaleria,SELECT_PICTURE);
+    }
+    public void subirImagen(Uri imagenUri) {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference imagesRef = storageRef.child("imagenes/*");
+        imagesRef.putFile(imagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while(!uriTask.isSuccessful());
+                if(uriTask.isSuccessful()) {
+                    uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String downloadURI = uri.toString();
+                            crearAnuncio(asociacionID, downloadURI);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(PublicacionesActivity.this,"Error: " + e, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+    public void restablecerInput() {
+        imageuri = null;
+        imageuri=Uri.parse("");
+        b.etNuevoAnuncio.setText("");
+        b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
+        b.btnCargarImagen.setEnabled(true);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //DEL MÉTODO CARGAR IMAGEN
+        if(resultCode == RESULT_OK && requestCode == SELECT_PICTURE && data != null) {
+            imageuri = data.getData();
+            b.btnCargarImagen.setImageResource(R.drawable.imagen_adjuntada);
+            imagenCargada = true;
+            b.btnCargarImagen.setEnabled(false);
+        }else {
+            Toast.makeText(this, "No selected image", Toast.LENGTH_SHORT).show();
+        }
     }
 }

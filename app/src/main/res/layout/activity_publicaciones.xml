@@ -99,6 +99,7 @@
             android:background="@drawable/edittext_mensaje"/>
 
         <ImageView
+            android:id="@+id/btnCargarImagen"
             android:layout_width="0dp"
             android:layout_weight=".2"
             android:layout_height="match_parent"
