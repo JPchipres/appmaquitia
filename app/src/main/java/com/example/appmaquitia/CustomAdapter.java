@@ -16,9 +16,9 @@ import java.util.List;
 public class CustomAdapter extends BaseAdapter {
 
     private final Context context;
-    private final ArrayList<oscModel> publicaciones;
+    private final ArrayList<OSC> publicaciones;
 
-    public CustomAdapter(Context context, ArrayList<oscModel> publicaciones) {
+    public CustomAdapter(Context context, ArrayList<OSC> publicaciones) {
         this.context = context;
         this.publicaciones = publicaciones;
     }
@@ -51,9 +51,9 @@ public class CustomAdapter extends BaseAdapter {
             holderView = (HolderView) convertView.getTag();
 
         }
-        oscModel list = publicaciones.get(position);
-        holderView.imagen_osc.setImageResource(list.getImg_osc());
-        holderView.nombre_osc.setText(list.getNombre_osc());
+        OSC list = publicaciones.get(position);
+        //holderView.imagen_osc.setImageResource(list.getActividades());
+        holderView.nombre_osc.setText(list.getNombre());
 
         return convertView;
 

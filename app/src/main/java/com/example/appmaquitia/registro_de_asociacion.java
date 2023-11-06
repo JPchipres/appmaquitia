@@ -1,15 +1,25 @@
 package com.example.appmaquitia;
 
+import static android.app.PendingIntent.getActivity;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +66,6 @@ public class registro_de_asociacion extends AppCompatActivity {
     FirebaseAuth mAuth;
     Intent i;
     TextView titulo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +85,6 @@ public class registro_de_asociacion extends AppCompatActivity {
         nombre.setClickable(false);
         email.setFocusable(false);
         email.setClickable(false);
-
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +97,7 @@ public class registro_de_asociacion extends AppCompatActivity {
             public void onClick(View v) { new LECTURA().execute(); }
         });
     }
+
 
     private class DATOS extends AsyncTask<Void, Void, Void>{
         protected Void doInBackground(Void... voids){
@@ -194,6 +203,9 @@ public class registro_de_asociacion extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
                                                 String documentId = documentReference.getId();
+                                                i = new Intent(registro_de_asociacion.this, registro_de_asociacion_imagen.class);
+                                                i.putExtra("cluni", cluni);
+                                                startActivity(i);
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override

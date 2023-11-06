@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class publicaciones extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    ArrayList<oscModel> publicaciones;
+    ArrayList<OSC> publicaciones;
     ListView Lista;
     EditText nombreosc;
     ImageView imgosc;
@@ -32,9 +32,9 @@ public class publicaciones extends AppCompatActivity implements AdapterView.OnIt
         Lista.setAdapter(adapter);
         Lista.setOnItemClickListener(this);
     }
-    private ArrayList<oscModel> setNombreYImagen(){
+    private ArrayList<OSC> setNombreYImagen(){
         publicaciones = new ArrayList<>();
-        publicaciones.add(new oscModel(R.drawable.promo_asociacion, "Casa hogar"));
+        //publicaciones.add(new OSC(R.drawable.promo_asociacion, "Casa hogar"));
 
         return publicaciones;
     }

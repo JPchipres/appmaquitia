@@ -4,9 +4,7 @@
     package="com.example.appmaquitia">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -21,6 +19,9 @@
         android:theme="@style/Theme.Appmaquitia"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".registro_de_asociacion_imagen"
+            android:exported="false" />
         <activity
             android:name=".PublicacionesActivity"
             android:exported="false" />
