@@ -53,5 +53,7 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.16.1'
     apply plugin: 'com.google.gms.google-services'
     implementation 'com.uncopt:android.justified:1.0'
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
+
 
 }

@@ -1,6 +1,8 @@
 package com.example.appmaquitia;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,36 +13,40 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 import java.util.ArrayList;
-
-
-
-
-public class publicaciones extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
-    ArrayList<OSC> publicaciones;
-    ListView Lista;
-    EditText nombreosc;
-    ImageView imgosc;
+public class publicaciones extends AppCompatActivity {
+    RecyclerView asociacionR;
+    AsociacionesAdapter asociacionA;
+    FirebaseFirestore asociacionF;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicaciones_inicio);
-        Lista = findViewById(R.id.cardviewlist);
-        publicaciones = setNombreYImagen();
-        CustomAdapter adapter = new CustomAdapter(this, publicaciones);
-        Lista.setAdapter(adapter);
-        Lista.setOnItemClickListener(this);
-    }
-    private ArrayList<OSC> setNombreYImagen(){
-        publicaciones = new ArrayList<>();
-        //publicaciones.add(new OSC(R.drawable.promo_asociacion, "Casa hogar"));
+        asociacionF = FirebaseFirestore.getInstance();
+        asociacionR = findViewById(R.id.rv_asociaciones);
+        asociacionR.setLayoutManager(new LinearLayoutManager(this));
+        Query query = asociacionF.collection("organizaciones");
 
-        return publicaciones;
+        FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
+                .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
+        asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions);
+        asociacionA.notifyDataSetChanged();
+        asociacionR.setAdapter(asociacionA);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    protected void onStart() {
+        super.onStart();
+        asociacionA.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        asociacionA.stopListening();
     }
 }

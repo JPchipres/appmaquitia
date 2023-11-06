@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //i = new Intent(MainActivity.this, publicaciones.class);
 
-                i = new Intent(MainActivity.this, registro.class);
+                i = new Intent(MainActivity.this, publicaciones.class);
                 startActivity(i);
 
             }
