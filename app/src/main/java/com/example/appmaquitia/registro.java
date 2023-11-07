@@ -14,11 +14,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.hash.Hashing;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,12 +106,15 @@ public class registro extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                String hashed = Hashing.sha256()
+                        .hashString(pass, StandardCharsets.UTF_8)
+                        .toString();
                 String id = mAuth.getCurrentUser().getUid();
                 Map<String, Object> map = new HashMap<>();
                 map.put("id", id);
                 map.put("name", nombre);
                 map.put("email", mail);
-                map.put("password", pass);
+                map.put("password", hashed);
 
                 mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
