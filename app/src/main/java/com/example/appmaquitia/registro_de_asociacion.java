@@ -47,6 +47,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.hash.Hashing;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,6 +64,7 @@ import org.jsoup.select.Elements;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -340,24 +342,52 @@ public class registro_de_asociacion extends AppCompatActivity {
                         if(!scluni.isEmpty() && !snombre.isEmpty() && !semail.isEmpty() && !spass.isEmpty() && !spassconfirm.isEmpty()){
                             if(spass.equals(spassconfirm)) {
                                 if (status.equals("Activa")) {
+                                    String hashed = Hashing.sha256()
+                                            .hashString(spass, StandardCharsets.UTF_8)
+                                            .toString();
                                     OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext,
-                                            num_int, cp, actividades, "", "", "", spass);
-                                    mFirestore.collection("organizaciones").add(datos)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            num_int, cp, actividades, "", "", "", hashed);
+                                    DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
+                                    documentReference.set(datos)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
-                                                public void onSuccess(DocumentReference documentReference) {
+                                                public void onSuccess(Void unused) {
                                                     String documentId = documentReference.getId();
-                                                    runOnUiThread(new Runnable() {
+                                                    mAuth.createUserWithEmailAndPassword(correo, spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                         @Override
-                                                        public void run() {
-                                                            SpannableString textAlert = new SpannableString("Registro exitoso");
-                                                            int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                                            textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                            alert.setMessage(textAlert);
-                                                            AlertDialog dialog = alert.create();
-                                                            Window window = dialog.getWindow();
-                                                            window.setGravity(Gravity.TOP | Gravity.START);
-                                                            dialog.show();
+                                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    SpannableString textAlert = new SpannableString("Registro exitoso");
+                                                                    int colorBlanco = ContextCompat.getColor(context, R.color.white);
+                                                                    textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                                                    alert.setMessage(textAlert);
+                                                                    AlertDialog dialog = alert.create();
+                                                                    Window window = dialog.getWindow();
+                                                                    window.setGravity(Gravity.TOP | Gravity.START);
+                                                                    dialog.show();
+                                                                    i = new Intent(registro_de_asociacion.this, MainActivity.class);
+                                                                    startActivity(i);
+                                                                }
+                                                            });
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    SpannableString textAlert = new SpannableString("Ups! Algo ocurrio durante el registro");
+                                                                    int colorBlanco = ContextCompat.getColor(context, R.color.white);
+                                                                    textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                                                    alert.setMessage(textAlert);
+                                                                    AlertDialog dialog = alert.create();
+                                                                    Window window = dialog.getWindow();
+                                                                    window.setGravity(Gravity.TOP | Gravity.START);
+                                                                    dialog.show();
+                                                                }
+                                                            });
                                                         }
                                                     });
                                                 }

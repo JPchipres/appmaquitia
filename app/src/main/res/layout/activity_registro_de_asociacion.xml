@@ -79,7 +79,8 @@
         android:textSize="16dp"
         android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
-        android:hint="Contraseña"/>
+        android:hint="Contraseña"
+        android:inputType="textPassword"/>
     <EditText
         android:id="@+id/confirmacion"
         style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
@@ -92,7 +93,8 @@
         android:textSize="16dp"
         android:textColor="@color/black"
         android:fontFamily="@font/urbanist"
-        android:hint="Confirmar contraseña"/>
+        android:hint="Confirmar contraseña"
+        android:inputType="textPassword"/>
 
     <LinearLayout
         android:id="@+id/ll_botones"
