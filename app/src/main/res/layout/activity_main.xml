@@ -64,14 +64,15 @@
                 android:textStyle="bold"
                 android:textSize="17sp"/>
             <TextView
+                android:id="@+id/btn_publicaciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-
                 android:textColor="@color/buttons"
                 android:textSize="17sp"
                 android:text="Continuar sin registrarse"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:clickable="true"/>
 
         </LinearLayout>
     </LinearLayout>
