@@ -14,7 +14,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/button_style"
-        android:drawableLeft="@drawable/arrow"
         android:paddingStart="5dp"
         android:textSize="30sp" />
 

@@ -1,0 +1,15 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:right="2dp" android:left="0dp" android:top="2dp" android:bottom="2dp">
+        <shape>
+            <stroke android:width="1dp" android:color="#E9E9E9" /> <!-- Borde gris de 1dp -->
+            <solid android:color="#FFFFFF" /> <!-- Color del fondo del EditText -->
+            <corners android:radius="4dp" /> <!-- Radio de las esquinas, ajusta según tu preferencia -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#00000000" /> <!-- Color transparente para el difuminado -->
+            <corners android:radius="1dp" /> <!-- Radio de las esquinas, ajusta según tu preferencia -->
+        </shape>
+    </item>
+</layer-list>

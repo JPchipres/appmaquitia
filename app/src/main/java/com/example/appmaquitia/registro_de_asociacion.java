@@ -14,6 +14,9 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+
+import android.os.Handler;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;

@@ -21,6 +21,13 @@
             android:layout_marginBottom="15dp"
             android:text="[Placeholder] A versatile full-zip that you can wear all day long and even..."
             android:textColor="?android:textColorSecondary" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnlogout"
+            android:text="salir"
+
+            ></Button>
 
 
     </LinearLayout>
