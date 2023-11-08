@@ -26,4 +26,7 @@
     <string name="add_google_wallet_unknown_error" translatable="false">An unknown error occurred
         when adding pass to Google Wallet.
     </string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

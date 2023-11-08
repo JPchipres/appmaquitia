@@ -24,16 +24,7 @@ public class login extends AppCompatActivity {
     FirebaseAuth mAuth;
     Intent i;
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser !=null){
-            i = new Intent(getApplicationContext(), pruebas.class);
-            startActivity(i);
-            finish();
-        }
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +47,18 @@ public class login extends AppCompatActivity {
             }
         });
     }
+
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+    }
     private void autenticar(String email, String pass) {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    i = new Intent(getApplicationContext(), pruebas.class);
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    i = new Intent(getApplicationContext(), publicaciones.class);
                     startActivity(i);
                     finish();
                 }else{

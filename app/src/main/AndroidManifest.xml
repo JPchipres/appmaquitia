@@ -28,6 +28,18 @@
             android:name=".registro_de_asociacion_imagen"
             android:exported="false" />
         <activity
+            android:name=".Configuracionusuario"
+            android:exported="false" />
+        <activity
+            android:name=".AssProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DescriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewPublicActivity"
+            android:exported="false" />
+        <activity
             android:name=".PublicacionesActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="false" />
