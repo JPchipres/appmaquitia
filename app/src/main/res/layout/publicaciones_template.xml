@@ -1,44 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="right">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="right">
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="10dp"
             android:layout_alignParentEnd="true"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginBottom="15dp"
             android:background="@drawable/background_publicaciones">
 
                 <com.uncopt.android.widget.text.justify.JustifiedTextView
                     android:id="@+id/tvCuerpo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="${Mensaje}"
+                    android:text=" "
                     android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist" />
+                    android:fontFamily="@font/urbanist"
+                    android:layout_marginBottom="5dp"/>
+
                 <ImageView
                     android:id="@+id/imgvImagen"
-                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerInside"/>
-                <TextView
-                    android:id="@+id/tvFechaHora"
-                    android:textColor="@color/gris2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:textSize="10sp"
-                    android:text="${fecha y hora}"
+                    android:adjustViewBounds="true"/>
 
-                    android:fontFamily="@font/urbanist"
-                    android:textAlignment="textEnd"/>
+
         </LinearLayout>
+        <TextView
+            android:id="@+id/tvFechaHora"
+            android:textColor="@color/gris2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="16/08/2023 14:56:00"
+            android:fontFamily="@font/urbanist"
+            android:textAlignment="textEnd"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            />
 </LinearLayout>
-

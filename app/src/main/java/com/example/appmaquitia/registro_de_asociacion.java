@@ -99,7 +99,7 @@ public class registro_de_asociacion extends AppCompatActivity {
         email.setFocusable(false);
         email.setClickable(false);
 
-        alert = new AlertDialog.Builder(registro_de_asociacion.this, R.style.AlertDialogStyle);
+        alert = new AlertDialog.Builder(registro_de_asociacion.this, R.style.AlertDialogCustom);
         registro.setEnabled(false);
 
         cluni.addTextChangedListener(new TextWatcher() {

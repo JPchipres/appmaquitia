@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.appmaquitia.PublicacionesActivity;
 import com.example.appmaquitia.R;
 import com.example.appmaquitia.modelos.Anuncio;
@@ -46,6 +47,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.ViewHold
         Glide.with(context)
                 .load(anuncio.getImagen())
                 .override(700,400)
+                .transform(new RoundedCorners(30))
                 .into(holder.ivImagen);
         holder.bind(cuerpo, fecha_hora);
     }
@@ -67,9 +69,12 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.ViewHold
         }
 
         public void bind(String cuerpo, String fecha_hora) {
-            tvCuerpo.setText(cuerpo);
+            if(cuerpo.isEmpty()) {
+                tvCuerpo.setVisibility(View.GONE);
+            }else {
+                tvCuerpo.setText(cuerpo);
+            }
             tvFechaHora.setText(fecha_hora.toString());
-            //imagen.
         }
     }
 }

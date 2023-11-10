@@ -4,20 +4,22 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.ScrollView;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AnuncioAdapter;
@@ -31,7 +33,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,6 +43,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import android.content.DialogInterface;
 import java.util.Random;
 
 //ESTA ES LA VISTA DE LAS ORGANIZACIONES PARA CREAR ANUNCIOS
@@ -50,7 +53,7 @@ public class PublicacionesActivity extends AppCompatActivity {
     Uri imageuri;
     private static final int SELECT_PICTURE = 1;
     private boolean imagenCargada  = false;
-    private String asociacionID = "4WZHbfJDD7QhbqBjUNop"; //dinamicamente se cambiará
+    private String asociacionID = "BAC99030825014"; //dinamicamente se cambiará
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,14 @@ public class PublicacionesActivity extends AppCompatActivity {
         setContentView(v);
 
         cargarAnuncios(asociacionID);
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b.scrollView.fullScroll(View.FOCUS_DOWN);
+            }
+        }, 1000);
 
         b.btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,17 +95,24 @@ public class PublicacionesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(imagenCargada) {
-                    subirImagen(imageuri);
+                    subirImagen(imageuri,asociacionID);
                 }else {
                     if(!b.etNuevoAnuncio.getText().toString().equals("")) {
-                        crearAnuncio(asociacionID,"");
+                        if(!b.etNuevoAnuncio.getText().toString().startsWith(" ") && !b.etNuevoAnuncio.getText().toString().startsWith("\n")) {
+                            crearAnuncio(asociacionID, "");
+                        }
                     }
                 }
             }});
         b.btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarImagen();
+                if(imagenCargada) {
+
+                    eliminarImagen(imageuri);
+                }else{
+                    cargarImagen();
+                }
             }
         });
     }
@@ -146,7 +164,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         Date fecha_hora= new Date();
         Timestamp ts = new Timestamp(fecha_hora);
         Map<String, Object> anuncio = new HashMap<>();
-        anuncio.put("cuerpo", b.etNuevoAnuncio.getText().toString());
+        anuncio.put("cuerpo", b.etNuevoAnuncio.getText().toString().trim());
         anuncio.put("fecha_hora", ts);
         anuncio.put("imagen", imagen);
         //esto es provicional debe cambiar
@@ -158,14 +176,19 @@ public class PublicacionesActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(PublicacionesActivity.this, "Se creo un nuevo anuncio", Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                b.scrollView.fullScroll(View.FOCUS_DOWN);
+                            }
+                        });
                         restablecerInput();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PublicacionesActivity.this, "No se pudo crear un nuevo anuncio", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PublicacionesActivity.this, "No se pudo crear el anuncio", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -173,10 +196,12 @@ public class PublicacionesActivity extends AppCompatActivity {
         Intent abrirGaleria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(abrirGaleria,SELECT_PICTURE);
     }
-    public void subirImagen(Uri imagenUri) {
+    public void subirImagen(Uri imagenUri, String asociacionID) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imagesRef = storageRef.child("imagenes/*");
+        Random rand = new Random();
+        Integer randomNum = rand.nextInt(1000);
+        StorageReference imagesRef = storageRef.child("imagenes/" + asociacionID + "/" + randomNum);
         imagesRef.putFile(imagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -201,11 +226,39 @@ public class PublicacionesActivity extends AppCompatActivity {
     }
     public void restablecerInput() {
         imageuri = null;
-        imageuri=Uri.parse("");
+        imageuri = Uri.parse("");
+        imagenCargada = false;
         b.etNuevoAnuncio.setText("");
         b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
         b.btnCargarImagen.setEnabled(true);
     }
+
+    public void eliminarImagen(Uri image) {
+        ImageView imageView =  new ImageView(this);
+        imageView.setImageURI(image);
+        AlertDialog.Builder  alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        alert.setView(imageView);
+        alert.setMessage("¿Deseas cancelar el envio de la imagen?")
+                .setCancelable(false)
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageuri = null;
+                        imagenCargada=false;
+                        b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog titulo = alert.create();
+        titulo.setTitle("Cancelar envío");
+        titulo.show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -214,7 +267,6 @@ public class PublicacionesActivity extends AppCompatActivity {
             imageuri = data.getData();
             b.btnCargarImagen.setImageResource(R.drawable.imagen_adjuntada);
             imagenCargada = true;
-            b.btnCargarImagen.setEnabled(false);
         }else {
             Toast.makeText(this, "No selected image", Toast.LENGTH_SHORT).show();
         }
