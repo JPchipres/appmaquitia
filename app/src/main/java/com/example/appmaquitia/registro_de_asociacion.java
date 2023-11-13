@@ -87,7 +87,7 @@ public class registro_de_asociacion extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         nombre = findViewById(R.id.nombre);
         email = findViewById(R.id.email);
-        pass = findViewById(R.id.contraseña);
+        pass = findViewById(R.id.contrasena);
         cluni = findViewById(R.id.cluni);
         passconfirm = findViewById(R.id.confirmacion);
         registro = (Button) findViewById(R.id.registroAsociacion);

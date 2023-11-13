@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
@@ -16,14 +18,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.model.FieldIndex;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class registro_de_asociacion_imagen extends AppCompatActivity {
     Uri ImageUri;
-    Button confirmar;
-    MaterialCardView seleccionarimg;
     String urlimg;
+    Button seleccionarimg;
+    ImageButton regresar;
     FirebaseStorage storage;
     FirebaseFirestore firestore;
     StorageReference mStoragref;
@@ -32,10 +35,19 @@ public class registro_de_asociacion_imagen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_de_asociacion_imagen);
-        seleccionarimg = (MaterialCardView) findViewById(R.id.seleccionarimg);
+        seleccionarimg = (Button) findViewById(R.id.btnSeleccion);
+        regresar = (ImageButton) findViewById(R.id.btn_back);
         storage = FirebaseStorage.getInstance();
         firestore = FirebaseFirestore.getInstance();
         mStoragref = storage.getReference();
+
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
