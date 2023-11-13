@@ -79,9 +79,6 @@
             android:name=".detallespago"
             android:exported="false" />
         <activity
-            android:name=".pruebas"
-            android:exported="false" />
-        <activity
             android:name=".recover_password"
             android:exported="false" />
         <activity
