@@ -19,17 +19,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="10dp">
+            android:layout_height="50dp"
+            android:padding="0dp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_back"
                 android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_style"
-                android:drawableLeft="@drawable/arrow"
-                android:paddingStart="5dp"
-                android:textSize="30sp" />
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:textSize="20dp"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:background="@drawable/backbutton"/>
 
         </LinearLayout>
 
@@ -74,7 +75,7 @@
                 android:gravity="bottom">
 
                 <EditText
-                    android:id="@+id/etnombre"
+                    android:id="@+id/etNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -89,7 +90,7 @@
                     android:fontFamily="@font/urbanist"/>
 
                 <EditText
-                    android:id="@+id/etmail"
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -102,7 +103,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/urbanist"/>
                 <EditText
-                    android:id="@+id/etpass"
+                    android:id="@+id/etPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -138,7 +139,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/button_ini"
                     android:textColor="@color/white"
-                    android:text="Entrar"
+                    android:text="Registrarse"
                     android:fontFamily="@font/urbanist"
                     android:textStyle="bold"
                     android:textSize="16dp"

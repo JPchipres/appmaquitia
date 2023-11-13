@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class login extends AppCompatActivity {
     EditText txtemail, txtpass;
     Button iniciar;
+    ImageButton regresar;
+    TextView restablecer;
 
     FirebaseAuth mAuth;
     Intent i;
@@ -32,9 +36,11 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        txtemail = (EditText) findViewById(R.id.email);
+        txtemail = (EditText) findViewById(R.id.etmail);
         txtpass = (EditText) findViewById(R.id.pass);
         iniciar = (Button) findViewById(R.id.entrar);
+        regresar = (ImageButton) findViewById(R.id.btnRegresar);
+        restablecer = (TextView) findViewById(R.id.btnRestablecer);
 
 
         iniciar.setOnClickListener(new View.OnClickListener() {
@@ -42,8 +48,25 @@ public class login extends AppCompatActivity {
             public void onClick(View v) {
                 String email = txtemail.getText().toString();
                 String pass = txtpass.getText().toString();
-                autenticar(email, pass);
+                if(!email.isEmpty() && !pass.isEmpty()) {
+                    autenticar(email, pass);
+                }else {
+                    Toast.makeText(login.this, "Rellene todos los campos.", Toast.LENGTH_SHORT).show();
 
+                }
+
+            }
+        });
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        restablecer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login.this, new_password.class));
             }
         });
     }
@@ -62,7 +85,7 @@ public class login extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else{
-                    Toast.makeText(login.this, "Autenticacion fallida.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(login.this, "Credenciales Incorrectas", Toast.LENGTH_SHORT).show();
                 }
             }
         });

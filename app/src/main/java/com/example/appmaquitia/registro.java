@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,8 +27,8 @@ import java.util.Map;
 
 public class registro extends AppCompatActivity {
     EditText etnombre, etmail, etpass, etpassconfirm;
-    Button btnregistrar, btnasociacion, btnexit;
-
+    Button btnregistrar, btnasociacion;
+    ImageButton btnexit;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
     Intent i;
@@ -37,9 +38,9 @@ public class registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
         mFirestore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        etnombre = findViewById(R.id.etnombre);
-        etmail = findViewById(R.id.etmail);
-        etpass = findViewById(R.id.etpass);
+        etnombre = findViewById(R.id.etNombre);
+        etmail = findViewById(R.id.etEmail);
+        etpass = findViewById(R.id.etPass);
         etpassconfirm = findViewById(R.id.etpassconfirm);
         btnregistrar = findViewById(R.id.btnregistrar);
         btnasociacion = findViewById(R.id.btnregistrarAso);
@@ -48,8 +49,9 @@ public class registro extends AppCompatActivity {
         btnexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = new Intent(registro.this, pruebas.class);
-                startActivity(i);
+                //i = new Intent(registro.this, pruebas.class);
+                //startActivity(i);
+                finish();
             }
         });
 
@@ -76,18 +78,18 @@ public class registro extends AppCompatActivity {
                 String passconfirm = etpassconfirm.getText().toString().trim();
                 if(nombre.isEmpty() && mail.isEmpty() && pass.isEmpty() && passconfirm.isEmpty())
                 {
-                    Toast.makeText(registro.this, "Debes acompletar todos los campos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(registro.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
                 }else if (nombre.length() <= 8){
-                    etnombre.setError("Ingresa tu nombre completo.");
+                    etnombre.setError("Ingresa un nombre válido.");
                     etnombre.requestFocus();
                     return;
                 } else if (!mail.matches(regex)) {
-                    etmail.setError("Formato del correo invalido.");
+                    etmail.setError("Ingresa un correo válido.");
                     etmail.requestFocus();
                     return;
                 }
                 else if (!pass.matches(regexpass)) {
-                    etpass.setError("Contraseña debe contener 8 caracteres y debe contener números, letras minúsculas y mayúsculas..");
+                    etpass.setError("La contraseña debe tener 8 caractéres, números y letras mayúsculas y minúsculas.");
                     etpass.requestFocus();
                     return;
                 } else if (!pass.equals(passconfirm)) {
@@ -120,20 +122,21 @@ public class registro extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
                         finish();
-                        startActivity(new Intent(registro.this, pruebas.class));
+                        startActivity(new Intent(registro.this, login.class));
+                        Toast.makeText(registro.this, "¡Registro exitoso!", Toast.LENGTH_SHORT).show();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(registro.this, "Error al añadir coleccion", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(registro.this, "¡Error al añadir colección!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(registro.this, "Error al registrar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(registro.this, "¡Algo ha salido mal!", Toast.LENGTH_SHORT).show();
             }
         });
     }
