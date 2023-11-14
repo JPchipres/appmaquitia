@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,16 +16,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.bumptech.glide.Glide;
 
 import com.example.appmaquitia.adaptadores.AnuncioAdapter;
 import com.example.appmaquitia.databinding.ActivityPublicacionesBinding;
 import com.example.appmaquitia.modelos.Anuncio;
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import android.view.LayoutInflater;
 import java.util.Map;
 
 import android.content.DialogInterface;
@@ -140,7 +150,6 @@ public class PublicacionesActivity extends AppCompatActivity {
                     Anuncio anuncio = new Anuncio(cuerpo,fechaFormateada,url_imagen);
                     anuncios.add(anuncio);
                 }
-                //Toast.makeText(PublicacionesActivity.this, "hay: " + queryDocumentSnapshots.size(), Toast.LENGTH_SHORT).show();
                 RecyclerView recyclerView = b.rvPublicaciones;
                 AnuncioAdapter adapter = new AnuncioAdapter(anuncios,PublicacionesActivity.this);
                 recyclerView.setAdapter(adapter);
@@ -188,7 +197,7 @@ public class PublicacionesActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PublicacionesActivity.this, "No se pudo crear el anuncio", Toast.LENGTH_SHORT).show();
+                        alertas.alertFalied(PublicacionesActivity.this,"No se pudo crear el anuncio", 2000);
                     }
                 });
     }
@@ -217,7 +226,7 @@ public class PublicacionesActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(PublicacionesActivity.this,"Error: " + e, Toast.LENGTH_SHORT).show();
+                            alertas.alertFalied(PublicacionesActivity.this,"Error: " + e, 2000);
                         }
                     });
                 }
@@ -232,32 +241,48 @@ public class PublicacionesActivity extends AppCompatActivity {
         b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
         b.btnCargarImagen.setEnabled(true);
     }
-
     public void eliminarImagen(Uri image) {
-        ImageView imageView =  new ImageView(this);
-        imageView.setImageURI(image);
-        AlertDialog.Builder  alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
-        alert.setView(imageView);
-        alert.setMessage("¿Deseas cancelar el envio de la imagen?")
-                .setCancelable(false)
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        imageuri = null;
-                        imagenCargada=false;
-                        b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog titulo = alert.create();
-        titulo.setTitle("Cancelar envío");
-        titulo.show();
+
+        SpannableString textAlert = new SpannableString("¿Desea eliminar la imagen seleccionada?");
+        AlertDialog.Builder alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        int color = ContextCompat.getColor(this, R.color.black);
+        textAlert.setSpan(new ForegroundColorSpan(color), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        alert.setMessage(textAlert);
+        View view = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null);
+        alert.setView(view);
+        ImageView imageView = view.findViewById(R.id.image); // Asegúrate de usar el ID correcto
+
+        // Cargar la imagen desde la URI usando Glide
+        Glide.with(this)
+                .load(image)
+                .into(imageView);
+        alert.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                imageuri = null;
+                imagenCargada=false;
+                b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
+
+            }
+        });
+
+        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER | Gravity.CENTER);
+        dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.buttons));
+        negativeButton.setTextColor(ContextCompat.getColor(this, R.color.buttons));
     }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -268,7 +293,7 @@ public class PublicacionesActivity extends AppCompatActivity {
             b.btnCargarImagen.setImageResource(R.drawable.imagen_adjuntada);
             imagenCargada = true;
         }else {
-            Toast.makeText(this, "No selected image", Toast.LENGTH_SHORT).show();
+            alertas.alertWarning(PublicacionesActivity.this, "Ninguna imagen fue seleccionada",2000);
         }
     }
 }

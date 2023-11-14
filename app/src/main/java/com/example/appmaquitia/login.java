@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -51,8 +52,7 @@ public class login extends AppCompatActivity {
                 if(!email.isEmpty() && !pass.isEmpty()) {
                     autenticar(email, pass);
                 }else {
-                    Toast.makeText(login.this, "Rellene todos los campos.", Toast.LENGTH_SHORT).show();
-
+                    alertas.alertWarning(login.this,"Rellene todos los campos",2000);
                 }
 
             }
@@ -85,7 +85,7 @@ public class login extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else{
-                    Toast.makeText(login.this, "Credenciales Incorrectas", Toast.LENGTH_SHORT).show();
+                    alertas.alertFalied(login.this,"Credenciales Incorrectas",2000);
                 }
             }
         });
