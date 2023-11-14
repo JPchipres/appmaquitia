@@ -17,8 +17,7 @@
             android:id="@+id/detailImage"
             android:layout_width="match_parent"
             android:layout_height="350dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/polo_shirt_image" />
+            android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/detailTitle"

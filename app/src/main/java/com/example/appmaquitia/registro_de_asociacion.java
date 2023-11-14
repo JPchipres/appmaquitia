@@ -19,9 +19,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.AlignmentSpan;
 import android.text.style.ForegroundColorSpan;
 
 import android.os.Handler;
@@ -208,10 +210,14 @@ public class registro_de_asociacion extends AppCompatActivity {
         spassconfirm = passconfirm.getText().toString().trim();
 
         if(!scluni.isEmpty() && !snombre.isEmpty() && !semail.isEmpty() && !spass.isEmpty() && !spassconfirm.isEmpty()){
-            registro.setBackgroundResource(R.drawable.btn_osc_data);
             registro.setEnabled(true);
+            busqueda.setEnabled(false);
+            registro.setBackgroundResource(R.drawable.button_ini);
+            registro.setTextColor(getResources().getColor(R.color.white));
+            busqueda.setBackgroundResource(R.drawable.button3_style);
+            busqueda.setTextColor(getResources().getColor(R.color.buttons));
+
         }else{
-            registro.setBackgroundResource(R.drawable.btn_osc_register);
             registro.setEnabled(false);
         }
     }
@@ -246,12 +252,12 @@ public class registro_de_asociacion extends AppCompatActivity {
                                         nombre.setText(n_osc);
                                         email.setText(correo);
                                         SpannableString textAlert = new SpannableString("La OSC con el cluni " + scluni + " fue encontrada!");
-                                        int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                        textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        int colorMain = ContextCompat.getColor(context, R.color.buttons);
+                                        textAlert.setSpan(new ForegroundColorSpan(colorMain), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                         alert.setMessage(textAlert);
                                         AlertDialog dialog = alert.create();
                                         Window window = dialog.getWindow();
-                                        window.setGravity(Gravity.TOP | Gravity.START);
+                                        window.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                                         dialog.show();
                                     }
                                 });
@@ -262,13 +268,14 @@ public class registro_de_asociacion extends AppCompatActivity {
                                         nombre.setText("");
                                         email.setText("");
                                         SpannableString textAlert = new SpannableString("La OSC no fue encontrada o esta inactiva");
-                                        int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                        textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                        int colorRojo = ContextCompat.getColor(context, R.color.red);
+                                        textAlert.setSpan(new ForegroundColorSpan(colorRojo), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                         alert.setMessage(textAlert);
                                         AlertDialog dialog = alert.create();
                                         Window window = dialog.getWindow();
-                                        window.setGravity(Gravity.TOP | Gravity.START);
+                                        window.setGravity(Gravity.BOTTOM | Gravity.CENTER);
                                         dialog.show();
+
                                     }
                                 });
                             }
