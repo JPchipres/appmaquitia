@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.appmaquitia.modelos.alertas;
+
 public class recover_password extends AppCompatActivity {
 
     @Override

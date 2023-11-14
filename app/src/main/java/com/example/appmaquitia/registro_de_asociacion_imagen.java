@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -66,7 +67,7 @@ public class registro_de_asociacion_imagen extends AppCompatActivity {
                         ImageUri = data.getData();
                         SubirImagenFStorage();
                     }else{
-                        Toast.makeText(this, "Imagen no seleccionada", Toast.LENGTH_SHORT).show();
+                        alertas.alertWarning(registro_de_asociacion_imagen.this, "Ninguna imagen fue seleccionada",2000);
                     }
                 }
             });
@@ -89,15 +90,15 @@ public class registro_de_asociacion_imagen extends AppCompatActivity {
 
                             // con la URL de la imagen
 
-                            Toast.makeText(this, "Imagen subida con éxito", Toast.LENGTH_SHORT).show();
+                            alertas.alertSuccess(registro_de_asociacion_imagen.this,"¡Imagen subida con éxito!",2000);
                         });
                     })
                     .addOnFailureListener(e -> {
                         // Maneja errores al subir la imagen
-                        Toast.makeText(this, "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                        alertas.alertFalied(registro_de_asociacion_imagen.this, "¡Error al subir la imagen!",2000);
                     });
         } else {
-            Toast.makeText(this, "Selecciona una imagen primero", Toast.LENGTH_SHORT).show();
+            alertas.alertWarning(registro_de_asociacion_imagen.this,"Selecciona una imagen",2000);
         }
     }
 
@@ -119,20 +120,20 @@ public class registro_de_asociacion_imagen extends AppCompatActivity {
                         documentReference.update("url_imagen", urlimg)
                                 .addOnSuccessListener(aVoid -> {
                                     // Éxito al actualizar el campo en Firestore
-                                    Toast.makeText(this, "URL de imagen actualizada en Firestore", Toast.LENGTH_SHORT).show();
+                                    alertas.alertSuccess(registro_de_asociacion_imagen.this, "Url de la imagen actualizada con éxito",2000);
                                     Intent i = new Intent(this, publicaciones.class);
                                     startActivity(i);
                                 })
                                 .addOnFailureListener(e -> {
                                     // Maneja errores al actualizar el campo en Firestore
-                                    Toast.makeText(this, "Error al actualizar la URL de la imagen en Firestore", Toast.LENGTH_SHORT).show();
+                                    alertas.alertFalied(registro_de_asociacion_imagen.this,"¡Error al actualizar la Url de la imagen!",2000);
                                 });
                     } else {
-                        Toast.makeText(this, "Documento no encontrado", Toast.LENGTH_SHORT).show();
+                        alertas.alertWarning(registro_de_asociacion_imagen.this, "Documento no encontrado",2000);
                     }
                 } else {
                     // Maneja errores al realizar la consulta en Firestore
-                    Toast.makeText(this, "Error al consultar Firestore", Toast.LENGTH_SHORT).show();
+                    alertas.alertFalied(registro_de_asociacion_imagen.this,"¡Error al consultar Firestore!",2000);
                 }
             });
         }

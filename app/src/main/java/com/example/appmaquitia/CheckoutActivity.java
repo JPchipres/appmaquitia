@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.wallet.AutoResolveHelper;
@@ -75,7 +76,7 @@ public class CheckoutActivity extends AppCompatActivity {
         if (available) {
             googlePayButton.setVisibility(View.VISIBLE);
         } else {
-            Toast.makeText(this, R.string.googlepay_status_unavailable, Toast.LENGTH_LONG).show();
+            alertas.alertFalied(CheckoutActivity.this,"Unfortunately, Google Wallet is not available on this phone.",2000);
         }
     }
 
@@ -154,9 +155,7 @@ public class CheckoutActivity extends AppCompatActivity {
             final String token = tokenizationData.getString("token");
             final JSONObject info = paymentMethodData.getJSONObject("info");
             final String billingName = info.getJSONObject("billingAddress").getString("name");
-            Toast.makeText(
-                    this, getString(R.string.payments_show_name, billingName),
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.payments_show_name, billingName),Toast.LENGTH_LONG).show();
 
             // Logging token string.
             Log.d("Google Pay token: ", token);

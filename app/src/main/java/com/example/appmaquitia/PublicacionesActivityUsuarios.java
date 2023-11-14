@@ -92,7 +92,6 @@ public class PublicacionesActivityUsuarios extends AppCompatActivity {
                     Anuncio anuncio = new Anuncio(cuerpo,fechaFormateada,url_imagen);
                     anuncios.add(anuncio);
                 }
-                //Toast.makeText(PublicacionesActivity.this, "hay: " + queryDocumentSnapshots.size(), Toast.LENGTH_SHORT).show();
                 RecyclerView recyclerView = b.rvPublicaciones;
                 AnuncioAdapter adapter = new AnuncioAdapter(anuncios,PublicacionesActivityUsuarios.this);
                 recyclerView.setAdapter(adapter);

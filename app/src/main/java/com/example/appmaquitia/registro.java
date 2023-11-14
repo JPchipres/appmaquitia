@@ -1,16 +1,27 @@
 package com.example.appmaquitia;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import android.os.Handler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +42,7 @@ public class registro extends AppCompatActivity {
     ImageButton btnexit;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
+    AlertDialog.Builder alert;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +61,6 @@ public class registro extends AppCompatActivity {
         btnexit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //i = new Intent(registro.this, pruebas.class);
-                //startActivity(i);
                 finish();
             }
         });
@@ -78,7 +88,7 @@ public class registro extends AppCompatActivity {
                 String passconfirm = etpassconfirm.getText().toString().trim();
                 if(nombre.isEmpty() && mail.isEmpty() && pass.isEmpty() && passconfirm.isEmpty())
                 {
-                    Toast.makeText(registro.this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+                    alertas.alertWarning(registro.this, "Rellene todos los campos", 2000);
                 }else if (nombre.length() <= 8){
                     etnombre.setError("Ingresa un nombre válido.");
                     etnombre.requestFocus();
@@ -108,35 +118,35 @@ public class registro extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                String hashed = Hashing.sha256()
-                        .hashString(pass, StandardCharsets.UTF_8)
-                        .toString();
-                String id = mAuth.getCurrentUser().getUid();
-                Map<String, Object> map = new HashMap<>();
-                map.put("id", id);
-                map.put("name", nombre);
-                map.put("email", mail);
-                map.put("password", hashed);
+                if(task.isSuccessful()) {
 
-                mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        finish();
-                        startActivity(new Intent(registro.this, login.class));
-                        Toast.makeText(registro.this, "¡Registro exitoso!", Toast.LENGTH_SHORT).show();
+                    String hashed = Hashing.sha256()
+                            .hashString(pass, StandardCharsets.UTF_8)
+                            .toString();
+                    String id = mAuth.getCurrentUser().getUid();
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", id);
+                    map.put("name", nombre);
+                    map.put("email", mail);
+                    map.put("password", hashed);
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(registro.this, "¡Error al añadir colección!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(registro.this, "¡Algo ha salido mal!", Toast.LENGTH_SHORT).show();
+                    mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            finish();
+                            startActivity(new Intent(registro.this, login.class));
+                            alertas.alertSuccess(registro.this, "¡Registro exitoso!",2000);
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            alertas.alertFalied(registro.this,"¡Error al añadir la colección!",2000);
+                        }
+                    });
+                }else {
+                    alertas.alertFalied(registro.this, "¡Algo salió mal!",2000);
+                }
             }
         });
     }

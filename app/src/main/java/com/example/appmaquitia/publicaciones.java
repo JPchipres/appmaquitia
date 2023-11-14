@@ -47,7 +47,6 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     }
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(this, "Seleccion: "+position, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, Detalleorganizacion.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
