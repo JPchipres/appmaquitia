@@ -29,7 +29,7 @@
     <Button
         android:layout_marginTop="5dp"
         android:id="@+id/donar"
-        android:background="@drawable/btn_osc_data"
+        android:background="@drawable/button_ini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombre_as"
