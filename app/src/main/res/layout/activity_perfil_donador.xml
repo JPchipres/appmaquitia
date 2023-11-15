@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context=".perfil_donador">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:padding="20dp">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imgperfil"
+            android:src="@drawable/persona_ejemplo"
+            android:padding="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imgperfil"
+            android:id="@+id/txtnombre"
+            android:text="Nombre del donador:"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/urbanist_bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt"
+            android:text="Donante en maquitia"
+            android:layout_below="@id/txtnombre"
+            android:layout_toEndOf="@id/imgperfil"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/urbanist"
+            android:textSize="18dp"
+            android:textColor="@color/grey"/>
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="20dp"
+            android:background="@drawable/baseline_alternate_email_24"
+            android:layout_below="@id/imgperfil"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtemail"
+            android:text="email@email.com"
+            android:layout_below="@id/imgperfil"
+            android:layout_marginLeft="45dp"
+            android:fontFamily="@font/urbanist_semibold"
+            android:textSize="18dp"
+            android:textColor="@color/grey"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtemail"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="20dp">
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:columnCount="2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="Total donado:"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:padding="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Total de donaciones:"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:padding="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="20dp"
+                    android:text="$0.00 MXN"
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:padding="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:textSize="20dp"
+                    android:text="50 "
+                    android:fontFamily="@font/urbanist_bold"
+                    android:padding="5dp"/>
+
+
+            </GridLayout>
+            <Button
+                android:id="@+id/editar_perfil"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:text="Editar perfil"
+                android:textSize="14dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_semibold"
+                android:padding="5dp"/>
+            <Button
+                android:id="@+id/terminos"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Terminos y condiciones"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_bold"
+                android:padding="5dp"/>
+
+            <Button
+                android:id="@+id/cerrar_sesion"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Cerrar sesion"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist_bold"
+                android:padding="5dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navbar"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/nabvar_background"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="700dp"
+        app:menu="@menu/navbar_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/gris_medio"
+        app:itemRippleColor="@color/white"
+        app:labelVisibilityMode="unlabeled">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
+</RelativeLayout>

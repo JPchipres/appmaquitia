@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         registro = (Button) findViewById(R.id.btnRegistro);
         iniciar = (Button) findViewById(R.id.btnInicioSesion);
         btnpublicaciones = findViewById(R.id.btn_publicaciones);
+        //Intent ii = new Intent(this, registro_de_asociacion_imagen.class);
+        // startActivity(ii);
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
