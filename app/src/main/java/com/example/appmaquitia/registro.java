@@ -133,10 +133,15 @@ public class registro extends AppCompatActivity {
                     mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            finish();
-                            startActivity(new Intent(registro.this, login.class));
                             alertas.alertSuccess(registro.this, "¡Registro exitoso!",2000);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                    startActivity(new Intent(registro.this, login.class));
 
+                                }
+                            }, 2500);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

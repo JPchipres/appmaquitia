@@ -66,7 +66,7 @@ public class login extends AppCompatActivity {
         restablecer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login.this, new_password.class));
+                startActivity(new Intent(login.this, recover_password.class));
             }
         });
     }
