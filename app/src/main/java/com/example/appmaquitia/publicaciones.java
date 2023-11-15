@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
@@ -32,6 +35,14 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
         asociacionR.setAdapter(asociacionA);
+        ImageButton regresar = (ImageButton) findViewById(R.id.btn_back);
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
     @Override
