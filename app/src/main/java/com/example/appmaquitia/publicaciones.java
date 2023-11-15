@@ -38,6 +38,8 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     protected void onStart() {
         super.onStart();
         asociacionA.startListening();
+        asociacionA.notifyDataSetChanged();
+
     }
 
     @Override
@@ -62,7 +64,6 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("representante",asociacionA.getItem(position).getRepresentantes());
         i.putExtra("telefono",asociacionA.getItem(position).getTelefono());
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
-
         startActivity(i);
 
 

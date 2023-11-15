@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id leo lobortis, auctor velit quis, malesuada turpis. Ut in ullamcorper leo, vitae posuere lorem. Vivamus feugiat placerat diam. Morbi in sem fringilla, pulvinar neque ac, accumsan lectus."
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="Calle 123, avenida, gaviotas"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:text="BAD1234DA44D"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bonanza"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:text="anonimo@gmail.com"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -150,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:text="28210"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:text="descripcion de la organizacion"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:text="Manzanillo"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:text="Colima"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -214,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:text="123"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -230,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:text="Factultad de Ingenieria Electromecanica"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -246,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:text="314-123-123-123"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -262,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:text="Casa hogar"
                 android:textSize="16dp"
-                android:fontFamily="@font/urbanist"
+                android:fontFamily="@font/urbanist_medium"
                 android:textColor="@color/black"/>
         </LinearLayout>
     </ScrollView>

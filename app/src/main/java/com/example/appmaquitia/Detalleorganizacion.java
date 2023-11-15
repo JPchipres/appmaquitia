@@ -55,9 +55,5 @@ public class Detalleorganizacion extends AppCompatActivity {
         telefono_as.setText(telefono);
         String topico = getIntent().getStringExtra("topico");
         topico_as.setText(topico);
-
-
-
-
     }
 }
