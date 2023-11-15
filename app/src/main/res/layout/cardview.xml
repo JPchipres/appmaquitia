@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="6dp"
@@ -9,64 +9,67 @@
     android:theme="@style/Theme.MaterialComponents.Light"
     app:cardPreventCornerOverlap="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/img_post"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:scaleType="fitXY"
-            android:clipToOutline="true"
-            android:background="@drawable/card_image"
-            android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/rubik_medium"
-            android:text="Nombre A.C"
-            android:textColor="@color/turquesa"
-            android:id="@+id/nombre_osc"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/locacion"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="50dp"
-            />
-        <TextView
-            android:id="@+id/ubicacion_osc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="50dp"
-            android:paddingLeft="15dp"
-            android:fontFamily="@font/rubik"
-            android:text="Ubicacion"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/informacion_osc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="80dp"
-            android:fontFamily="@font/rubik"
-            android:text="Información"
-            android:textColor="@color/gris_medio"
-            />
-
-
-
-
-
-    </RelativeLayout>
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:elevation="10dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/asociacion_logo"
+                android:src="@drawable/asociaciones"
+                android:padding="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+            <TextView
+                android:paddingTop="10dp"
+                android:text="Nombre A.C"
+                android:textAlignment="center"
+                android:textSize="22dp"
+                android:textColor="@color/turquesa"
+                android:fontFamily="@font/urbanist_semibold"
+                android:id="@+id/nombre_as"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.8" />
+            <TextView
+                android:textSize="16dp"
+                android:text=" Manzanillo"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                android:textColor="@color/black"
+                android:id="@+id/municipio_as"
+                android:fontFamily="@font/urbanist_semibold"/>
+            <TextView
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:text="Lider de asociación"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                android:id="@+id/representante_as"/>
+            <TextView
+                android:textAlignment="center"
+                android:textColor="#9A9A9A"
+                android:textSize="14dp"
+                android:text="Telefono"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".7"
+                android:id="@+id/num_telefono_as"/>
+        </LinearLayout>
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

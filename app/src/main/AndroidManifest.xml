@@ -4,10 +4,9 @@
     package="com.example.appmaquitia">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
 
     <application
         android:allowBackup="true"
@@ -23,9 +22,33 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PublicacionesActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:name=".Detalleorganizacion"
             android:exported="false" />
+        <activity
+            android:name=".PublicacionesActivityUsuarios"
+            android:exported="false" />
+        <activity
+            android:name=".Asociaciones"
+            android:exported="false" />
+        <activity
+            android:name=".registro_de_asociacion_imagen"
+            android:exported="false" />
+        <activity
+            android:name=".Configuracionusuario"
+            android:exported="false" />
+        <activity
+            android:name=".AssProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DescriptionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewPublicActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PublicacionesActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".publicaciones"
             android:exported="false" />
@@ -57,9 +80,6 @@
             android:exported="false" />
         <activity
             android:name=".detallespago"
-            android:exported="false" />
-        <activity
-            android:name=".pruebas"
             android:exported="false" />
         <activity
             android:name=".recover_password"

@@ -4,25 +4,36 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.ScrollView;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+import com.bumptech.glide.Glide;
 
 import com.example.appmaquitia.adaptadores.AnuncioAdapter;
 import com.example.appmaquitia.databinding.ActivityPublicacionesBinding;
 import com.example.appmaquitia.modelos.Anuncio;
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +42,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -41,7 +51,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import android.view.LayoutInflater;
 import java.util.Map;
+
+import android.content.DialogInterface;
 import java.util.Random;
 
 //ESTA ES LA VISTA DE LAS ORGANIZACIONES PARA CREAR ANUNCIOS
@@ -50,7 +63,7 @@ public class PublicacionesActivity extends AppCompatActivity {
     Uri imageuri;
     private static final int SELECT_PICTURE = 1;
     private boolean imagenCargada  = false;
-    private String asociacionID = "4WZHbfJDD7QhbqBjUNop"; //dinamicamente se cambiará
+    private String asociacionID = "BAC99030825014"; //dinamicamente se cambiará
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +73,14 @@ public class PublicacionesActivity extends AppCompatActivity {
         setContentView(v);
 
         cargarAnuncios(asociacionID);
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b.scrollView.fullScroll(View.FOCUS_DOWN);
+            }
+        }, 1000);
 
         b.btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,17 +105,24 @@ public class PublicacionesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(imagenCargada) {
-                    subirImagen(imageuri);
+                    subirImagen(imageuri,asociacionID);
                 }else {
                     if(!b.etNuevoAnuncio.getText().toString().equals("")) {
-                        crearAnuncio(asociacionID,"");
+                        if(!b.etNuevoAnuncio.getText().toString().startsWith(" ") && !b.etNuevoAnuncio.getText().toString().startsWith("\n")) {
+                            crearAnuncio(asociacionID, "");
+                        }
                     }
                 }
             }});
         b.btnCargarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarImagen();
+                if(imagenCargada) {
+
+                    eliminarImagen(imageuri);
+                }else{
+                    cargarImagen();
+                }
             }
         });
     }
@@ -122,7 +150,6 @@ public class PublicacionesActivity extends AppCompatActivity {
                     Anuncio anuncio = new Anuncio(cuerpo,fechaFormateada,url_imagen);
                     anuncios.add(anuncio);
                 }
-                //Toast.makeText(PublicacionesActivity.this, "hay: " + queryDocumentSnapshots.size(), Toast.LENGTH_SHORT).show();
                 RecyclerView recyclerView = b.rvPublicaciones;
                 AnuncioAdapter adapter = new AnuncioAdapter(anuncios,PublicacionesActivity.this);
                 recyclerView.setAdapter(adapter);
@@ -146,7 +173,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         Date fecha_hora= new Date();
         Timestamp ts = new Timestamp(fecha_hora);
         Map<String, Object> anuncio = new HashMap<>();
-        anuncio.put("cuerpo", b.etNuevoAnuncio.getText().toString());
+        anuncio.put("cuerpo", b.etNuevoAnuncio.getText().toString().trim());
         anuncio.put("fecha_hora", ts);
         anuncio.put("imagen", imagen);
         //esto es provicional debe cambiar
@@ -158,14 +185,19 @@ public class PublicacionesActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(PublicacionesActivity.this, "Se creo un nuevo anuncio", Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                b.scrollView.fullScroll(View.FOCUS_DOWN);
+                            }
+                        });
                         restablecerInput();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PublicacionesActivity.this, "No se pudo crear un nuevo anuncio", Toast.LENGTH_SHORT).show();
+                        alertas.alertFalied(PublicacionesActivity.this,"No se pudo crear el anuncio", 2000);
                     }
                 });
     }
@@ -173,10 +205,12 @@ public class PublicacionesActivity extends AppCompatActivity {
         Intent abrirGaleria = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(abrirGaleria,SELECT_PICTURE);
     }
-    public void subirImagen(Uri imagenUri) {
+    public void subirImagen(Uri imagenUri, String asociacionID) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference imagesRef = storageRef.child("imagenes/*");
+        Random rand = new Random();
+        Integer randomNum = rand.nextInt(1000);
+        StorageReference imagesRef = storageRef.child("imagenes/" + asociacionID + "/" + randomNum);
         imagesRef.putFile(imagenUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -192,7 +226,7 @@ public class PublicacionesActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(PublicacionesActivity.this,"Error: " + e, Toast.LENGTH_SHORT).show();
+                            alertas.alertFalied(PublicacionesActivity.this,"Error: " + e, 2000);
                         }
                     });
                 }
@@ -201,11 +235,55 @@ public class PublicacionesActivity extends AppCompatActivity {
     }
     public void restablecerInput() {
         imageuri = null;
-        imageuri=Uri.parse("");
+        imageuri = Uri.parse("");
+        imagenCargada = false;
         b.etNuevoAnuncio.setText("");
         b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
         b.btnCargarImagen.setEnabled(true);
     }
+    public void eliminarImagen(Uri image) {
+
+        SpannableString textAlert = new SpannableString("¿Desea eliminar la imagen seleccionada?");
+        AlertDialog.Builder alert = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        int color = ContextCompat.getColor(this, R.color.black);
+        textAlert.setSpan(new ForegroundColorSpan(color), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        alert.setMessage(textAlert);
+        View view = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null);
+        alert.setView(view);
+        ImageView imageView = view.findViewById(R.id.image); // Asegúrate de usar el ID correcto
+
+        // Cargar la imagen desde la URI usando Glide
+        Glide.with(this)
+                .load(image)
+                .into(imageView);
+        alert.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                imageuri = null;
+                imagenCargada=false;
+                b.btnCargarImagen.setImageResource(R.drawable.imagen_no_adjuntada);
+
+            }
+        });
+
+        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = alert.create();
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER | Gravity.CENTER);
+        dialog.show();
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        Button negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        positiveButton.setTextColor(ContextCompat.getColor(this, R.color.buttons));
+        negativeButton.setTextColor(ContextCompat.getColor(this, R.color.buttons));
+    }
+
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -214,9 +292,8 @@ public class PublicacionesActivity extends AppCompatActivity {
             imageuri = data.getData();
             b.btnCargarImagen.setImageResource(R.drawable.imagen_adjuntada);
             imagenCargada = true;
-            b.btnCargarImagen.setEnabled(false);
         }else {
-            Toast.makeText(this, "No selected image", Toast.LENGTH_SHORT).show();
+            alertas.alertWarning(PublicacionesActivity.this, "Ninguna imagen fue seleccionada",2000);
         }
     }
 }

@@ -5,123 +5,156 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".registro_de_asociacion"
-    android:background="@color/gris">
-
-    <Button
-        android:id="@+id/btn_back"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/button_style"
-        android:paddingStart="5dp"
-        android:textSize="30sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/titulo"
-        android:layout_below="@+id/btn_back"
-        android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="30dp"
-        android:text="Cambia las vidas!\nIngresa los datos"
-        android:textSize="34dp"
-        android:textColor="@color/gris_oscuro"
-        android:fontFamily="@font/urbanist_semibold"/>
-
-    <EditText
-        android:id="@+id/nombre"
-        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titulo"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/edit_text"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/urbanist"
-        android:hint="Nombre de la asociacion"/>
-    <EditText
-        android:id="@+id/cluni"
-        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/nombre"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/edit_text"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/urbanist"
-        android:hint="CLUNI"/>
-    <EditText
-        android:id="@+id/email"
-        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cluni"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/edit_text"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/urbanist"
-        android:hint="Email"/>
-    <EditText
-        android:id="@+id/contraseña"
-        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/email"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/edit_text"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/urbanist"
-        android:hint="Contraseña"/>
-    <EditText
-        android:id="@+id/confirmacion"
-        style="@style/Widget.Material3.TextInputEditText.FilledBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/contraseña"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/edit_text"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/urbanist"
-        android:hint="Confirmar contraseña"/>
+    android:background="@color/background">
 
     <LinearLayout
-        android:id="@+id/ll_botones"
-        android:layout_below="@+id/confirmacion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/busquedaDatos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="50dp"
-            android:padding="20dp"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_osc_data"
-            android:text="Buscar datos OSC"/>
-        <Button
-            android:id="@+id/registroAsociacion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:layout_marginHorizontal="25dp"
-            android:layout_marginTop="50dp"
-            android:padding="20dp"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_osc_register"
-            android:text="Registrar Asociación"/>
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginVertical="20dp"
+        android:layout_marginHorizontal="15dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="0dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:textSize="20dp"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:background="@drawable/backbutton"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cambia las vidas!\nIngresa los datos"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/urbanist"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+            <EditText
+                android:id="@+id/nombre"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Nombre Asociación"
+
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittext_radius"
+                app:cornerRadius="8dp"
+                android:paddingVertical="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="20sp"
+                android:fontFamily="@font/urbanist"/>
+
+            <EditText
+                android:id="@+id/cluni"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="CLUNI"
+
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittext_radius"
+                app:cornerRadius="8dp"
+                android:paddingVertical="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="20sp"
+                android:fontFamily="@font/urbanist"/>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Correo Electrónico"
+
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittext_radius"
+                app:cornerRadius="8dp"
+                android:paddingVertical="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="20sp"
+                android:fontFamily="@font/urbanist"/>
+
+            <EditText
+                android:id="@+id/contrasena"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Contraseña"
+
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittext_radius"
+                app:cornerRadius="8dp"
+                android:paddingVertical="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="20sp"
+                android:fontFamily="@font/urbanist"/>
+
+            <EditText
+                android:id="@+id/confirmacion"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Confirmar Contraseña"
+
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittext_radius"
+                app:cornerRadius="8dp"
+                android:paddingVertical="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textSize="20sp"
+                android:fontFamily="@font/urbanist"/>
+
+                <Button
+                    android:id="@+id/busquedaDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_ini"
+                    android:textColor="@color/white"
+                    android:text="Comprobar datos"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    app:cornerRadius="8dp"
+                    android:padding="12dp"/>
+                <Button
+                    android:id="@+id/registroAsociacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button3_style"
+                    android:textColor="@color/buttons"
+                    android:text="Registrar Organización"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    app:cornerRadius="8dp"
+                    android:padding="12dp"/>
+            </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
