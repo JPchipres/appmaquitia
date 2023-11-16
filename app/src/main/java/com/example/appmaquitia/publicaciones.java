@@ -1,5 +1,6 @@
 package com.example.appmaquitia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,19 +10,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class publicaciones extends AppCompatActivity implements Asociacioninterface {
+public class publicaciones extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener {
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
+    Intent i;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +48,8 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
                 finish();
             }
         });
+        bottomNavigationView = findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
     }
     @Override
@@ -77,5 +84,20 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         startActivity(i);
 
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.home){
+            i = new Intent(publicaciones.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.favs) {
+            i = new Intent(publicaciones.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.perfil) {
+            i = new Intent(publicaciones.this, perfil_donador.class);
+            startActivity(i);
+        }
+        return false;
     }
 }
