@@ -3,10 +3,14 @@ package com.example.appmaquitia;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Detalleorganizacion extends AppCompatActivity {
     TextView nombre_as,actividad_as,calle_as,cluni_as,colonia_as,correo_as,cp_as,descripcion_as,entidad_as,municipio_as,num_ext, representante_as,telefono_as,topico_as;
+    Button fav;
+    Boolean isFavSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,19 @@ public class Detalleorganizacion extends AppCompatActivity {
         representante_as = findViewById(R.id.representante_as);
         telefono_as = findViewById(R.id.telefono_as);
         topico_as = findViewById(R.id.topico_as);
+        fav = findViewById(R.id.btn_fav);
+
+        fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isFavSelected = !isFavSelected;
+                if(isFavSelected){
+                    fav.setBackgroundResource(R.drawable.favorito);
+                }else{
+                    fav.setBackgroundResource(R.drawable.bookmarked);
+                }
+            }
+        });
 
         String nombre = getIntent().getStringExtra("nombre");
         nombre_as.setText(nombre);
