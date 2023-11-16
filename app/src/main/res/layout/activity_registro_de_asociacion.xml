@@ -109,7 +109,7 @@
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
-                android:inputType="textPersonName|textCapWords"
+                android:inputType="textPassword"
                 android:textSize="20sp"
                 android:fontFamily="@font/urbanist"/>
 
@@ -125,7 +125,7 @@
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
-                android:inputType="textPersonName|textCapWords"
+                android:inputType="textPassword"
                 android:textSize="20sp"
                 android:fontFamily="@font/urbanist"/>
 
