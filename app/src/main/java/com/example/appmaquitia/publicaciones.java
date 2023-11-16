@@ -1,17 +1,24 @@
 package com.example.appmaquitia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -19,6 +26,8 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
+    BottomNavigationView navbar;
+    Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +41,19 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
         asociacionR.setAdapter(asociacionA);
+        navbar = (BottomNavigationView) findViewById(R.id.navbar);
+
+        navbar.setOnItemSelectedListener(item -> {
+            if(item.getItemId() == R.id.favs){
+                i = new Intent(this, publicaciones_favoritos.class);
+                startActivity(i);
+                return true;
+            }
+            return false;
+        });
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -64,7 +84,5 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
-
-
     }
 }
