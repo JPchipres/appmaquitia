@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     TextView btnpublicaciones;
-    Button registro, iniciar;
+    Button registro, iniciar, iniciar_osc;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +21,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         registro = (Button) findViewById(R.id.btnRegistro);
         iniciar = (Button) findViewById(R.id.btnInicioSesion);
+        iniciar_osc = (Button) findViewById(R.id.btnInicioSesionOsc);
         btnpublicaciones = findViewById(R.id.btn_publicaciones);
-        //Intent ii = new Intent(this, registro_de_asociacion_imagen.class);
-        // startActivity(ii);
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 i = new Intent(MainActivity.this, login.class);
+                startActivity(i);
+            }
+        });
+        iniciar_osc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i = new Intent(MainActivity.this, login_osc.class);
                 startActivity(i);
             }
         });

@@ -205,6 +205,7 @@ public class registro_de_asociacion extends AppCompatActivity {
             Context context = registro_de_asociacion.this;
 
             try {
+                Log.d("Registro asociacion ->", "try entry");
                 doc = Jsoup.connect(url).get();
                 if(!scluni.isEmpty()) {
                     if (!doc.body().text().isEmpty()) {
