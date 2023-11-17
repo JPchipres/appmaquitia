@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,62 +43,58 @@ public class editar_osc extends AppCompatActivity {
             String email = user.getEmail();
             String uid = user.getUid();
             emailtxt.setText(email);
-
-            mFirestore.collection("organizaciones").whereEqualTo("correo",user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            mFirestore.collection("organizaciones").whereEqualTo("correo",user.getEmail().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
+                        Log.d("editar_osc ->", "TASK SUCCESSFUL");
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("editar_osc ->", document.getId() + " => " + document.getData());
                             String nombreosc = document.getString("nombre");
                             String telosc = document.getString("telefono");
                             nombre_osc.setText(nombreosc);
                             tel.setText(telosc);
-                            if(emailtxt.getText().toString() == user.getEmail().toString()){
-                                Log.d("perfil_osc->", "Email no modificado");
-                            }else{
-                                user.updateEmail(emailtxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Log.e("perfil_osc->", "Update email success.");
-
-                                        startActivity(new Intent(editar_osc.this, perfil_osc.class));
+                            guardar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    if(emailtxt.getText().toString() == user.getEmail().toString()){
+                                        Log.d("perfil_osc->", "Email no modificado");
+                                    }else{
+                                        user.updateEmail(emailtxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Log.e("perfil_osc->", "Update email success.");
+                                                startActivity(new Intent(editar_osc.this, perfil_osc.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.e("perfil_osc->", "Update email not success.");
+                                            }
+                                        });
                                     }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.e("perfil_osc->", "Update email not success.");
+                                    if(tel.getText().toString() == telosc){
+                                        Log.d("perfil_osc->", "telefono no modificado");
+                                    }else{
+                                        user.updateEmail(emailtxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Log.e("perfil_osc->", "Update telefono success.");
+                                                startActivity(new Intent(editar_osc.this, perfil_osc.class));
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.e("perfil_osc->", "Update telefono not success.");
+                                            }
+                                        });
                                     }
-                                });
-                            }
-                            if(telosc == tel.getText().toString()){
-                                Log.d("perfil_osc->", "Telefono no modificado");
-                            }else {
-                                mFirestore.collection("organizaciones").document(document.getId()).update("telefono", tel.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            Log.e("perfil_osc->", "Update telefono success.");
-                                            startActivity(new Intent(editar_osc.this, perfil_osc.class));
-                                        }
-                                    }
-                                })
-                               .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.e("perfil_osc->", ""+e);
-                                    }
-                                });
-                            }
-
+                                }
+                            });
                         }
-                    } else {
-                        Log.e("editar_osc ->", "Error obtentiendo documento: ", task.getException());
                     }
-
                 }
-            });
-
+                });
         }
     }
 }
