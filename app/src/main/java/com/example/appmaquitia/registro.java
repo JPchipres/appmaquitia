@@ -103,9 +103,9 @@ public class registro extends AppCompatActivity {
                     etpass.requestFocus();
                     return;
                 } else if (!pass.equals(passconfirm)) {
-                    etpass.setError("Las contraseñas no son iguales.");
+                    etpass.setError("Las contraseñas coinciden.");
                     etpass.requestFocus();
-                    etpassconfirm.setError("Las contraseñas no son iguales.");
+                    etpassconfirm.setError("Las contraseñas no coinciden.");
                     etpassconfirm.requestFocus();
                     return;
                 }else{
