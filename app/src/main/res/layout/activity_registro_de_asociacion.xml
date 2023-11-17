@@ -57,7 +57,7 @@
 
                 android:hint="Nombre Asociación"
 
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
@@ -73,7 +73,7 @@
 
                 android:hint="CLUNI"
 
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
@@ -89,7 +89,7 @@
 
                 android:hint="Correo Electrónico"
 
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
@@ -105,11 +105,11 @@
 
                 android:hint="Contraseña"
 
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
-                android:inputType="textPersonName|textCapWords"
+                android:inputType="textPassword"
                 android:textSize="20sp"
                 android:fontFamily="@font/urbanist"/>
 
@@ -121,11 +121,11 @@
 
                 android:hint="Confirmar Contraseña"
 
-                android:paddingLeft="20dp"
+                android:paddingHorizontal="10dp"
                 android:background="@drawable/edittext_radius"
                 app:cornerRadius="8dp"
                 android:paddingVertical="10dp"
-                android:inputType="textPersonName|textCapWords"
+                android:inputType="textPassword"
                 android:textSize="20sp"
                 android:fontFamily="@font/urbanist"/>
 

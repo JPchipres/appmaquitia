@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -37,11 +40,16 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
         asociacionR.setAdapter(asociacionA);
-        bottomNavigationView
-                = findViewById(R.id.navbar);
+        ImageButton regresar = (ImageButton) findViewById(R.id.btn_back);
 
-        bottomNavigationView
-                .setOnNavigationItemSelectedListener(this);
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        bottomNavigationView = findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
     }
     @Override
