@@ -26,17 +26,36 @@
         android:layout_height="wrap_content"
         android:id="@+id/nombre_as"
         android:layout_below="@+id/asociacion_logo"/>
-    <Button
-        android:layout_marginTop="5dp"
-        android:id="@+id/donar"
-        android:background="@drawable/button_ini"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_botones"
         android:layout_below="@+id/nombre_as"
-        android:layout_centerHorizontal="true"
-        android:elevation="10dp"
-        android:text="Donar"
-        android:textColor="@color/white"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/donar"
+            android:background="@drawable/button_ini"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="5dp"
+            android:elevation="10dp"
+            android:text="Donar"
+            android:textColor="@color/white"/>
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_fav"
+            android:background="@drawable/favorito"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="10dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
     <View
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="30dp"
@@ -44,7 +63,7 @@
         android:layout_height="1.5dp"
         android:background="#70005555"
         android:id="@+id/linea"
-        android:layout_below="@+id/donar"/>
+        android:layout_below="@+id/ll_botones"/>
     <ScrollView
         android:layout_marginBottom="20dp"
         android:id="@+id/scrv_as"

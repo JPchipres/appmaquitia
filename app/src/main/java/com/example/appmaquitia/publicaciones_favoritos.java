@@ -4,92 +4,73 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class publicaciones extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener {
+public class publicaciones_favoritos extends AppCompatActivity implements Asociacioninterface{
+
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
-
     BottomNavigationView navbar;
     Intent i;
-    BottomNavigationView bottomNavigationView;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser usuarioActual = mAuth.getCurrentUser();
+    String userId;
+    DocumentReference userRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_publicaciones_favoritos);
         setContentView(R.layout.activity_publicaciones_inicio);
         asociacionF = FirebaseFirestore.getInstance();
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
-        Query query = asociacionF.collection("organizaciones");
+
+        if(usuarioActual != null){
+            userId = usuarioActual.getUid();
+            //Toast.makeText(this, userId, Toast.LENGTH_LONG).show();
+        }else{
+            //El usuario no ha sido autenticado
+        }
+
+        userRef = asociacionF.collection("user").document(userId);
+        Query query = userRef.collection("favoritos");
         FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
         asociacionR.setAdapter(asociacionA);
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
-
-        navbar.setOnItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.favs){
-                i = new Intent(this, publicaciones_favoritos.class);
-                startActivity(i);
-                return true;
-            }
-            return false;
-        });
-        ImageButton regresar = (ImageButton) findViewById(R.id.btn_back);
-
-        regresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        bottomNavigationView = findViewById(R.id.navbar);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
-
     }
 
-    @Override
-    protected void onStart() {
+    protected void onStart(){
         super.onStart();
         asociacionA.startListening();
-        asociacionA.notifyDataSetChanged();
     }
 
-    @Override
-    protected void onStop() {
+    protected void onStop(){
         super.onStop();
         asociacionA.stopListening();
     }
+
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
-        i.putExtra("nombre",asociacionA.getItem(position).getNombre());
-        i.putExtra("topic",asociacionA.getItem(position).getNombre());
-        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
-        i.putExtra("ID",asociacionA.getItem(position).getCluni());
-        startActivity(i);
-
-        /*Intent i = new Intent(this, Detalleorganizacion.class);
+        Intent i = new Intent(this, Detalleorganizacion.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
@@ -106,23 +87,5 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
-        */
-
-
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.home){
-            i = new Intent(publicaciones.this, publicaciones.class);
-            startActivity(i);
-        } else if (item.getItemId() == R.id.favs) {
-            i = new Intent(publicaciones.this, publicaciones.class);
-            startActivity(i);
-        } else if (item.getItemId() == R.id.perfil) {
-            i = new Intent(publicaciones.this, perfil_donador.class);
-            startActivity(i);
-        }
-        return false;
     }
 }

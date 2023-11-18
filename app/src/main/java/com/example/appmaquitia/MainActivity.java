@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         registro = (Button) findViewById(R.id.btnRegistro);
+        //i = new Intent(MainActivity.this, login.class); //Intent que dirije a lo que estoy trabajando actualmente
+        //startActivity(i);
         iniciar = (Button) findViewById(R.id.btnInicioSesion);
         iniciar_osc = (Button) findViewById(R.id.btnInicioSesionOsc);
         btnpublicaciones = findViewById(R.id.btn_publicaciones);

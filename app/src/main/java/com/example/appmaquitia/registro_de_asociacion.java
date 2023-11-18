@@ -318,8 +318,12 @@ public class registro_de_asociacion extends AppCompatActivity {
 
                         if(spass.equals(spassconfirm)) {
                                 if (status.equals("Activa")) {
-                                    String hashed = Hashing.sha256().hashString(spass, StandardCharsets.UTF_8).toString();
-                                    OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext, num_int, cp, actividades, "", "", "", hashed);
+                                    String hashed = Hashing.sha256()
+                                            .hashString(spass, StandardCharsets.UTF_8)
+                                            .toString();
+                                    OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext,
+                                            num_int, cp, actividades, "", "", "", hashed, false);
+
                                     DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
                                     documentReference.get().addOnCompleteListener(task ->  {
                                         if (task.isSuccessful()) {

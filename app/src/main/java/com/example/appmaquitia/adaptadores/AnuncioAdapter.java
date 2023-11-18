@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,7 +66,6 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.ViewHold
             tvCuerpo = itemView.findViewById(R.id.tvCuerpo);
             tvFechaHora = itemView.findViewById(R.id.tvFechaHora);
             ivImagen = itemView.findViewById(R.id.imgvImagen);
-
         }
 
         public void bind(String cuerpo, String fecha_hora) {
