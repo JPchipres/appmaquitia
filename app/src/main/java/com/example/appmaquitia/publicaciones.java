@@ -108,7 +108,7 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
             i = new Intent(publicaciones.this, publicaciones.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.favs) {
-            i = new Intent(publicaciones.this, publicaciones.class);
+            i = new Intent(publicaciones.this, publicaciones_favoritos.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.perfil) {
             i = new Intent(publicaciones.this, perfil_donador.class);

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
+import com.example.appmaquitia.modelos.alertas;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,9 +44,8 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
         if(usuarioActual != null){
             userId = usuarioActual.getUid();
-            //Toast.makeText(this, userId, Toast.LENGTH_LONG).show();
         }else{
-            //El usuario no ha sido autenticado
+            alertas.alertFalied(publicaciones_favoritos.this,"a",2000);
         }
 
         userRef = asociacionF.collection("user").document(userId);
@@ -70,11 +70,11 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this, Detalleorganizacion.class);
+        Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
-        i.putExtra("cluni",asociacionA.getItem(position).getCluni());
+        i.putExtra("ID",asociacionA.getItem(position).getCluni());
         i.putExtra("colonia",asociacionA.getItem(position).getColonia());
         i.putExtra("correo",asociacionA.getItem(position).getCorreo());
         i.putExtra("cp",asociacionA.getItem(position).getCp());
@@ -83,8 +83,8 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         i.putExtra("municipio",asociacionA.getItem(position).getMunicipio());
         i.putExtra("numero_ext",asociacionA.getItem(position).getNum_ext());
         i.putExtra("representante",asociacionA.getItem(position).getRepresentantes());
-        i.putExtra("telefono",asociacionA.getItem(position).getTelefono());
-        i.putExtra("topico",asociacionA.getItem(position).getTopic());
+        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
+        i.putExtra("topic",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
     }
