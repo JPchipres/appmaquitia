@@ -22,32 +22,21 @@
             android:layout_height="match_parent"
             android:src="@drawable/back_white"
             android:layout_marginEnd="10dp"/>
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:src="@drawable/checked" />
         <LinearLayout
             android:id="@+id/btnVerPerfil"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="match_parent"
-            android:paddingHorizontal="10dp"
+            android:paddingRight="10dp"
             android:orientation="vertical"
             android:gravity="center_vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvNombre"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="${ ORGANIZACION }"
                 android:fontFamily="@font/urbanist_bold"
                 android:textSize="18sp"
-                android:textColor="@color/white"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="${ topic }"
-                android:fontFamily="@font/urbanist"
-                android:textSize="16sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout

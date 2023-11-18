@@ -63,7 +63,9 @@ public class PublicacionesActivity extends AppCompatActivity {
     Uri imageuri;
     private static final int SELECT_PICTURE = 1;
     private boolean imagenCargada  = false;
-    private String asociacionID = "BAC99030825014"; //dinamicamente se cambiará
+    private String asociacionID = "";
+    private String topicoONG = "";
+    private String numeroONG = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         b = ActivityPublicacionesBinding.inflate(getLayoutInflater());
         View v = b.getRoot();
         setContentView(v);
+
 
         cargarAnuncios(asociacionID);
 
@@ -250,7 +253,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         alert.setMessage(textAlert);
         View view = LayoutInflater.from(this).inflate(R.layout.custom_alert_dialog, null);
         alert.setView(view);
-        ImageView imageView = view.findViewById(R.id.image); // Asegúrate de usar el ID correcto
+        ImageView imageView = view.findViewById(R.id.image);
 
         // Cargar la imagen desde la URI usando Glide
         Glide.with(this)

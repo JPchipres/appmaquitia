@@ -179,11 +179,11 @@ public class registro_de_asociacion extends AppCompatActivity {
 
                 pass.setError(null);
                 passconfirm.setError(null);
-                final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\\d!@#$%^&*()_+]{8,}$\n";
+                final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,63}$";
                 String passs = pass.getText().toString().trim();
                 String passsconfirm = passconfirm.getText().toString().trim();
                 if (!passs.matches(regexpass)) {
-                    pass.setError("La contraseña debe tener 8 caractéres, números, caracteres, letras mayúsculas y minúsculas.");
+                    pass.setError("La contraseña debe tener 8 dígitos, al menos un número, un caractere, letras mayúsculas y minúsculas.");
                     pass.requestFocus();
                 } else if (!passs.equals(passsconfirm)) {
 

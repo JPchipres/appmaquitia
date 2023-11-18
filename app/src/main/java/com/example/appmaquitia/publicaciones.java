@@ -56,6 +56,7 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     protected void onStart() {
         super.onStart();
         asociacionA.startListening();
+        asociacionA.notifyDataSetChanged();
     }
 
     @Override
@@ -65,7 +66,14 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     }
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this, Detalleorganizacion.class);
+        Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
+        i.putExtra("nombre",asociacionA.getItem(position).getNombre());
+        i.putExtra("topic",asociacionA.getItem(position).getNombre());
+        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
+        i.putExtra("ID",asociacionA.getItem(position).getCluni());
+        startActivity(i);
+
+        /*Intent i = new Intent(this, Detalleorganizacion.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
@@ -82,6 +90,7 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
+        */
 
 
     }

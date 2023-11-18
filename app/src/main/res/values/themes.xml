@@ -3,6 +3,7 @@
     <style name="Base.Theme.Appmaquitia" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor" tools:targetApi="1">@color/buttons</item>
     </style>
 
     <style name="Theme.Appmaquitia" parent="Base.Theme.Appmaquitia" />

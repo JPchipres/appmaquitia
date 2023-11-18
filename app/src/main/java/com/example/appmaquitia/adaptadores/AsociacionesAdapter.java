@@ -46,7 +46,6 @@ public class AsociacionesAdapter extends FirestoreRecyclerAdapter<Asociacion,Aso
     public void onItemClick(int position) {
 
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nombre, municipio, representantes, telefono;
         public ViewHolder(@NonNull View itemView, Asociacioninterface asociacioninterface) {

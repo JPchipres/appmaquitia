@@ -39,6 +39,7 @@ import java.util.Map;
 public class registro extends AppCompatActivity {
     EditText etnombre, etmail, etpass, etpassconfirm;
     Button btnregistrar, btnasociacion;
+    TextView recuperarContraseña;
     ImageButton btnexit;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
@@ -57,6 +58,15 @@ public class registro extends AppCompatActivity {
         btnregistrar = findViewById(R.id.btnregistrar);
         btnasociacion = findViewById(R.id.btnregistrarAso);
         btnexit = findViewById(R.id.btn_back);
+        recuperarContraseña = findViewById(R.id.btnRecuperarContraseña);
+
+        recuperarContraseña.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(registro.this, recover_password.class);
+                startActivity(i);
+            }
+        });
 
         btnexit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +90,16 @@ public class registro extends AppCompatActivity {
                 etpass.setError(null);
                 etpassconfirm.setError(null);
                 etmail.setError(null);
+                final String regexname ="^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\\s){1,4}[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$";
                 final String regex = "(?:[^<>()\\[\\].,;:\\s@\"]+(?:\\.[^<>()\\[\\].,;:\\s@\"]+)*|\"[^\\n\"]+\")@(?:[^<>()\\[\\].,;:\\s@\"]+\\.)+[^<>()\\[\\]\\.,;:\\s@\"]{2,63}";
                 final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,63}$";
                 String nombre = etnombre.getText().toString().trim();
                 String mail = etmail.getText().toString().trim();
                 String pass = etpass.getText().toString().trim();
                 String passconfirm = etpassconfirm.getText().toString().trim();
-                if(nombre.isEmpty() && mail.isEmpty() && pass.isEmpty() && passconfirm.isEmpty())
-                {
+                if(nombre.isEmpty() && mail.isEmpty() && pass.isEmpty() && passconfirm.isEmpty()) {
                     alertas.alertWarning(registro.this, "Rellene todos los campos", 2000);
-                }else if (nombre.length() <= 8){
+                }else if (!nombre.matches(regexname)){
                     etnombre.setError("Ingresa un nombre válido.");
                     etnombre.requestFocus();
                     return;
@@ -150,7 +160,7 @@ public class registro extends AppCompatActivity {
                         }
                     });
                 }else {
-                    alertas.alertFalied(registro.this, "¡Algo salió mal!",2000);
+                    alertas.alertFalied(registro.this, "¡El correo ya está en uso!",2000);
                 }
             }
         });

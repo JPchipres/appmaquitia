@@ -3,5 +3,7 @@
     <style name="Base.Theme.Appmaquitia" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:statusBarColor" tools:targetApi="1">@color/buttons</item>
+
     </style>
 </resources>

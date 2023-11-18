@@ -24,7 +24,7 @@ public class login_osc extends AppCompatActivity {
     EditText txtemail, txtpass;
     Button iniciar;
     ImageButton regresar;
-    TextView restablecer;
+    TextView restablecer, registro;
 
     FirebaseAuth mAuth;
     Intent i;
@@ -40,6 +40,13 @@ public class login_osc extends AppCompatActivity {
         iniciar = (Button) findViewById(R.id.entrar);
         regresar = (ImageButton) findViewById(R.id.btnRegresar);
         restablecer = (TextView) findViewById(R.id.btnRestablecer);
+        registro = (TextView) findViewById(R.id.btnRegistro);
+        registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(login_osc.this, registro_de_asociacion.class));
+            }
+        });
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -24,6 +24,7 @@ public class login extends AppCompatActivity {
     EditText txtemail, txtpass;
     Button iniciar;
     ImageButton regresar;
+    TextView btnRegistro;
     TextView restablecer;
 
     FirebaseAuth mAuth;
@@ -42,6 +43,14 @@ public class login extends AppCompatActivity {
         iniciar = (Button) findViewById(R.id.entrar);
         regresar = (ImageButton) findViewById(R.id.btnRegresar);
         restablecer = (TextView) findViewById(R.id.btnRestablecer);
+        btnRegistro = (TextView) findViewById(R.id.btnRegistro);
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(login.this,registro.class);
+                startActivity(i);
+            }
+        });
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
