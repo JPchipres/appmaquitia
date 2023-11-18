@@ -1,5 +1,6 @@
 package com.example.appmaquitia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,8 +10,13 @@ import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -21,6 +27,10 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
     FirebaseFirestore asociacionF;
     BottomNavigationView navbar;
     Intent i;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseUser usuarioActual = mAuth.getCurrentUser();
+    String userId;
+    DocumentReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +40,16 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         asociacionF = FirebaseFirestore.getInstance();
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
-        Query query = asociacionF.collection("organizaciones");
+
+        if(usuarioActual != null){
+            userId = usuarioActual.getUid();
+            //Toast.makeText(this, userId, Toast.LENGTH_LONG).show();
+        }else{
+            //El usuario no ha sido autenticado
+        }
+
+        userRef = asociacionF.collection("user").document(userId);
+        Query query = userRef.collection("favoritos");
         FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
