@@ -42,7 +42,7 @@ import java.util.List;
 
 public class PublicacionesActivityUsuarios extends AppCompatActivity {
     private ActivityPublicacionesUsuariosBinding b;
-    String asociacionNombre, numeroONG, topicoONG,asociacionID;
+    String asociacionNombre, numeroONG, topicoONG,asociacionID, actividades, calle, colonia, correo, cp, descripcion, entidad, municipio, numero_ext, representante;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +54,17 @@ public class PublicacionesActivityUsuarios extends AppCompatActivity {
         topicoONG = getIntent().getStringExtra("topic");
         numeroONG = getIntent().getStringExtra("numero");
         asociacionID = getIntent().getStringExtra("ID");
+        actividades = getIntent().getStringExtra("actividades");
+        calle = getIntent().getStringExtra("calle");
+        colonia = getIntent().getStringExtra("colonia");
+        correo = getIntent().getStringExtra("correo");
+        cp = getIntent().getStringExtra("cp");
+        descripcion = getIntent().getStringExtra("descripcion");
+        entidad = getIntent().getStringExtra("entidad");
+        municipio = getIntent().getStringExtra("municipio");
+        numero_ext = getIntent().getStringExtra("numero_ext");
+        representante = getIntent().getStringExtra("representante");
+
         b.tvNombre.setMaxLines(2);
         b.tvNombre.setEllipsize(TextUtils.TruncateAt.END);
         b.tvNombre.setText(asociacionNombre);
@@ -84,6 +95,28 @@ public class PublicacionesActivityUsuarios extends AppCompatActivity {
             public void onClick(View v) {
                 //Intent i = new Intent(this,perfilOrganizacion.class);
                 //startActivity(i);
+            }
+        });
+        b.btnVerPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PublicacionesActivityUsuarios.this,Detalleorganizacion.class);
+                i.putExtra("nombre",asociacionNombre);
+                i.putExtra("actividades",actividades);
+                i.putExtra("calle",calle);
+                i.putExtra("cluni",asociacionID);
+                i.putExtra("clonia",colonia);
+                i.putExtra("correo",correo);
+                i.putExtra("cp",cp);
+                i.putExtra("descripcion",descripcion);
+                i.putExtra("entidad",entidad);
+                i.putExtra("municipio",municipio);
+                i.putExtra("numero_ext",numero_ext);
+                i.putExtra("representante",representante);
+                i.putExtra("telefono",numeroONG);
+                i.putExtra("topico",topicoONG);
+                startActivity(i);
+
             }
         });
     }

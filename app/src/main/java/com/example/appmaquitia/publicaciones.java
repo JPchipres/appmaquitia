@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -17,9 +18,7 @@ import android.widget.Toast;
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -84,16 +83,9 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     public void onItemClick(int position) {
         Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
-        i.putExtra("topic",asociacionA.getItem(position).getNombre());
-        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
-        i.putExtra("ID",asociacionA.getItem(position).getCluni());
-        startActivity(i);
-
-        /*Intent i = new Intent(this, Detalleorganizacion.class);
-        i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
-        i.putExtra("cluni",asociacionA.getItem(position).getCluni());
+        i.putExtra("ID",asociacionA.getItem(position).getCluni());
         i.putExtra("colonia",asociacionA.getItem(position).getColonia());
         i.putExtra("correo",asociacionA.getItem(position).getCorreo());
         i.putExtra("cp",asociacionA.getItem(position).getCp());
@@ -102,11 +94,10 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("municipio",asociacionA.getItem(position).getMunicipio());
         i.putExtra("numero_ext",asociacionA.getItem(position).getNum_ext());
         i.putExtra("representante",asociacionA.getItem(position).getRepresentantes());
-        i.putExtra("telefono",asociacionA.getItem(position).getTelefono());
-        i.putExtra("topico",asociacionA.getItem(position).getTopic());
+        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
+        i.putExtra("topic",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
-        */
 
 
     }

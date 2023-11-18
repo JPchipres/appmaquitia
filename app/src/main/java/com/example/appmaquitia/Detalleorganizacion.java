@@ -113,8 +113,6 @@ public class Detalleorganizacion extends AppCompatActivity {
                     }
                 }
             });
-        }else{
-
         }
 
         fav.setOnClickListener(new View.OnClickListener() {
