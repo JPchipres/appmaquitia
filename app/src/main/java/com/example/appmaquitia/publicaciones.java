@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
@@ -22,12 +24,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class publicaciones extends AppCompatActivity implements Asociacioninterface {
+public class publicaciones extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener {
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
+
     BottomNavigationView navbar;
     Intent i;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,16 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
             }
             return false;
         });
+        ImageButton regresar = (ImageButton) findViewById(R.id.btn_back);
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        bottomNavigationView = findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
     }
 
@@ -58,6 +72,7 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     protected void onStart() {
         super.onStart();
         asociacionA.startListening();
+        asociacionA.notifyDataSetChanged();
     }
 
     @Override
@@ -67,7 +82,14 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
     }
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this, Detalleorganizacion.class);
+        Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
+        i.putExtra("nombre",asociacionA.getItem(position).getNombre());
+        i.putExtra("topic",asociacionA.getItem(position).getNombre());
+        i.putExtra("numero",asociacionA.getItem(position).getTelefono());
+        i.putExtra("ID",asociacionA.getItem(position).getCluni());
+        startActivity(i);
+
+        /*Intent i = new Intent(this, Detalleorganizacion.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
@@ -84,5 +106,23 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
+        */
+
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.home){
+            i = new Intent(publicaciones.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.favs) {
+            i = new Intent(publicaciones.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.perfil) {
+            i = new Intent(publicaciones.this, perfil_donador.class);
+            startActivity(i);
+        }
+        return false;
     }
 }

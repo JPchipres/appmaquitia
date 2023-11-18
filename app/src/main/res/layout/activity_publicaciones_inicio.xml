@@ -2,54 +2,98 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:padding="4dp"
-    tools:context=".publicaciones">
+    tools:context=".publicaciones"
+    android:background="@color/background">
 
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="140dp"
-        app:srcCompat="@drawable/logo" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/logo"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:imeOptions="actionSearch"
-        android:singleLine="true"
-        android:background="@drawable/edittext_buscador"
-        android:drawableStart="@drawable/search"
-        android:drawableLeft="@drawable/search"
-        android:drawablePadding="5dp"
-        android:id="@+id/buscar"
-        android:hint="Search" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@+id/buscar"
-            android:id="@+id/rv_asociaciones"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp">
-        </androidx.recyclerview.widget.RecyclerView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <LinearLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/navbar"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/back"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:background="@drawable/backbutton"/>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/logo2"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/buscarll"
+        android:layout_below="@+id/header"
+        android:paddingHorizontal="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingHorizontal="10dp"
+            android:layout_below="@+id/logo"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:background="@drawable/edittext_buscador"
+            android:drawableEnd="@drawable/search"
+            android:drawablePadding="10dp"
+            android:textColor="@color/buttons"
+            android:id="@+id/buscar"
+            android:hint="Buscar"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:paddingBottom="50dp"
+        android:id="@+id/scrollView"
+        android:paddingHorizontal="10dp"
+        android:layout_below="@+id/buscarll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_asociaciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/messageInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/nabvar_background"
-        android:layout_marginEnd="0dp"
-        app:menu="@menu/navbar_menu"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@color/gris_medio"
-        app:itemRippleColor="@color/white"
-        app:labelVisibilityMode="unlabeled">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:orientation="horizontal"
+        android:background="@color/white">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/navbar"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/nabvar_background"
+            android:layout_marginEnd="0dp"
+            app:menu="@menu/navbar_menu"
+            app:itemIconSize="30dp"
+            app:itemIconTint="@color/gris_medio"
+            app:itemRippleColor="@color/white"
+            app:labelVisibilityMode="unlabeled">
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </LinearLayout>
 </RelativeLayout>
-
-
-

@@ -86,7 +86,7 @@
 
                     android:background="@drawable/edittext_radius"
                     android:hint="Ingresa tu email"
-                    android:paddingLeft="20dp"
+                    android:paddingHorizontal="10dp"
                     android:paddingVertical="10dp"
                     android:inputType="textEmailAddress"
                     android:textSize="20sp"
@@ -98,8 +98,7 @@
                     android:layout_marginTop="20dp"
 
                     android:hint="Ingresa tu contraseña"
-
-                    android:paddingLeft="20dp"
+                    android:paddingHorizontal="10dp"
                     android:background="@drawable/edittext_radius"
                     app:cornerRadius="8dp"
                     android:paddingVertical="10dp"
@@ -140,6 +139,7 @@
                     android:fontFamily="@font/urbanist"
                     android:text="Recuperar Contraseña"/>
                 <TextView
+                    android:id="@+id/btnRegistro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

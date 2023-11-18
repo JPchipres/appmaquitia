@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -20,7 +21,10 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +33,7 @@ import com.google.common.hash.Hashing;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,11 +49,10 @@ public class registro_de_asociacion extends AppCompatActivity {
     EditText nombre, cluni, email, pass, passconfirm;
     String snombre, scluni, semail, spass, spassconfirm;
     Button registro, busqueda;
+    ImageButton regresar;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
-    Intent i;
     TextView titulo;
-    AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +68,12 @@ public class registro_de_asociacion extends AppCompatActivity {
         registro = (Button) findViewById(R.id.registroAsociacion);
         busqueda = (Button) findViewById(R.id.busquedaDatos);
         titulo = findViewById(R.id.titulo);
+        regresar = (ImageButton) findViewById(R.id.btn_back);
 
         nombre.setFocusable(false);
         nombre.setClickable(false);
         email.setFocusable(false);
         email.setClickable(false);
-
-        alert = new AlertDialog.Builder(registro_de_asociacion.this, R.style.AlertDialogCustom);
         registro.setEnabled(false);
 
         cluni.addTextChangedListener(new TextWatcher() {
@@ -161,13 +164,44 @@ public class registro_de_asociacion extends AppCompatActivity {
         busqueda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DATOS().execute();
+                scluni = cluni.getText().toString();
+                if (!scluni.isEmpty()) {
+                    new DATOS().execute();
+                }else {
+                    alertas.alertWarning(registro_de_asociacion.this,"Por favor ingrese un CLUNI",2000);
+                }
             }
         });
 
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { new LECTURA().execute(); }
+            public void onClick(View v) {
+
+                pass.setError(null);
+                passconfirm.setError(null);
+                final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,63}$";
+                String passs = pass.getText().toString().trim();
+                String passsconfirm = passconfirm.getText().toString().trim();
+                if (!passs.matches(regexpass)) {
+                    pass.setError("La contraseña debe tener 8 dígitos, al menos un número, un caractere, letras mayúsculas y minúsculas.");
+                    pass.requestFocus();
+                } else if (!passs.equals(passsconfirm)) {
+
+                    pass.setError("Las contraseñas coinciden.");
+                    pass.requestFocus();
+                    passconfirm.setError("Las contraseñas no coinciden.");
+                    passconfirm.requestFocus();
+                }else {
+                    new LECTURA().execute();
+                }
+
+            }
+        });
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
     }
 
@@ -202,89 +236,57 @@ public class registro_de_asociacion extends AppCompatActivity {
 
             }
             String url = "http://www.sii.gob.mx/portal/?cluni=" + scluni + "&nombre=&acronimo=&rfc=&status_osc=&status_sancion=&figura_juridica=&estado=&municipio=&asentamiento=&cp=&rep_nombre=&rep_apaterno=&rep_amaterno=&num_notaria=&objeto_social=&red=&advanced=\n";
-            Context context = registro_de_asociacion.this;
 
             try {
+                Log.d("Registro asociacion ->", "try entry");
                 doc = Jsoup.connect(url).get();
-                if(!scluni.isEmpty()) {
-                    if (!doc.body().text().isEmpty()) {
-                        Elements table = doc.select("tbody");
-                        Elements rows = table.get(1).select("tr");
-                        for (Element row : rows) {
-                            String n_osc = row.select("td").get(2).text();
-                            String status = row.select("td").get(5).text();
-                            String correo = row.select("td").get(11).text();
-                            if(status.equals("Activa")){
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        nombre.setText(n_osc);
-                                        email.setText(correo);
-                                        SpannableString textAlert = new SpannableString("La OSC con el cluni " + scluni + " fue encontrada!");
-                                        int colorMain = ContextCompat.getColor(context, R.color.buttons);
-                                        textAlert.setSpan(new ForegroundColorSpan(colorMain), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                        alert.setMessage(textAlert);
-                                        AlertDialog dialog = alert.create();
-                                        Window window = dialog.getWindow();
-                                        window.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-                                        dialog.show();
-                                    }
-                                });
-                            }else{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        nombre.setText("");
-                                        email.setText("");
-                                        SpannableString textAlert = new SpannableString("La OSC no fue encontrada o esta inactiva");
-                                        int colorRojo = ContextCompat.getColor(context, R.color.red);
-                                        textAlert.setSpan(new ForegroundColorSpan(colorRojo), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                        alert.setMessage(textAlert);
-                                        AlertDialog dialog = alert.create();
-                                        Window window = dialog.getWindow();
-                                        window.setGravity(Gravity.BOTTOM | Gravity.CENTER);
-                                        dialog.show();
-
-                                    }
-                                });
-                            }
+                if (!doc.body().text().isEmpty()) {
+                    Elements table = doc.select("tbody");
+                    Elements rows = table.get(1).select("tr");
+                    for (Element row : rows) {
+                        String n_osc = row.select("td").get(2).text();
+                        String status = row.select("td").get(5).text();
+                        String correo = row.select("td").get(11).text();
+                        if(status.equals("Activa")){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    nombre.setText("");
+                                    email.setText("");
+                                    nombre.setText(n_osc);
+                                    email.setText(correo);
+                                }
+                            });
+                        }else{
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    nombre.setText("");
+                                    email.setText("");
+                                    alertas.alertWarning(registro_de_asociacion.this,"La ONG está inactiva", 2000);
+                                }
+                            });
                         }
-                    }else{
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                alert.setMessage("OSC no encontrada");
-                                alert.show();
-                            }
-                        });
                     }
-                }else{
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            SpannableString textAlert = new SpannableString("Por favor, coloque un CLUNI");
-                            int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                            textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                            alert.setMessage(textAlert);
-                            AlertDialog dialog = alert.create();
-                            Window window = dialog.getWindow();
-                            window.setGravity(Gravity.TOP | Gravity.START);
-                            dialog.show();
-                        }
-                    });
                 }
             }catch (Exception e){
-                Log.e("Error", e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        alertas.alertFalied(registro_de_asociacion.this,"Pruebe con un CLUNI válido",2000);
+                    }
+                });
             }
             return null;
         }
     }
 
     private class LECTURA extends AsyncTask<Void, Void, Void>{
+
         protected Void doInBackground(Void... voids){
+
             Document doc = null;
             String url = "http://www.sii.gob.mx/portal/?cluni=" + scluni + "&nombre=&acronimo=&rfc=&status_osc=&status_sancion=&figura_juridica=&estado=&municipio=&asentamiento=&cp=&rep_nombre=&rep_apaterno=&rep_amaterno=&num_notaria=&objeto_social=&red=&advanced=\n";
-            Context context = registro_de_asociacion.this;
 
             try {
                 doc = Jsoup.connect(url).get();
@@ -314,117 +316,69 @@ public class registro_de_asociacion extends AppCompatActivity {
                         spass = pass.getText().toString().trim();
                         spassconfirm = passconfirm.getText().toString().trim();
 
-
-                        if(!scluni.isEmpty() && !snombre.isEmpty() && !semail.isEmpty() && !spass.isEmpty() && !spassconfirm.isEmpty()){
-                            if(spass.equals(spassconfirm)) {
+                        if(spass.equals(spassconfirm)) {
                                 if (status.equals("Activa")) {
                                     String hashed = Hashing.sha256()
                                             .hashString(spass, StandardCharsets.UTF_8)
                                             .toString();
                                     OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext,
                                             num_int, cp, actividades, "", "", "", hashed, false);
-                                    DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
-                                    documentReference.set(datos)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    String documentId = documentReference.getId();
-                                                    mAuth.createUserWithEmailAndPassword(correo, spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                                            runOnUiThread(new Runnable() {
-                                                                @Override
-                                                                public void run() {
-                                                                    SpannableString textAlert = new SpannableString("Registro exitoso");
-                                                                    int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                                                    textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                                    alert.setMessage(textAlert);
-                                                                    AlertDialog dialog = alert.create();
-                                                                    Window window = dialog.getWindow();
-                                                                    window.setGravity(Gravity.TOP | Gravity.START);
-                                                                    dialog.show();
-                                                                    i = new Intent(registro_de_asociacion.this, MainActivity.class);
-                                                                    startActivity(i);
-                                                                }
-                                                            });
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            runOnUiThread(new Runnable() {
-                                                                @Override
-                                                                public void run() {
-                                                                    SpannableString textAlert = new SpannableString("Ups! Algo ocurrio durante el registro");
-                                                                    int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                                                    textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                                    alert.setMessage(textAlert);
-                                                                    AlertDialog dialog = alert.create();
-                                                                    Window window = dialog.getWindow();
-                                                                    window.setGravity(Gravity.TOP | Gravity.START);
-                                                                    dialog.show();
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    runOnUiThread(new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            SpannableString textAlert = new SpannableString("Ups! Algo ocurrio durante el registro");
-                                                            int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                                            textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                                            alert.setMessage(textAlert);
-                                                            AlertDialog dialog = alert.create();
-                                                            Window window = dialog.getWindow();
-                                                            window.setGravity(Gravity.TOP | Gravity.START);
-                                                            dialog.show();
-                                                        }
-                                                    });
-                                                }
-                                            });
 
-                                } else {
+                                    DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
+                                    documentReference.get().addOnCompleteListener(task ->  {
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot documento = task.getResult();
+                                            if (!documento.exists()) {
+                                                documentReference.set(datos)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                String documentId = documentReference.getId();
+                                                                mAuth.createUserWithEmailAndPassword(correo, spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                        runOnUiThread(new Runnable() {
+                                                                            @Override
+                                                                            public void run() {
+                                                                                alertas.alertSuccess(registro_de_asociacion.this,"¡Resgitro creado con éxito!",2000);
+                                                                                new Handler().postDelayed(new Runnable() {
+                                                                                    @Override
+                                                                                    public void run() {
+                                                                                        finish();
+                                                                                        startActivity(new Intent(registro_de_asociacion.this, login.class));
+
+                                                                                    }
+                                                                                }, 2500);
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                });
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                runOnUiThread(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        alertas.alertWarning(registro_de_asociacion.this,"¡Ups Algo salió mal durante el registro!",2000);
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                            }else {
+                                                alertas.alertFalied(registro_de_asociacion.this,"La ONG se encuentra ya registrada",2000);
+                                            }
+                                        }
+                                    });
+                                }else {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            alert.setMessage("La OSC no está activa");
-                                            alert.show();
+                                            alertas.alertFalied(registro_de_asociacion.this,"Intenta con una ONG activa",2000);
                                         }
                                     });
                                 }
-                            }else{
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        SpannableString textAlert = new SpannableString("Las contraseñas deben ser iguales");
-                                        int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                        textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                        alert.setMessage(textAlert);
-                                        AlertDialog dialog = alert.create();
-                                        Window window = dialog.getWindow();
-                                        window.setGravity(Gravity.TOP | Gravity.START);
-                                        dialog.show();
-                                    }
-                                });
                             }
-                        }else{
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    SpannableString textAlert = new SpannableString("Todos los campos deben ser llenados");
-                                    int colorBlanco = ContextCompat.getColor(context, R.color.white);
-                                    textAlert.setSpan(new ForegroundColorSpan(colorBlanco), 0, textAlert.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                                    alert.setMessage(textAlert);
-                                    AlertDialog dialog = alert.create();
-                                    Window window = dialog.getWindow();
-                                    window.setGravity(Gravity.TOP | Gravity.START);
-                                    dialog.show();
-                                }
-                            });
-                        }
                     }
                 }
             }catch (Exception e){
