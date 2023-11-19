@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
@@ -87,5 +89,10 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         i.putExtra("topico",asociacionA.getItem(position).getTopic());
 
         startActivity(i);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }

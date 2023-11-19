@@ -5,17 +5,24 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
+
+import android.content.DialogInterface;
 import android.os.Handler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -38,13 +45,14 @@ import java.util.Map;
 
 public class registro extends AppCompatActivity {
     EditText etnombre, etmail, etpass, etpassconfirm;
-    Button btnregistrar, btnasociacion;
+    Button btnregistrar, btnasociacion, terms;
     TextView recuperarContraseña;
     ImageButton btnexit;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
     AlertDialog.Builder alert;
     Intent i;
+    CheckBox checkBoxTerms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +67,10 @@ public class registro extends AppCompatActivity {
         btnasociacion = findViewById(R.id.btnregistrarAso);
         btnexit = findViewById(R.id.btn_back);
         recuperarContraseña = findViewById(R.id.btnRecuperarContraseña);
+        checkBoxTerms = findViewById(R.id.cb_terminos);
+        terms = findViewById(R.id.btn_terms);
+
+        btnregistrar.setEnabled(false);
 
         recuperarContraseña.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +92,41 @@ public class registro extends AppCompatActivity {
             public void onClick(View v) {
                 i = new Intent(registro.this, registro_de_asociacion.class);
                 startActivity(i);
+            }
+        });
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(registro.this);
+                View customLayout = inflater.inflate(R.layout.dialog_custom_terms, null);
+                TextView messageTerms = customLayout.findViewById(R.id.txt_viewMessageTerms);
+                AlertDialog.Builder builder = new AlertDialog.Builder(registro.this, R.style.AlertDialogTerms);
+                builder.setTitle("Politicas y términos");
+                String text_terms = getResources().getString(R.string.txt_terms);
+                messageTerms.setText(Html.fromHtml(text_terms));
+                builder.setView(customLayout);
+
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        checkBoxTerms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                btnregistrar.setEnabled(isChecked);
+                if(isChecked){
+                    btnregistrar.setBackgroundResource(R.drawable.button_ini);
+                }else{
+                    btnregistrar.setBackgroundResource(R.drawable.button_not_ini);
+                }
             }
         });
 

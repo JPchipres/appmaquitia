@@ -6,20 +6,25 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -49,11 +54,12 @@ public class registro_de_asociacion extends AppCompatActivity {
     EditText nombre, cluni, email, pass, passconfirm;
     String snombre, scluni, semail, spass, spassconfirm;
     Button registro, busqueda;
+    Button terms;
     ImageButton regresar;
     FirebaseFirestore mFirestore;
     FirebaseAuth mAuth;
     TextView titulo;
-
+    CheckBox checkBoxTerms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +75,37 @@ public class registro_de_asociacion extends AppCompatActivity {
         busqueda = (Button) findViewById(R.id.busquedaDatos);
         titulo = findViewById(R.id.titulo);
         regresar = (ImageButton) findViewById(R.id.btn_back);
+        terms = (Button) findViewById(R.id.btn_terms);
+        checkBoxTerms = findViewById(R.id.cb_terminos);
 
         nombre.setFocusable(false);
         nombre.setClickable(false);
         email.setFocusable(false);
         email.setClickable(false);
         registro.setEnabled(false);
+
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(registro_de_asociacion.this);
+                View customLayout = inflater.inflate(R.layout.dialog_custom_terms, null);
+                TextView messageTerms = customLayout.findViewById(R.id.txt_viewMessageTerms);
+                AlertDialog.Builder builder = new AlertDialog.Builder(registro_de_asociacion.this, R.style.AlertDialogTerms);
+                builder.setTitle("Politicas y términos");
+                String text_terms = getResources().getString(R.string.txt_terms2);
+                messageTerms.setText(Html.fromHtml(text_terms));
+                builder.setView(customLayout);
+
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
         cluni.addTextChangedListener(new TextWatcher() {
             @Override
@@ -197,6 +228,7 @@ public class registro_de_asociacion extends AppCompatActivity {
 
             }
         });
+
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,6 +236,8 @@ public class registro_de_asociacion extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void estadoBoton() {
         scluni = cluni.getText().toString();
@@ -213,10 +247,22 @@ public class registro_de_asociacion extends AppCompatActivity {
         spassconfirm = passconfirm.getText().toString().trim();
 
         if(!scluni.isEmpty() && !snombre.isEmpty() && !semail.isEmpty() && !spass.isEmpty() && !spassconfirm.isEmpty()){
-            registro.setEnabled(true);
+            checkBoxTerms.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    registro.setEnabled(isChecked);
+                    if(isChecked){
+                        registro.setTextColor(getResources().getColor(R.color.white));
+                        registro.setBackgroundResource(R.drawable.button_ini);
+                    }else{
+                        registro.setTextColor(getResources().getColor(R.color.white));
+                        registro.setBackgroundResource(R.drawable.button_not_ini);
+                    }
+                }
+            });
+            //registro.setEnabled(true);
             busqueda.setEnabled(false);
-            registro.setBackgroundResource(R.drawable.button_ini);
-            registro.setTextColor(getResources().getColor(R.color.white));
+            //registro.setBackgroundResource(R.drawable.button_ini);
             busqueda.setBackgroundResource(R.drawable.button3_style);
             busqueda.setTextColor(getResources().getColor(R.color.buttons));
 

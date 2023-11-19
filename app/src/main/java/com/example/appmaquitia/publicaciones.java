@@ -7,19 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
 import com.example.appmaquitia.modelos.Asociacion;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -117,7 +112,7 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
             i = new Intent(publicaciones.this, publicaciones.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.favs) {
-            i = new Intent(publicaciones.this, publicaciones.class);
+            i = new Intent(publicaciones.this, publicaciones_favoritos.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.perfil) {
             i = new Intent(publicaciones.this, perfil_donador.class);

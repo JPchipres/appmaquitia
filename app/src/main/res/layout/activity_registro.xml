@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".7"
+                android:layout_weight=".3"
                 android:gravity="center"
                 android:orientation="vertical">
                 <TextView
@@ -70,7 +70,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1.7"
+                android:layout_weight="1.50"
                 android:orientation="vertical"
                 android:gravity="bottom">
 
@@ -78,7 +78,6 @@
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:hint="Ingresa tu nombre"
                     android:paddingHorizontal="10dp"
                     android:background="@drawable/edittext_radius"
@@ -93,7 +92,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-
                     android:background="@drawable/edittext_radius"
                     android:hint="Ingresa tu email"
                     android:paddingHorizontal="10dp"
@@ -106,7 +104,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-
                     android:hint="Ingresa tu contraseña"
                     android:paddingHorizontal="10dp"
                     android:background="@drawable/edittext_radius"
@@ -121,7 +118,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-
                     android:background="@drawable/edittext_radius"
                     android:hint="Confirma tu contraseña"
                     android:paddingHorizontal="10dp"
@@ -131,11 +127,30 @@
                     android:fontFamily="@font/urbanist"/>
 
                 <Button
+                    android:id="@+id/btn_terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:layout_gravity="center"
+                    android:text="Leer politicas y términos"
+                    android:fontFamily="@font/urbanist_bold" />
+
+                <CheckBox
+                    android:id="@+id/cb_terminos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Acepto los términos y condiciones"
+                    android:fontFamily="@font/urbanist"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"/>
+
+                <Button
                     android:id="@+id/btnregistrar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/button_ini"
+                    android:background="@drawable/button_not_ini"
                     android:textColor="@color/white"
                     android:text="Registrarse"
                     android:fontFamily="@font/urbanist"
@@ -146,12 +161,12 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".5"
                 android:orientation="vertical">
+
                 <Button
                     android:id="@+id/btnregistrarAso"
                     android:layout_width="match_parent"
