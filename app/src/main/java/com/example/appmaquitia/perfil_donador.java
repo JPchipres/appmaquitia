@@ -24,7 +24,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
 
     FirebaseFirestore firebasefirestore;
     FirebaseAuth mAuth;
-    Button logout;
+    Button logout, editar;
     Intent i;
     BottomNavigationView bottomNavigationView;
     TextView txtnombre, txtemail;
@@ -34,6 +34,8 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
         setContentView(R.layout.activity_perfil_donador);
         txtnombre = (TextView) findViewById(R.id.txtnombre);
         txtemail = (TextView) findViewById(R.id.txtemail);
+        editar = (Button) findViewById(R.id.editar_perfil);
+        logout = (Button) findViewById(R.id.cerrar_sesion);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore mFirestore =  FirebaseFirestore.getInstance();
         if (user != null) {
@@ -46,12 +48,17 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
                     if(task.isSuccessful()){
                         DocumentSnapshot document = task.getResult();
                         txtnombre.setText(document.getString("name"));
+                        editar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(perfil_donador.this, editar_donador.class));
+                            }
+                        });
                     }
                 }
             });
 
         }
-        logout = (Button) findViewById(R.id.cerrar_sesion);
         bottomNavigationView
                 = findViewById(R.id.navbar);
 
@@ -60,7 +67,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 i = new Intent(perfil_donador.this, MainActivity.class);
                 startActivity(i);

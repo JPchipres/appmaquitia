@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
+    tools:context=".editar_donador">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="0dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:textSize="20dp"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                android:background="@drawable/backbutton"/>
+
+
+        </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp"
+            android:id="@+id/imgperfil"
+            android:src="@drawable/persona_ejemplo"
+            android:padding="5dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#ffffff"/>
+
+        <ImageButton
+            android:id="@+id/btn_editar"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginLeft="180dp"
+            android:src="@drawable/editar"
+            android:textSize="20dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgperfil"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/imgperfil"
+                android:id="@+id/txtnombre"
+                android:text="Nombre del donador"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="70dp"
+                android:fontFamily="@font/urbanist_bold"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Correo electronico"
+                android:paddingTop="20dp"
+                android:fontFamily="@font/urbanist_semibold"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/txtemail"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/edittext_radius"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Nombre"
+                android:fontFamily="@font/urbanist_semibold"
+                android:textSize="17dp"/>
+            <EditText
+                android:id="@+id/txtnom"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/edittext_radius"
+                android:layout_marginBottom="10dp"
+                />
+            <Button
+                android:id="@+id/btnguardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"
+                android:text="Guardar datos"
+                android:fontFamily="@font/urbanist"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                app:cornerRadius="8dp"
+                android:padding="12dp"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navbar"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/nabvar_background"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="700dp"
+        app:menu="@menu/navbar_menu"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/gris_medio"
+        app:itemRippleColor="@color/white"
+        app:labelVisibilityMode="unlabeled">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
+</RelativeLayout>

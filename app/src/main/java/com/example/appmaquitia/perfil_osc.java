@@ -79,7 +79,7 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
         signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(perfil_osc.this, MainActivity.class));
             }

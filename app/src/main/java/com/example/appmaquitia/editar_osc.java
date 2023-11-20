@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -52,12 +53,13 @@ public class editar_osc extends AppCompatActivity {
                             Log.d("editar_osc ->", document.getId() + " => " + document.getData());
                             String nombreosc = document.getString("nombre");
                             String telosc = document.getString("telefono");
+                            String cluniID = document.getId();
                             nombre_osc.setText(nombreosc);
                             tel.setText(telosc);
                             guardar.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if(emailtxt.getText().toString() == user.getEmail().toString()){
+                                    if(emailtxt.getText().toString() == email){
                                         Log.d("perfil_osc->", "Email no modificado");
                                     }else{
                                         user.updateEmail(emailtxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -76,7 +78,7 @@ public class editar_osc extends AppCompatActivity {
                                     if(tel.getText().toString() == telosc){
                                         Log.d("perfil_osc->", "telefono no modificado");
                                     }else{
-                                        user.updateEmail(emailtxt.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        Task<Void> oscRef = mFirestore.collection("organizaciones").document(cluniID).update("telefono", tel.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Log.e("perfil_osc->", "Update telefono success.");
