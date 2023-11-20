@@ -1,6 +1,7 @@
 package com.example.appmaquitia.adaptadores;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -46,6 +47,12 @@ public class AsociacionesAdapter extends FirestoreRecyclerAdapter<Asociacion,Aso
     public void onItemClick(int position) {
 
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nombre, municipio, representantes, telefono;
         public ViewHolder(@NonNull View itemView, Asociacioninterface asociacioninterface) {

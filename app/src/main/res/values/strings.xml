@@ -29,4 +29,65 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="txt_terms">Universidad de Colima informa a los usuarios de la aplicación Maquitia, acerca del tratamiento de los datos personales, que ellos voluntariamente hayan facilitado durante el proceso de registro, acceso y utilización del servicio.
+                            - FINALIDAD DE LA INFORMACIÓN PERSONAL QUE RECOPILAMOS (USUARIOS Y OSC)
+                              Para proceder al registro, acceso y posterior uso de la aplicación, tanto el  usuario como la OSC deberá facilitar de forma voluntaria, datos de carácter personal (esencialmente, identificativos y de contacto), los cuales serán incorporados a soportes automatizados que son titularidad de MAQUITIA (No se comparten con terceros).
+                            - NOMBRES Y DATOS DE LOS CONTACTOS DE LOS RESPONSABLES DEL TRATAMIENTO DE DATOS.
+                              Los datos no se comunicarán a ningún tercero ajeno a MAQUITIA, salvo obligación legal o en cualquier caso, previa solicitud del consentimiento del usuario. Por otra parte, MAQUITIA podrá dar acceso o transmitir los datos personales facilitados por el usuario, a terceros proveedores de servicios, con los que haya suscrito acuerdos de encargo de tratamiento de datos, y que únicamente accedan a dicha información para prestar un servicio en favor y por cuenta del responsable.
+                            - Contactos del equipo de trabajo de MAQUITIA:
+                                Gilberto Valenzuela - gvalenzuela@ucol.mx
+                                Héctor Huerta - hhuerta@ucol.mx
+                                Juan Pablo Chipres - jchipres@ucol.mx
+                                Sebastian Gomez - sgomez4@ucol.mx
+                                Mitzi R.Don Juan - mrdonjuan@ucol.mx
+                            - Deslindamiento de Aportaciones Financieras:
+                              Maquitia actúa únicamente como intermediaria, facilitando la conexión entre donadores y ONGs.
+                              Maquitia no maneja ni retiene fondos directamente; todas las donaciones se transfieren directamente a las cuentas de las ONGs mediante servicios de pagos externos y/o ajenos.
+
+                            - Responsabilidad del Usuario:
+                              Los donadores son responsables de seleccionar la ONG a la que desean contribuir y de investigar de manera independiente antes de realizar donaciones.
+                              El usuario es el único responsable y no podrá exigir algún reembolso en caso de malentendido o problemas con los pagos a las ONGs
+
+                            - Uso de la Aplicación:
+                              Maquitia se proporciona como una aplicación para facilitar la conexión entre donadores y ONGs de manera transparente.
+                              Maquitia no tiene acceso directo ni control sobre los fondos donados; solo sirve como herramienta de información y facilitación.
+
+                            - Transparencia y Registros:
+                              Se garantiza la transparencia en todas las transacciones.
+                              Los donadores pueden acceder a un registro detallado de sus donaciones, y se proporcionan informes financieros periódicos sobre la distribución de fondos entre las ONGs por parte de estas mismas.
+                              Maquitia no se hace responsable de la gestión interna de las ONGs ni garantiza el éxito de proyectos específicos.
+
+                            - LEGITIMACIÓN PARA EL TRATAMIENTO DE LOS DATOS
+
+                              El tratamiento de los datos del usuario, se realiza con las siguientes bases jurídicas que legitiman el mismo:
+
+                              • La solicitud de información, con carácter previo, para su expresa aceptación.
+                              • El consentimiento libre, específico, informado e inequívoco del usuario, poniendo a su disposición la presente política de privacidad, que deberá aceptar una vez ingresado los datos por consentimiento propio.
+
+                              En caso de que el Usuario no facilite a MAQUITIA sus datos, o lo haga de forma errónea o incompleta, no será posible proceder al uso de la aplicación.
+
+    </string>
+    <string name="txt_terms2">
+                            Universidad de Colima informa a los usuarios de la aplicación Maquitia, acerca del tratamiento de los datos personales, que ellos voluntariamente hayan facilitado durante el proceso de registro, acceso y utilización del servicio.
+                            - FINALIDAD DE LA INFORMACIÓN PERSONAL QUE RECOPILAMOS (USUARIOS Y OSC)
+                              Para proceder al registro, acceso y posterior uso de la aplicación, tanto el  usuario como la OSC deberá facilitar de forma voluntaria, datos de carácter personal (esencialmente, identificativos y de contacto), los cuales serán incorporados a soportes automatizados que son titularidad de MAQUITIA (No se comparten con terceros).
+                            - NOMBRES Y DATOS DE LOS CONTACTOS DE LOS RESPONSABLES DEL TRATAMIENTO DE DATOS.
+                              Los datos no se comunicarán a ningún tercero ajeno a MAQUITIA, salvo obligación legal o en cualquier caso, previa solicitud del consentimiento del usuario. Por otra parte, MAQUITIA podrá dar acceso o transmitir los datos personales facilitados por el usuario, a terceros proveedores de servicios, con los que haya suscrito acuerdos de encargo de tratamiento de datos, y que únicamente accedan a dicha información para prestar un servicio en favor y por cuenta del responsable.
+                            - Contactos del equipo de trabajo de MAQUITIA:
+                                Gilberto Valenzuela - gvalenzuela@ucol.mx
+                                Héctor Huerta - hhuerta@ucol.mx
+                                Juan Pablo Chipres - jchipres@ucol.mx
+                                Sebastian Gomez - sgomez4@ucol.mx
+                                Mitzi R.Don Juan - mrdonjuan@ucol.mx
+                            - Política de Confidencialidad y Seguridad de Datos:
+                            En Maquitia, la Universidad de Colima se compromete a proteger la confidencialidad y seguridad de los datos proporcionados por las Organizaciones de la Sociedad Civil (OSC). Los datos recopilados se utilizan exclusivamente para el propósito de facilitar donativos y mejorar la experiencia de usuario en la plataforma Maquitia.
+                            Implementamos medidas de seguridad, como encriptación de datos, restricción de acceso y firewalls, para garantizar la protección integral de la información. Nuestro compromiso es mantener la integridad y confidencialidad de los datos de las OSC en todo momento.
+                            - Política de Uso de Datos Personales:
+                            Al utilizar Maquitia, las OSC otorgan su consentimiento para el uso de sus datos personales exclusivamente con el fin de facilitar la donación y mejorar nuestros servicios. No compartimos esta información con terceros sin consentimiento explícito, a menos que sea requerido por ley o para el cumplimiento de nuestros servicios.
+                            Las OSC tienen derecho a acceder, rectificar, cancelar u oponerse al uso de sus datos personales. Para ejercer estos derechos o para más información sobre cómo utilizamos los datos, pueden contactarnos a través de los canales proporcionados en la app.
+                            - Política de Retención de Datos:
+                            Mantenemos los datos de las OSC únicamente durante el tiempo necesario para cumplir con los propósitos mencionados anteriormente o según lo requieran las leyes aplicables. Una vez que los datos ya no sean necesarios, procederemos a su eliminación o anonimización de manera segura, garantizando su no utilización futura.
+                            Las OSC pueden solicitar la eliminación de sus datos personales de nuestra plataforma en cualquier momento, siempre y cuando no sea necesario retener la información para cumplir con obligaciones legales o contractuales.
+    </string>
 </resources>
