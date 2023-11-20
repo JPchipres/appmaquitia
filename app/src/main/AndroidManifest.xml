@@ -109,6 +109,9 @@
             android:name=".codigo_otp"
             android:exported="false" />
         <activity
+            android:name=".publicaciones_favoritos"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
