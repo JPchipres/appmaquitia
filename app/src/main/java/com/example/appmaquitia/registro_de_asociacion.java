@@ -367,8 +367,9 @@ public class registro_de_asociacion extends AppCompatActivity {
                                     String hashed = Hashing.sha256()
                                             .hashString(spass, StandardCharsets.UTF_8)
                                             .toString();
+                                    String rol = "osc";
                                     OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext,
-                                            num_int, cp, actividades, "", "", "", hashed, false);
+                                            num_int, cp, actividades, "", "", "", hashed, false, rol);
 
                                     DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
                                     documentReference.get().addOnCompleteListener(task ->  {

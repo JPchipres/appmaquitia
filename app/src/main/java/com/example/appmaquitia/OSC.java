@@ -22,7 +22,15 @@ public class OSC {
     private String foto;
     private String password;
     private Boolean favorito;
+    private String rol;
 
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
 
     public OSC(){
 
@@ -192,7 +200,7 @@ public class OSC {
 
     public OSC(String cluni, String nombre, String rfc, String figura, String status, String representantes, String correo, String telefono, String entidad, String municipio,
                String colonia, String calle, String num_ext, String num_int, String cp, String actividades, String descripcion, String topic, String foto,
-               String password, Boolean favorito){
+               String password, Boolean favorito, String rol){
         this.cluni = cluni;
         this.nombre = nombre;
         this.rfc = rfc;
@@ -214,5 +222,6 @@ public class OSC {
         this.foto = foto;
         this.password = password;
         this.favorito = favorito;
+        this.rol = rol;
     }
 }

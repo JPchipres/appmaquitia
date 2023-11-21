@@ -186,6 +186,7 @@ public class registro extends AppCompatActivity {
                     map.put("name", nombre);
                     map.put("email", mail);
                     map.put("password", hashed);
+                    map.put("rol", "user");
 
                     mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

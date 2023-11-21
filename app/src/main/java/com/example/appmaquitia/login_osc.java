@@ -6,19 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class login_osc extends AppCompatActivity {
     EditText txtemail, txtpass;
@@ -27,6 +31,7 @@ public class login_osc extends AppCompatActivity {
     TextView restablecer, registro;
 
     FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
     Intent i;
 
     @Override
@@ -41,6 +46,7 @@ public class login_osc extends AppCompatActivity {
         regresar = (ImageButton) findViewById(R.id.btnRegresar);
         restablecer = (TextView) findViewById(R.id.btnRestablecer);
         registro = (TextView) findViewById(R.id.btnRegistro);
+        mFirestore = FirebaseFirestore.getInstance();
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,17 +85,35 @@ public class login_osc extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    private void autenticar(String email, String pass) {
+    public void autenticar(String email, String pass) {
+
+        Log.d("LOGIN_OSC ->", "AUTENTICAR");
+        mFirestore.collection("organizaciones").whereEqualTo("correo", email).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.d("LOGIN_OSC ->", "ONCOMPLETE");
+                for (QueryDocumentSnapshot doc : task.getResult()){
+                    if (task.isSuccessful()) {
+                        Log.d("LOGIN_OSC ->", "FOR->OK");
+                        iniciarSesion(email, pass);
+                    }
+                    else{
+                        alertas.alertFalied(login_osc.this, "Credenciales Incorrectas", 2000);
+                    }
+                }
+            }
+        });
+    }
+    private void iniciarSesion(String email, String pass) {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
+                if(task.isSuccessful()){
                     i = new Intent(getApplicationContext(), perfil_osc.class);
                     startActivity(i);
                     finish();
-                } else {
-                    alertas.alertFalied(login_osc.this, "Credenciales Incorrectas", 2000);
+                }else{
+                    alertas.alertFalied(login_osc.this,"Credenciales Incorrectas",2000);
                 }
             }
         });
