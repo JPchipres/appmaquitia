@@ -52,7 +52,6 @@
     </LinearLayout>
 
     <ScrollView
-
         android:paddingVertical="10dp"
         android:id="@+id/scrollView"
         android:layout_below="@+id/header"

@@ -176,7 +176,8 @@ public class registro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
-
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    user.sendEmailVerification();
                     String hashed = Hashing.sha256()
                             .hashString(pass, StandardCharsets.UTF_8)
                             .toString();

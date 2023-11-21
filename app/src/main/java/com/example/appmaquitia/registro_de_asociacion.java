@@ -391,7 +391,7 @@ public class registro_de_asociacion extends AppCompatActivity {
                                                                                     @Override
                                                                                     public void run() {
                                                                                         finish();
-                                                                                        startActivity(new Intent(registro_de_asociacion.this, login.class));
+                                                                                        startActivity(new Intent(registro_de_asociacion.this, login_osc.class));
 
                                                                                     }
                                                                                 }, 2500);

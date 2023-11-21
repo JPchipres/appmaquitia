@@ -7,149 +7,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
     tools:context=".perfil_osc">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:padding="20dp">
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/imgperfil"
-            android:src="@drawable/persona_ejemplo"
-            android:padding="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/imgperfil"
-            android:id="@+id/txtnombre"
-            android:text="Nombre de la OSC"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/urbanist_bold"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt"
-            android:text="OSC en maquitia"
-            android:layout_below="@id/txtnombre"
-            android:layout_toEndOf="@id/imgperfil"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/urbanist"
-            android:textSize="18dp"
-            android:textColor="@color/grey"/>
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="20dp"
-            android:background="@drawable/baseline_alternate_email_24"
-            android:layout_below="@id/imgperfil"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtemail"
-            android:text="email@email.com"
-            android:layout_below="@id/imgperfil"
-            android:layout_marginLeft="45dp"
-            android:fontFamily="@font/urbanist_semibold"
-            android:textSize="18dp"
-            android:textColor="@color/grey"/>
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtemail"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginTop="20dp">
-            <GridLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:columnCount="2">
-                <TextView
-                    android:id="@+id/totaldinero"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="25dp"
-                    android:text="Total donado:"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:id="@+id/conteo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Donaciones recibidas:"
-                    android:textSize="16dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="$0.00 MXN"
-                    android:layout_marginLeft="25dp"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:textSize="20dp"
-                    android:text="0"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-
-
-            </GridLayout>
-            <Button
-                android:id="@+id/editar_perfil"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:text="Editar perfil"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_semibold"
-                android:padding="5dp"/>
-            <Button
-                android:id="@+id/terminos"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Terminos y condiciones"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_bold"
-                android:padding="5dp"/>
-
-            <Button
-                android:id="@+id/cerrar_sesion"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Cerrar sesion"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_bold"
-                android:padding="5dp"/>
-
+            android:paddingVertical="5dp"
+            android:gravity="center">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/btnCambiarFoto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/asociaciones"/>
         </LinearLayout>
+        <LinearLayout
+            android:paddingVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Editar Datos"
+                android:paddingHorizontal="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"/>
+            <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingHorizontal="10dp"
+                android:text="Cerrar Sesión"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NOMBRE:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Nombre"
+                    android:inputType="textImeMultiLine"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DESCRIPCION:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:hint="Añade una Descripcion"
+                    android:inputType="textImeMultiLine"
+                    android:layout_marginBottom="10dp"
+                    android:paddingVertical="10dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TÓPICO:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etTopico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:hint="Añade un Topico"
+                    android:inputType="text"
+                    android:paddingVertical="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ACTIVIDADES:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etActividades"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:hint="Actividades"
+                    android:inputType="text"
+                    android:layout_marginBottom="10dp"
+                    android:paddingVertical="10dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TELÉFONO:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:hint="Teléfono"
+                    android:paddingVertical="10dp"
+                    android:inputType="text"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Correo:"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:padding="5dp"/>
+                <EditText
+                    android:id="@+id/etCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edittext_radius"
+                    android:paddingHorizontal="10dp"
+                    android:hint="Correo"
+                    android:paddingVertical="10dp"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/urbanist"
+                    android:enabled="false"/>
+                <Button
+                    android:id="@+id/btnCambiarContraseña"
+                    android:background="@drawable/button3_style"
+                    android:textColor="@color/buttons"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cambiar Contraseña"/>
+                <Button
+                    android:id="@+id/btnGuardarCambios"
+                    android:background="@drawable/button_ini"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/urbanist"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Guardar"/>
+            </LinearLayout>
+        </ScrollView>
 
-    </RelativeLayout>
+    </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,10 +222,9 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/nabvar_background"
         android:layout_marginEnd="0dp"
-        android:layout_marginTop="700dp"
-        app:menu="@menu/navbar_menu"
+        app:menu="@menu/navbar_menu_osc"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/gris_medio"
+        app:itemIconTint="@color/buttons"
         app:itemRippleColor="@color/white"
         app:labelVisibilityMode="unlabeled">
     </com.google.android.material.bottomnavigation.BottomNavigationView>

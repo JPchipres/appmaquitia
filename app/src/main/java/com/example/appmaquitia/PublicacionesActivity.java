@@ -63,9 +63,7 @@ public class PublicacionesActivity extends AppCompatActivity {
     Uri imageuri;
     private static final int SELECT_PICTURE = 1;
     private boolean imagenCargada  = false;
-    private String asociacionID = "";
-    private String topicoONG = "";
-    private String numeroONG = "";
+    private String asociacionID = "", nombre = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,9 @@ public class PublicacionesActivity extends AppCompatActivity {
         View v = b.getRoot();
         setContentView(v);
 
-
+        asociacionID = getIntent().getStringExtra("ID");
+        nombre = getIntent().getStringExtra("nombre");
+        b.tvNombre.setText(nombre);
         cargarAnuncios(asociacionID);
 
         Handler handler = new Handler(Looper.getMainLooper());
@@ -89,12 +89,6 @@ public class PublicacionesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();//mata este activity y regresa al activity que lo lanzó inicialmente
-            }
-        });
-        b.btnWhatsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirWhatsapp("3141438337");
             }
         });
         b.btnVerPerfil.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +127,7 @@ public class PublicacionesActivity extends AppCompatActivity {
         //Esta función se encarga de traer todos los anuncios de cada organización y establece un escuchador para que el recyclerview de se actualicé automaticamente cada que
         //se agrega un nuevo anuncio, lo que ayuda a que el usuario no tenga que recargar la ventana
         //recibe como parametro el id de la organización para que el usuario decida cual chat verbu
-        CollectionReference anunciosRef = FirebaseFirestore.getInstance().collection("organizaciones/"+organizacionID+"/anuncios");
+        CollectionReference anunciosRef = FirebaseFirestore.getInstance().collection("/organizaciones/"+organizacionID+"/anuncios");
 
         anunciosRef.orderBy("fecha_hora", Query.Direction.ASCENDING).addSnapshotListener((queryDocumentSnapshot, e) -> {
             //Manejo de errores
@@ -164,12 +158,6 @@ public class PublicacionesActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
             }
         });
-    }
-    public void abrirWhatsapp(String numeroDeTelefono) {
-        String url = "https://api.whatsapp.com/send?phone=" + numeroDeTelefono;
-        Intent intent  = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(url));
-        startActivity(intent);
     }
     public void crearAnuncio(String organizacionID, String imagen) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
