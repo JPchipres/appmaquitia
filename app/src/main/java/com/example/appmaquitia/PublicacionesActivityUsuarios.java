@@ -197,7 +197,6 @@ public class PublicacionesActivityUsuarios extends AppCompatActivity {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setView(customDialogView);
             alertDialogBuilder.setTitle("Selecciona un número");
-
             // Mostrar el AlertDialog
             alertDialogBuilder.show();
         } else {

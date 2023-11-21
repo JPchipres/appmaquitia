@@ -112,10 +112,15 @@ public class login extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    i = new Intent(getApplicationContext(), publicaciones.class);
-                    startActivity(i);
-                    finish();
+                if (task.isSuccessful()){
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    if (user.isEmailVerified()) {
+                        i = new Intent(getApplicationContext(), publicaciones.class);
+                        startActivity(i);
+                        finish();
+                    } else {
+                        alertas.alertWarning(login.this, "Verifica tu correo para inciar sesión",2000);
+                    }
                 }else{
                     alertas.alertFalied(login.this,"Credenciales Incorrectas",2000);
                 }
