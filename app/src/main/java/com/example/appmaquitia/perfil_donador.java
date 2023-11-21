@@ -1,15 +1,22 @@
 package com.example.appmaquitia;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
@@ -24,7 +31,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
 
     FirebaseFirestore firebasefirestore;
     FirebaseAuth mAuth;
-    Button logout, editar;
+    Button logout, resetpass, historial;
     Intent i;
     BottomNavigationView bottomNavigationView;
     TextView txtnombre, txtemail;
@@ -34,8 +41,9 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
         setContentView(R.layout.activity_perfil_donador);
         txtnombre = (TextView) findViewById(R.id.txtnombre);
         txtemail = (TextView) findViewById(R.id.txtemail);
-        editar = (Button) findViewById(R.id.editar_perfil);
+        resetpass = (Button) findViewById(R.id.btnCambiarContraseña);
         logout = (Button) findViewById(R.id.cerrar_sesion);
+        historial = (Button) findViewById(R.id.btnHistorial);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore mFirestore =  FirebaseFirestore.getInstance();
         if (user != null) {
@@ -48,12 +56,6 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
                     if(task.isSuccessful()){
                         DocumentSnapshot document = task.getResult();
                         txtnombre.setText(document.getString("name"));
-                        editar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(perfil_donador.this, editar_donador.class));
-                            }
-                        });
                     }
                 }
             });
@@ -66,6 +68,50 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
 
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
+        historial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // inflate the layout of the popup window
+                LayoutInflater inflater = (LayoutInflater)
+                        getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup, null);
+
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        resetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.sendPasswordResetEmail(user.getEmail()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            alertas.alertSuccess(perfil_donador.this, "El correo fue enviado correctamente", 2000);
+                        } else {
+                            alertas.alertFalied(perfil_donador.this, "Error al enviar el correo", 2000);
+                        }
+                    }
+                });
+            }
+        });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

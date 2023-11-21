@@ -54,6 +54,15 @@
                 android:text="Cerrar Sesión"
                 android:background="@drawable/button_ini"
                 android:textColor="@color/white"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/urbanist"
+                android:padding="5dp"
+                android:text="NOMBRE:"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
@@ -62,14 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="NOMBRE:"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/urbanist"
-                    android:textStyle="bold"
-                    android:padding="5dp"/>
+
                 <EditText
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"
@@ -91,20 +93,22 @@
                     android:fontFamily="@font/urbanist"
                     android:textStyle="bold"
                     android:padding="5dp"/>
+
                 <EditText
                     android:id="@+id/etDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edittext_radius"
-                    android:paddingHorizontal="10dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/urbanist"
                     android:hint="Añade una Descripcion"
                     android:inputType="textImeMultiLine"
-                    android:layout_marginBottom="10dp"
+                    android:paddingHorizontal="10dp"
                     android:paddingVertical="10dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/urbanist"
-                    android:enabled="false"/>
+                    android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,20 +139,22 @@
                     android:fontFamily="@font/urbanist"
                     android:textStyle="bold"
                     android:padding="5dp"/>
+
                 <EditText
                     android:id="@+id/etActividades"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edittext_radius"
-                    android:paddingHorizontal="10dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/urbanist"
                     android:hint="Actividades"
                     android:inputType="text"
-                    android:layout_marginBottom="10dp"
+                    android:paddingHorizontal="10dp"
                     android:paddingVertical="10dp"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/urbanist"
-                    android:enabled="false"/>
+                    android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

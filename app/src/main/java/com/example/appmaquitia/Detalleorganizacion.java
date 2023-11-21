@@ -20,6 +20,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +30,7 @@ public class Detalleorganizacion extends AppCompatActivity {
     private static final int styleFav = R.drawable.bookmarked;
     private static final int styleUnfav = R.drawable.favorito;
     TextView nombre_as,actividad_as,calle_as,cluni_as,colonia_as,correo_as,cp_as,descripcion_as,entidad_as,municipio_as,num_ext, representante_as,telefono_as,topico_as;
-    Button fav;
+    Button fav, donar;
     String userId, documentId;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -54,6 +56,7 @@ public class Detalleorganizacion extends AppCompatActivity {
         telefono_as = findViewById(R.id.telefono_as);
         topico_as = findViewById(R.id.topico_as);
         fav = findViewById(R.id.btn_fav);
+        donar = findViewById(R.id.donar);
 
         String nombre = getIntent().getStringExtra("nombre");
         nombre_as.setText(nombre);
@@ -114,95 +117,101 @@ public class Detalleorganizacion extends AppCompatActivity {
                 }
             });
         }
+        donar.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
 
-        fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(usuarioActual != null) {
-                    Boolean isFavSelected = sharedPreferences.getBoolean("favorito_" + cluni, false);
-                    userId = usuarioActual.getUid();
-                    DocumentReference userDocRef = db.collection("user").document(userId);
-                    isFavSelected = !isFavSelected;
-                    if (isFavSelected) {
-                        fav.setBackgroundResource(styleFav);
-                        editor.putBoolean("favorito_" + cluni, isFavSelected);
-                        editor.apply();
+                                     }
+                                 });
 
-                        oscData.put("nombre", nombre);
-                        oscData.put("actividades", actividades);
-                        oscData.put("calle", calle);
-                        oscData.put("cluni", cluni);
-                        oscData.put("colonia", colonia);
-                        oscData.put("correo", correo);
-                        oscData.put("cp", cp);
-                        oscData.put("descripcion", descripcion);
-                        oscData.put("entidad", entidad);
-                        oscData.put("municipio", municipio);
-                        oscData.put("num_ext", numero_ext);
-                        oscData.put("representantes", representante);
-                        oscData.put("telefono", telefono);
-                        oscData.put("topico", topico);
+                fav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (usuarioActual != null) {
+                            Boolean isFavSelected = sharedPreferences.getBoolean("favorito_" + cluni, false);
+                            userId = usuarioActual.getUid();
+                            DocumentReference userDocRef = db.collection("user").document(userId);
+                            isFavSelected = !isFavSelected;
+                            if (isFavSelected) {
+                                fav.setBackgroundResource(styleFav);
+                                editor.putBoolean("favorito_" + cluni, isFavSelected);
+                                editor.apply();
 
-                        organizaciones.whereEqualTo("cluni", cluni).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    documentId = document.getId();
-                                    //Toast.makeText(this, userId, Toast.LENGTH_LONG).show();
-                                    userDocRef.collection("favoritos").document(documentId).set(oscData)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
+                                oscData.put("nombre", nombre);
+                                oscData.put("actividades", actividades);
+                                oscData.put("calle", calle);
+                                oscData.put("cluni", cluni);
+                                oscData.put("colonia", colonia);
+                                oscData.put("correo", correo);
+                                oscData.put("cp", cp);
+                                oscData.put("descripcion", descripcion);
+                                oscData.put("entidad", entidad);
+                                oscData.put("municipio", municipio);
+                                oscData.put("num_ext", numero_ext);
+                                oscData.put("representantes", representante);
+                                oscData.put("telefono", telefono);
+                                oscData.put("topico", topico);
 
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
+                                organizaciones.whereEqualTo("cluni", cluni).get().addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            documentId = document.getId();
+                                            //Toast.makeText(this, userId, Toast.LENGTH_LONG).show();
+                                            userDocRef.collection("favoritos").document(documentId).set(oscData)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) {
 
-                                                }
-                                            });
-                                }
-                            }
-                        });
-                    } else {
-                        fav.setBackgroundResource(styleUnfav);
-                        editor.putBoolean("favorito_" + cluni, isFavSelected);
-                        editor.apply();
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
 
-                        organizaciones.whereEqualTo("cluni", cluni).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    documentId = document.getId();
-                                    if (documentId != null) {
-                                        db.collection("user").document(userId).collection("favoritos").document(documentId)
-                                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                            //Eliminado exitosamente
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                            //Error en la eliminación
-                                                    }
-                                                });
+                                                        }
+                                                    });
+                                        }
                                     }
-                                }
+                                });
+                            } else {
+                                fav.setBackgroundResource(styleUnfav);
+                                editor.putBoolean("favorito_" + cluni, isFavSelected);
+                                editor.apply();
+
+                                organizaciones.whereEqualTo("cluni", cluni).get().addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            documentId = document.getId();
+                                            if (documentId != null) {
+                                                db.collection("user").document(userId).collection("favoritos").document(documentId)
+                                                        .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                //Eliminado exitosamente
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                //Error en la eliminación
+                                                            }
+                                                        });
+                                            }
+                                        }
+                                    }
+                                });
                             }
-                        });
-                    }
 
-                    if (isFavSelected) {
-                        fav.setBackgroundResource(styleFav);
-                    } else {
-                        fav.setBackgroundResource(styleUnfav);
-                    }
+                            if (isFavSelected) {
+                                fav.setBackgroundResource(styleFav);
+                            } else {
+                                fav.setBackgroundResource(styleUnfav);
+                            }
 
-                }else{
-                    //usuarios no validado
-                }
-            }
-        });
+                        } else {
+                            //usuarios no validado
+                        }
+                    }
+                });
 
     }
 }
