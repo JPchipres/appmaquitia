@@ -58,6 +58,8 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
                 }
             });
 
+        }else{
+            startActivity(new Intent(perfil_donador.this, MainActivity.class));
         }
         bottomNavigationView
                 = findViewById(R.id.navbar);
