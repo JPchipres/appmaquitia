@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,7 +33,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
 
     FirebaseFirestore firebasefirestore;
     FirebaseAuth mAuth;
-    Button logout, resetpass, historial;
+    Button logout, resetpass, historial, terms;
     Intent i;
     BottomNavigationView bottomNavigationView;
     TextView txtnombre, txtemail;
@@ -44,6 +46,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
         resetpass = (Button) findViewById(R.id.btnCambiarContraseña);
         logout = (Button) findViewById(R.id.cerrar_sesion);
         historial = (Button) findViewById(R.id.btnHistorial);
+        terms = (Button) findViewById(R.id.btnterminos);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore mFirestore =  FirebaseFirestore.getInstance();
         if (user != null) {
@@ -68,6 +71,28 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
 
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = LayoutInflater.from(perfil_donador.this);
+                View customLayout = inflater.inflate(R.layout.dialog_custom_terms, null);
+                TextView messageTerms = customLayout.findViewById(R.id.txt_viewMessageTerms);
+                AlertDialog.Builder builder = new AlertDialog.Builder(perfil_donador.this, R.style.AlertDialogTerms);
+                builder.setTitle("Politicas y términos");
+                String text_terms = getResources().getString(R.string.txt_terms);
+                messageTerms.setText(Html.fromHtml(text_terms));
+                builder.setView(customLayout);
+
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         historial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
