@@ -23,12 +23,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class publicaciones_favoritos extends AppCompatActivity implements Asociacioninterface{
-
+public class publicaciones_favoritos extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener{
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
     BottomNavigationView navbar;
+    BottomNavigationView bottomNavigationView;
     Intent i;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser usuarioActual = mAuth.getCurrentUser();
@@ -39,10 +39,10 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicaciones_favoritos);
-        setContentView(R.layout.activity_publicaciones_inicio);
         asociacionF = FirebaseFirestore.getInstance();
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
+        bottomNavigationView = findViewById(R.id.navbar);
 
         if(usuarioActual != null){
             userId = usuarioActual.getUid();
@@ -56,13 +56,16 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
+
         asociacionR.setAdapter(asociacionA);
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
     protected void onStart(){
         super.onStart();
         asociacionA.startListening();
+        asociacionA.notifyDataSetChanged();
     }
 
     protected void onStop(){
@@ -93,6 +96,15 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.home){
+            i = new Intent(publicaciones_favoritos.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.favs) {
+            return false;
+        } else if (item.getItemId() == R.id.perfil) {
+            i = new Intent(publicaciones_favoritos.this, perfil_donador.class);
+            startActivity(i);
+        }
         return false;
     }
 }
