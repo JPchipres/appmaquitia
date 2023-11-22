@@ -115,7 +115,7 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user.isEmailVerified()) {
-                        i = new Intent(getApplicationContext(), publicaciones.class);
+                        i = new Intent(getApplicationContext(), perfil_donador.class);
                         startActivity(i);
                         finish();
                     } else {

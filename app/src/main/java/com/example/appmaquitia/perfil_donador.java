@@ -154,11 +154,10 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
             i = new Intent(perfil_donador.this, publicaciones.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.favs) {
-            i = new Intent(perfil_donador.this, publicaciones.class);
+            i = new Intent(perfil_donador.this, publicaciones_favoritos.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.perfil) {
-            i = new Intent(perfil_donador.this, perfil_donador.class);
-            startActivity(i);
+            return false;
         }
         return false;
     }

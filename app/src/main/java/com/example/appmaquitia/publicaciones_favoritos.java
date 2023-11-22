@@ -23,12 +23,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class publicaciones_favoritos extends AppCompatActivity implements Asociacioninterface{
-
+public class publicaciones_favoritos extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener{
     RecyclerView asociacionR;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
     BottomNavigationView navbar;
+    BottomNavigationView bottomNavigationView;
     Intent i;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseUser usuarioActual = mAuth.getCurrentUser();
@@ -39,10 +39,10 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicaciones_favoritos);
-        setContentView(R.layout.activity_publicaciones_inicio);
         asociacionF = FirebaseFirestore.getInstance();
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
+        bottomNavigationView = findViewById(R.id.navbar);
 
         if(usuarioActual != null){
             userId = usuarioActual.getUid();
@@ -56,13 +56,17 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
         asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
         asociacionA.notifyDataSetChanged();
+
         asociacionR.setAdapter(asociacionA);
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
+        bottomNavigationView = findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
     protected void onStart(){
         super.onStart();
         asociacionA.startListening();
+        asociacionA.notifyDataSetChanged();
     }
 
     protected void onStop(){
@@ -72,11 +76,11 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
     @Override
     public void onItemClick(int position) {
-        Intent i = new Intent(this, PublicacionesActivityUsuarios.class);
+        Intent i = new Intent(this, Detalleorganizacion.class);
         i.putExtra("nombre",asociacionA.getItem(position).getNombre());
         i.putExtra("actividades",asociacionA.getItem(position).getActividades());
         i.putExtra("calle",asociacionA.getItem(position).getCalle());
-        i.putExtra("ID",asociacionA.getItem(position).getCluni());
+        i.putExtra("cluni",asociacionA.getItem(position).getCluni());
         i.putExtra("colonia",asociacionA.getItem(position).getColonia());
         i.putExtra("correo",asociacionA.getItem(position).getCorreo());
         i.putExtra("cp",asociacionA.getItem(position).getCp());
@@ -86,13 +90,23 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         i.putExtra("numero_ext",asociacionA.getItem(position).getNum_ext());
         i.putExtra("representante",asociacionA.getItem(position).getRepresentantes());
         i.putExtra("numero",asociacionA.getItem(position).getTelefono());
-        i.putExtra("topic",asociacionA.getItem(position).getTopic());
+        i.putExtra("topico",asociacionA.getItem(position).getTopic());
+        i.putExtra("foto",asociacionA.getItem(position).getFoto());
 
         startActivity(i);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.home){
+            i = new Intent(publicaciones_favoritos.this, publicaciones.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.favs) {
+            return false;
+        } else if (item.getItemId() == R.id.perfil) {
+            i = new Intent(publicaciones_favoritos.this, perfil_donador.class);
+            startActivity(i);
+        }
         return false;
     }
 }
