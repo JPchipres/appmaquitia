@@ -43,7 +43,7 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_osc);
 
-        FirebaseFirestore mFirestore =  FirebaseFirestore.getInstance();
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -82,11 +82,20 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
                             descripcionn = document.getString("descripcion");
                             topicc = document.getString("topic");
                             foto = document.getString("foto");
-                            Glide.with(perfil_osc.this)
-                                    .load(foto)
-                                    .override(700,400)
-                                    .transform(new RoundedCorners(30))
-                                    .into(cambiarFoto);
+                            if(!foto.equals("")) {
+                                Glide.with(perfil_osc.this)
+                                        .load(foto)
+                                        .override(700,400)
+                                        .transform(new RoundedCorners(30))
+                                        .into(cambiarFoto);
+                            }else {
+                                Glide.with(perfil_osc.this)
+                                        .load(R.drawable.perfil3)
+                                        .override(700,400)
+                                        .transform(new RoundedCorners(30))
+                                        .into(cambiarFoto);
+                            }
+
                             topico.setText(topicc);
                             descripcion.setText(descripcionn);
                             nom_osc.setText(nombreosc);
@@ -170,7 +179,15 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
         cambiarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(perfil_osc.this, registro_de_asociacion_imagen.class));
+                Intent i = new Intent(perfil_osc.this, registro_de_asociacion_imagen.class);
+                i.putExtra("cluni", cluni);
+                nom_osc.setEnabled(false);
+                descripcion.setEnabled(false);
+                telefonos.setEnabled(false);
+                topico.setEnabled(false);
+                actividades.setEnabled(false);
+                guardar.setVisibility(View.GONE);
+                startActivity(i);
             }
         });
     }
@@ -197,7 +214,7 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.home){
+        if(item.getItemId() == R.id.historialDonaciones){
             return false;
         } else if (item.getItemId() == R.id.chat) {
             Intent i = new Intent(perfil_osc.this, PublicacionesActivity.class);

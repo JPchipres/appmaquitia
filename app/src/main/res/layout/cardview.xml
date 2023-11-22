@@ -1,75 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="6dp"
-    app:cardUseCompatPadding="true"
-    android:theme="@style/Theme.MaterialComponents.Light"
-    app:cardPreventCornerOverlap="true">
+    android:layout_height="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/background_publicaciones"
         android:orientation="horizontal"
         android:elevation="10dp">
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.4">
+            android:layout_weight="1"
+            android:layout_height="match_parent">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:id="@+id/asociacion_logo"
-                android:src="@drawable/asociaciones"
-                android:padding="5dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/base_perfil_foto_ong"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
-            <TextView
-                android:paddingTop="10dp"
-                android:text="Nombre A.C"
-                android:textAlignment="center"
-                android:textSize="22dp"
-                android:textColor="@color/turquesa"
-                android:fontFamily="@font/urbanist_semibold"
-                android:id="@+id/nombre_as"
+            android:orientation="vertical"
+            android:paddingVertical="5dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="5dp">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.8" />
-            <TextView
-                android:textSize="16dp"
-                android:text=" Manzanillo"
-                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/nombre_as"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="${NOMBRE A.C}"
+                    android:textSize="17sp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:textColor="@color/buttons"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                android:textColor="@color/black"
-                android:id="@+id/municipio_as"
-                android:fontFamily="@font/urbanist_semibold"/>
-            <TextView
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:text="Lider de asociación"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ubi_icon"/>
+                <TextView
+                    android:id="@+id/municipio_as"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gris_fuerte"
+                    android:fontFamily="@font/urbanist_semibold"
+                    android:text="${UBICACION}"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                android:id="@+id/representante_as"/>
-            <TextView
-                android:textAlignment="center"
-                android:textColor="#9A9A9A"
-                android:textSize="14dp"
-                android:text="Telefono"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                android:id="@+id/num_telefono_as"/>
+
+                android:layout_marginBottom="10dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/descripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/gris_fuerte"
+                    android:fontFamily="@font/urbanist"
+                    android:textSize="15sp"
+                    android:text="${Descripcion deadflkj asdfkljad kjlñdfjk lksjd kljsdfl jl adjfkl klajdsf kljadsf lkjdfklj dfljdfj djkdfkl ldkfa...}"/>
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

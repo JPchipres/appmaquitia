@@ -138,7 +138,7 @@ public class registro extends AppCompatActivity {
                 etpassconfirm.setError(null);
                 etmail.setError(null);
                 final String regexname ="^([a-zA-ZáéíóúÁÉÍÓÚñÑ]+\\s){1,4}[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$";
-                final String regex = "(?:[^<>()\\[\\].,;:\\s@\"]+(?:\\.[^<>()\\[\\].,;:\\s@\"]+)*|\"[^\\n\"]+\")@(?:[^<>()\\[\\].,;:\\s@\"]+\\.)+[^<>()\\[\\]\\.,;:\\s@\"]{2,63}";
+                final String regex = "[a-z0-9]+(\\.[_a-z0-9]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,15})";
                 final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,63}$";
                 String nombre = etnombre.getText().toString().trim();
                 String mail = etmail.getText().toString().trim();

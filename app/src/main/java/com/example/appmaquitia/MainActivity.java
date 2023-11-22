@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class MainActivity extends AppCompatActivity {
     TextView btnpublicaciones;
@@ -50,8 +53,18 @@ public class MainActivity extends AppCompatActivity {
         btnpublicaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = new Intent(MainActivity.this, publicaciones.class);
-                startActivity(i);
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user!= null) {
+                    mAuth.signOut();
+
+                    i = new Intent(MainActivity.this, publicaciones.class);
+                    startActivity(i);
+                }else {
+
+                    i = new Intent(MainActivity.this, publicaciones.class);
+                    startActivity(i);
+                }
             }
         });
 

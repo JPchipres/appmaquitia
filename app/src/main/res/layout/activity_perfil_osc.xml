@@ -28,8 +28,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/btnCambiarFoto"
                 android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/asociaciones"/>
+                android:layout_height="150dp"/>
         </LinearLayout>
         <LinearLayout
             android:paddingVertical="5dp"
@@ -54,24 +53,23 @@
                 android:text="Cerrar Sesión"
                 android:background="@drawable/button_ini"
                 android:textColor="@color/white"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/urbanist"
-                android:padding="5dp"
-                android:text="NOMBRE:"
-                android:textSize="15sp"
-                android:textStyle="bold" />
         </LinearLayout>
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/urbanist"
+                    android:padding="5dp"
+                    android:text="NOMBRE:"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
                 <EditText
                     android:id="@+id/etNombre"
                     android:layout_width="match_parent"

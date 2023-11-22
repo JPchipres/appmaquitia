@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
 import com.example.appmaquitia.interfaces.Asociacioninterface;
@@ -31,6 +34,7 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
     BottomNavigationView bottomNavigationView;
     Intent i;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    EditText etBuscador;
     FirebaseUser usuarioActual = mAuth.getCurrentUser();
     String userId;
     DocumentReference userRef;
@@ -43,6 +47,7 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
         bottomNavigationView = findViewById(R.id.navbar);
+        etBuscador = (EditText) findViewById(R.id.etBuscador);
 
         if(usuarioActual != null){
             userId = usuarioActual.getUid();
@@ -52,13 +57,29 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
         Query query = userRef.collection("favoritos");
         FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
-        asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
+        asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this,this);
         asociacionA.notifyDataSetChanged();
 
         asociacionR.setAdapter(asociacionA);
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
         bottomNavigationView = findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        etBuscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                buscar(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     protected void onStart(){
@@ -93,7 +114,18 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
         startActivity(i);
     }
+    public void buscar(String filtro) {
+        Query query = asociacionF.collection("user").document(userId).collection("favoritos")
+                .orderBy("nombre") // Ordena por el campo que desees
+                .startAt(filtro)
+                .endAt(filtro + "\uf8ff");
 
+        FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
+                .Builder<Asociacion>().setQuery(query, Asociacion.class).build();
+
+        asociacionA.updateOptions(firestoreRecyclerOptions); // Actualiza el adaptador con los nuevos resultados
+        asociacionA.notifyDataSetChanged();
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.home){
