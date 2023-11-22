@@ -214,7 +214,7 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.home){
+        if(item.getItemId() == R.id.historialDonaciones){
             return false;
         } else if (item.getItemId() == R.id.chat) {
             Intent i = new Intent(perfil_osc.this, PublicacionesActivity.class);
