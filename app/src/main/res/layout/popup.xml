@@ -3,14 +3,43 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#62def8">
-
+    android:background="@color/white">
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="30dp"
         android:textSize="22sp"
-        android:text="This is a popup window."/>
+        android:text="Transacciones"/>
+    <GridLayout
+        android:id="@+id/grid"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/title">
+        <ScrollView
+            android:paddingBottom="50dp"
+            android:id="@+id/scrollView"
+            android:paddingHorizontal="10dp"
+            android:layout_below="@+id/buscarll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_transacciones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+    </GridLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid"
+        android:background="@color/turquesa"
+        android:layout_marginLeft="25dp"
+        android:text="Cerrar"
+        >
+
+    </Button>
+
 
 </RelativeLayout>

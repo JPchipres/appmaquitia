@@ -1,85 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detallespago">
+    android:fillViewport="true"
+    tools:context=".CheckoutActivity">
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="50dp"
+        android:padding="0dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical"
-        android:translationY="200dp">
-
-        <TextView
-            android:id="@+id/txtId"
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="Payment ID"
-            android:textColor="#171515"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textViewID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID HERE"
-            android:textColor="#E91E63"
-            android:textSize="15sp" />
+            android:src="@drawable/back"
+            android:textSize="20dp"
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:background="@drawable/backbutton"/>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="280dp"
         android:layout_height="100dp"
-        android:orientation="vertical"
-        android:translationY="300dp">
+        android:layout_marginTop="50dp"
+        android:text="Tarjeta de debito/Credito"
+        android:textSize="35dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:textColor="@color/black"
+        android:layout_below="@+id/l1"
+        android:layout_marginLeft="50dp"
+        />
 
-        <TextView
-            android:id="@+id/txtAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Payment Amount"
-            android:textColor="#171515"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:text="Numero de tarjeta"
+        android:textSize="20dp">
+    </TextView>
+    <EditText
+        android:id="@+id/card"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:digits="01234 56789"
+        android:inputType="number"
+        android:maxLength="19"
+        android:layout_below="@id/txt1"
+        android:hint="xxxx-xxxx-xxxx-xxxx"
+        android:background="@drawable/button3_style"
+        android:drawableRight="@mipmap/ic_mastervisa"
+        />
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/card"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="25dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:text="Fecha de expiracion"
+        android:textSize="15dp">
+    </TextView>
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:paddingTop="20dp"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:hint="mm/yy"
+        android:textAlignment="center"
+        android:maxLength="4"
+        android:layout_below="@id/txt2"
+        android:background="@drawable/button3_style"
+        />
+    <TextView
+        android:id="@+id/txt3"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/card"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="200dp"
+        android:fontFamily="@font/urbanist_bold"
+        android:text="CVV"
+        android:textSize="15dp">
+    </TextView>
+    <EditText
+        android:id="@+id/cvv"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="200dp"
+        android:paddingTop="20dp"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:hint="000"
+        android:textAlignment="center"
+        android:maxLength="3"
+        android:layout_below="@id/txt3"
+        android:background="@drawable/button3_style"
+        />
+    <Button
+        android:id="@+id/pagar"
+        android:layout_width="180dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/cvv"
+        android:layout_height="50dp"
+        android:layout_marginLeft="110dp"
+        android:background="@drawable/button_ini"
+        android:text="Pagar ahora"
+        android:fontFamily="@font/urbanist"
+        android:textColor="@color/white"
+        ></Button>
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="180dp"
+        android:layout_marginTop="120dp"
+        android:layout_below="@id/cvv"
+        android:layout_height="50dp"
+        android:layout_marginLeft="110dp"
+        android:background="@drawable/button_not_ini"
+        android:text="Cancelar pago"
+        android:fontFamily="@font/urbanist"
+        android:textColor="@color/white"
+        ></Button>
 
-        <TextView
-            android:id="@+id/textViewAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="AMOUNT HERE"
-            android:textColor="#E91E63"
-            android:textSize="15sp" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="vertical"
-        android:translationY="400dp">
-
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Payment Status"
-            android:textColor="#252222"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textViewStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="STATUS HERE"
-            android:textColor="#E91E63"
-            android:textSize="15sp" />
-    </LinearLayout>
 
 </RelativeLayout>

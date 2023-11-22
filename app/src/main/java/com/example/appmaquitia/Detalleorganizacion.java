@@ -64,6 +64,7 @@ public class Detalleorganizacion extends AppCompatActivity {
         btnFavoritos = findViewById(R.id.btn_fav);
         perfilFoto = findViewById(R.id.ivPerfilImagen);
         btnChat = findViewById(R.id.btnChat);
+        btnDonacion = findViewById(R.id.btnDonar);
 
         nombre = getIntent().getStringExtra("nombre");
         tvNombre.setText(nombre);
@@ -118,7 +119,16 @@ public class Detalleorganizacion extends AppCompatActivity {
                 finish();
             }
         });
-
+        btnDonacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Detalleorganizacion.this, CheckoutActivity.class);
+                i.putExtra("userID", usuarioActual.getUid());
+                i.putExtra("ID",cluni);
+                i.putExtra("nombre",nombre);
+                startActivity(i);
+            }
+        });
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -19,6 +22,9 @@ import com.google.android.gms.wallet.PaymentData;
 import com.example.appmaquitia.R;
 import com.example.appmaquitia.viewmodel.CheckoutViewModel;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Locale;
 
 import org.json.JSONException;
@@ -31,156 +37,77 @@ import com.example.appmaquitia.databinding.ActivityCheckoutBinding;
  */
 public class CheckoutActivity extends AppCompatActivity {
 
-    // Arbitrarily-picked constant integer you define to track a request for payment data activity.
-    private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 991;
-
-    private CheckoutViewModel model;
-
-    private ActivityCheckoutBinding layoutBinding;
-    private View googlePayButton;
-
-    /**
-     * Initialize the Google Pay API on creation of the activity
-     *
-     * @see AppCompatActivity#onCreate(android.os.Bundle)
-     */
+    TextView txtnombre, txtfecha;
+    String nombre, userID, cluni, monto, fechaS;
+    Integer dia, mes, y;
+    Button price1, price2, price3, op1;
+    ImageButton regresar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeUi();
+        setContentView(R.layout.activity_checkout);
+        nombre = getIntent().getStringExtra("nombre");
+        userID = getIntent().getStringExtra("userID");
+        cluni = getIntent().getStringExtra("ID");
+        txtnombre = (TextView) findViewById(R.id.txtnom);
+        txtfecha = (TextView) findViewById(R.id.txtfecha);
+        price1 = (Button) findViewById(R.id.price1);
+        price2 = (Button) findViewById(R.id.price2);
+        price3 = (Button) findViewById(R.id.price3);
+        op1 = (Button) findViewById(R.id.op1);
+        regresar = (ImageButton) findViewById(R.id.btn_back);
+        Calendar fecha = Calendar.getInstance();
+            dia = fecha.get(Calendar.DAY_OF_MONTH);
+            mes = fecha.get(Calendar.MONTH) + 1;
+            y = fecha.get(Calendar.YEAR);
+            fechaS = dia + "/" + mes + "/" + y;
+        txtfecha.setText("Donante: "+nombre);
+        txtnombre.setText("Fecha: "+fechaS);
+        price1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                op1.setEnabled(true);
+                price1.setSelected(true);
+                price2.setSelected(false);
+                price3.setSelected(false);
+                monto = "10";
 
-        model = new ViewModelProvider(this).get(CheckoutViewModel.class);
-        model.canUseGooglePay.observe(this, this::setGooglePayAvailable);
+            }
+        });
+        price2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                op1.setEnabled(true);
+                price1.setSelected(false);
+                price2.setSelected(true);
+                price3.setSelected(false);
+                monto = "50";
+            }
+        });
+        price3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                op1.setEnabled(true);
+                price1.setSelected(false);
+                price2.setSelected(false);
+                price3.setSelected(true);
+                monto = "100";
+            }
+        });
+        op1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CheckoutActivity.this, detallespago.class);
+                i.putExtra("userID", userID);
+                i.putExtra("ID",cluni);
+                i.putExtra("nombre",nombre);
+                i.putExtra("monto",monto);
+                i.putExtra("fecha", fechaS);
+                startActivity(i);
+            }
+        });
+
+
     }
 
-    private void initializeUi() {
-
-        // Use view binding to access the UI elements
-        layoutBinding = ActivityCheckoutBinding.inflate(getLayoutInflater());
-        setContentView(layoutBinding.getRoot());
-
-        // The Google Pay button is a layout file – take the root view
-        googlePayButton = layoutBinding.googlePayButton.getRoot();
-        googlePayButton.setOnClickListener(this::requestPayment);
-    }
-
-    /**
-     * If isReadyToPay returned {@code true}, show the button and hide the "checking" text.
-     * Otherwise, notify the user that Google Pay is not available. Please adjust to fit in with
-     * your current user flow. You are not required to explicitly let the user know if isReadyToPay
-     * returns {@code false}.
-     *
-     * @param available isReadyToPay API response.
-     */
-    private void setGooglePayAvailable(boolean available) {
-        if (available) {
-            googlePayButton.setVisibility(View.VISIBLE);
-        } else {
-            alertas.alertFalied(CheckoutActivity.this,"Unfortunately, Google Wallet is not available on this phone.",2000);
-        }
-    }
-
-    public void requestPayment(View view) {
-
-        // Disables the button to prevent multiple clicks.
-        googlePayButton.setClickable(false);
-
-        // The price provided to the API should include taxes and shipping.
-        // This price is not displayed to the user.
-        long dummyPriceCents = 100;
-        long shippingCostCents = 900;
-        long totalPriceCents = dummyPriceCents + shippingCostCents;
-        final Task<PaymentData> task = model.getLoadPaymentDataTask(totalPriceCents);
-
-        // Shows the payment sheet and forwards the result to the onActivityResult method.
-        AutoResolveHelper.resolveTask(task, this, LOAD_PAYMENT_DATA_REQUEST_CODE);
-    }
-
-    /**
-     * Handle a resolved activity from the Google Pay payment sheet.
-     *
-     * @param requestCode Request code originally supplied to AutoResolveHelper in requestPayment().
-     * @param resultCode  Result code returned by the Google Pay API.
-     * @param data        Intent from the Google Pay API containing payment or error data.
-     * @see <a href="https://developer.android.com/training/basics/intents/result">Getting a result
-     * from an Activity</a>
-     */
-    @SuppressWarnings("deprecation")
-    // Suppressing deprecation until `registerForActivityResult` can be used with the Google Pay API.
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            // value passed in AutoResolveHelper
-            case LOAD_PAYMENT_DATA_REQUEST_CODE:
-                switch (resultCode) {
-
-                    case AppCompatActivity.RESULT_OK:
-                        PaymentData paymentData = PaymentData.getFromIntent(data);
-                        handlePaymentSuccess(paymentData);
-                        break;
-
-                    case AppCompatActivity.RESULT_CANCELED:
-                        // The user cancelled the payment attempt
-                        break;
-
-                    case AutoResolveHelper.RESULT_ERROR:
-                        Status status = AutoResolveHelper.getStatusFromIntent(data);
-                        handleError(status);
-                        break;
-                }
-
-                // Re-enables the Google Pay payment button.
-                googlePayButton.setClickable(true);
-        }
-    }
-
-    /**
-     * PaymentData response object contains the payment information, as well as any additional
-     * requested information, such as billing and shipping address.
-     *
-     * @param paymentData A response object returned by Google after a payer approves payment.
-     * @see <a href="https://developers.google.com/pay/api/android/reference/
-     * object#PaymentData">PaymentData</a>
-     */
-    private void handlePaymentSuccess(@Nullable PaymentData paymentData) {
-        final String paymentInfo = paymentData.toJson();
-
-        try {
-            JSONObject paymentMethodData = new JSONObject(paymentInfo).getJSONObject("paymentMethodData");
-            // If the gateway is set to "example", no payment information is returned - instead, the
-            // token will only consist of "examplePaymentMethodToken".
-
-            final JSONObject tokenizationData = paymentMethodData.getJSONObject("tokenizationData");
-            final String token = tokenizationData.getString("token");
-            final JSONObject info = paymentMethodData.getJSONObject("info");
-            final String billingName = info.getJSONObject("billingAddress").getString("name");
-            Toast.makeText(this, getString(R.string.payments_show_name, billingName),Toast.LENGTH_LONG).show();
-
-            // Logging token string.
-            Log.d("Google Pay token: ", token);
-
-        } catch (JSONException e) {
-            throw new RuntimeException("The selected garment cannot be parsed from the list of elements");
-        }
-    }
-
-    /**
-     * At this stage, the user has already seen a popup informing them an error occurred. Normally,
-     * only logging is required.
-     *
-     * @param status will hold the value of any constant from CommonStatusCode or one of the
-     *               WalletConstants.ERROR_CODE_* constants.
-     * @see <a href="https://developers.google.com/android/reference/com/google/android/gms/wallet/
-     * WalletConstants#constant-summary">Wallet Constants Library</a>
-     */
-    private void handleError(@Nullable Status status) {
-        String errorString = "Unknown error.";
-        if (status != null) {
-            int statusCode = status.getStatusCode();
-            errorString = String.format(Locale.getDefault(), "Error code: %d", statusCode);
-        }
-
-        Log.e("loadPaymentData failed", errorString);
-    }
 }
