@@ -40,6 +40,8 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionF = FirebaseFirestore.getInstance();
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
+        bottomNavigationView = findViewById(R.id.navbar);
+
         Query query = asociacionF.collection("organizaciones");
         FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
@@ -48,7 +50,6 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionR.setAdapter(asociacionA);
 
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
-        bottomNavigationView = findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
     }

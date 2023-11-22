@@ -183,7 +183,8 @@ public class Detalleorganizacion extends AppCompatActivity {
                         oscData.put("num_ext", numero_ext);
                         oscData.put("representantes", representante);
                         oscData.put("telefono", telefono);
-                        oscData.put("topico", topico);
+                        oscData.put("topic", topico);
+                        oscData.put("foto",foto);
                         organizaciones.whereEqualTo("cluni", cluni).get().addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {

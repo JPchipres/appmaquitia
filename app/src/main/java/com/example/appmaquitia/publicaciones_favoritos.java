@@ -46,8 +46,6 @@ public class publicaciones_favoritos extends AppCompatActivity implements Asocia
 
         if(usuarioActual != null){
             userId = usuarioActual.getUid();
-        }else{
-            alertas.alertFalied(publicaciones_favoritos.this,"a",2000);
         }
 
         userRef = asociacionF.collection("user").document(userId);
