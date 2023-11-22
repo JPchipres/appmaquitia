@@ -45,7 +45,7 @@
             android:drawableEnd="@drawable/search"
             android:drawablePadding="10dp"
             android:textColor="@color/buttons"
-            android:id="@+id/buscar"
+            android:id="@+id/etBuscador"
             android:hint="Buscar"/>
 
     </LinearLayout>
@@ -56,7 +56,8 @@
         android:paddingHorizontal="10dp"
         android:layout_below="@+id/buscarll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_asociaciones"
             android:layout_width="match_parent"
@@ -82,7 +83,7 @@
             android:layout_marginEnd="0dp"
             app:menu="@menu/navbar_menu"
             app:itemIconSize="30dp"
-            app:itemIconTint="@color/gris_medio"
+            app:itemIconTint="@color/buttons"
             app:itemRippleColor="@color/white"
             app:labelVisibilityMode="unlabeled">
         </com.google.android.material.bottomnavigation.BottomNavigationView>

@@ -210,6 +210,7 @@ public class registro_de_asociacion extends AppCompatActivity {
 
                 pass.setError(null);
                 passconfirm.setError(null);
+
                 final String regexpass = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,63}$";
                 String passs = pass.getText().toString().trim();
                 String passsconfirm = passconfirm.getText().toString().trim();
@@ -361,14 +362,15 @@ public class registro_de_asociacion extends AppCompatActivity {
                         semail = email.getText().toString().trim();
                         spass = pass.getText().toString().trim();
                         spassconfirm = passconfirm.getText().toString().trim();
-
+                        Integer posicion = semail.indexOf(',');
+                        String nEmail = (posicion != -1) ? semail.substring(0,posicion) : semail;
                         if(spass.equals(spassconfirm)) {
                                 if (status.equals("Activa")) {
                                     String hashed = Hashing.sha256()
                                             .hashString(spass, StandardCharsets.UTF_8)
                                             .toString();
                                     String rol = "osc";
-                                    OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, correo, telefono, entidad, municipio, colonia, calle, num_ext,
+                                    OSC datos = new OSC(cluni, n_osc, figura, rfc, status, representantes, nEmail, telefono, entidad, municipio, colonia, calle, num_ext,
                                             num_int, cp, actividades, "", "", "", hashed, false, rol);
 
                                     DocumentReference documentReference = mFirestore.collection("organizaciones").document(cluni);
@@ -381,7 +383,7 @@ public class registro_de_asociacion extends AppCompatActivity {
                                                             @Override
                                                             public void onSuccess(Void unused) {
                                                                 String documentId = documentReference.getId();
-                                                                mAuth.createUserWithEmailAndPassword(correo, spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                mAuth.createUserWithEmailAndPassword(nEmail, spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                                                         runOnUiThread(new Runnable() {

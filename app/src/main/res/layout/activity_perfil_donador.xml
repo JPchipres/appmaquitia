@@ -6,160 +6,149 @@
     android:theme="@style/Theme.MaterialComponents.Light"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/background"
-    tools:context=".perfil_donador">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    tools:context=".perfil_osc">
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:padding="20dp">
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/imgperfil"
-            android:src="@drawable/foto_donador"
-            android:padding="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/imgperfil"
-            android:id="@+id/txtnombre"
-            android:text="Nombre del donador:"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/urbanist_bold"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt"
-            android:text="Donante en maquitia"
-            android:layout_below="@id/txtnombre"
-            android:layout_toEndOf="@id/imgperfil"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/urbanist"
-            android:textSize="18dp"
-            android:textColor="@color/grey"/>
-        <ImageView
-            android:layout_width="18dp"
-            android:layout_height="20dp"
-            android:background="@drawable/baseline_alternate_email_24"
-            android:layout_below="@id/imgperfil"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtemail"
-            android:text="email@email.com"
-            android:layout_below="@id/imgperfil"
-            android:layout_marginLeft="45dp"
-            android:fontFamily="@font/urbanist_semibold"
-            android:textSize="18dp"
-            android:textColor="@color/grey"/>
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtemail"
             android:orientation="vertical"
-            android:padding="10dp"
-            android:layout_marginTop="20dp">
-            <GridLayout
+            android:paddingVertical="5dp"
+            android:gravity="center">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgperfil"
+                android:layout_width="150dp"
+                android:layout_height="150dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:paddingVertical="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnEditar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:columnCount="2">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="25dp"
-                    android:text="Total donado:"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="Total de donaciones:"
-                    android:textSize="16dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textSize="20dp"
-                    android:text="$0.00 MXN"
-                    android:layout_marginLeft="25dp"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:textSize="20dp"
-                    android:text="0"
-                    android:fontFamily="@font/urbanist_bold"
-                    android:padding="5dp"/>
-
-
-            </GridLayout>
+                android:layout_height="40dp"
+                android:text="Editar Datos"
+                android:paddingHorizontal="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"/>
             <Button
-                android:id="@+id/btnHistorial"
-                android:layout_width="250dp"
+                android:id="@+id/btnCerrarSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:paddingHorizontal="10dp"
+                android:text="Cerrar Sesión"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:text="Historial donaciones"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_semibold"
-                android:padding="5dp"/>
+                android:fontFamily="@font/urbanist"
+                android:padding="5dp"
+                android:text="NOMBRE:"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_radius"
+                android:paddingHorizontal="10dp"
+                android:textAlignment="center"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Nombre"
+                android:inputType="textImeMultiLine"
+                android:textSize="18sp"
+                android:fontFamily="@font/urbanist"
+                android:enabled="false"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/urbanist"
+                android:padding="5dp"
+                android:text="CORREO:"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/etCorreo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_radius"
+                android:paddingHorizontal="10dp"
+                android:textAlignment="center"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Correo"
+                android:inputType="textImeMultiLine"
+                android:textSize="18sp"
+                android:fontFamily="@font/urbanist"
+                android:enabled="false"/>
             <Button
-                android:id="@+id/btnCambiarContraseña"
-                android:layout_width="250dp"
+                android:id="@+id/btnGuardar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:text="Cambiar Contraseña"
-                android:textSize="14dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_semibold"
-                android:padding="5dp"/>
-            <Button
-                android:id="@+id/btnterminos"
-                android:layout_width="250dp"
+                android:background="@drawable/button_ini"
+                android:textColor="@color/white"
+                android:text="guardar"/>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Terminos y condiciones"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_bold"
-                android:padding="5dp"/>
+                android:paddingBottom="10dp"
+                android:gravity="bottom"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/btnCambiarContrasena"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button3_style"
+                    android:textColor="@color/buttons"
+                    android:text="cambiar contraseña"/>
 
-            <Button
-                android:id="@+id/cerrar_sesion"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Cerrar sesion"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/urbanist_bold"
-                android:padding="5dp"/>
+                <Button
+                    android:id="@+id/btnTerminos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button3_style"
+                    android:textColor="@color/buttons"
+                    android:text="terminos y condiciones"/>
+                <Button
+                    android:id="@+id/btnHistorial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_ini"
+                    android:textColor="@color/white"
+                    android:text="Historial de donaciones"/>
+            </LinearLayout>
 
         </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
+    </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -167,14 +156,11 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/nabvar_background"
         android:layout_marginEnd="0dp"
-        android:layout_marginTop="700dp"
         app:menu="@menu/navbar_menu"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/gris_medio"
+        app:itemIconTint="@color/buttons"
         app:itemRippleColor="@color/white"
         app:labelVisibilityMode="unlabeled">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-
 
 </RelativeLayout>

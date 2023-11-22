@@ -50,26 +50,15 @@
                 android:textAlignment="center"
                 android:textSize="20sp"/>
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_marginTop="10dp"
-                android:id="@+id/imgvFotoPerfil"
+                android:id="@+id/ivFotoPreliminar"
                 android:src="@drawable/perfil_foto2"
                 android:layout_width="200dp"
                 android:layout_height="200dp"/>
 
             <Button
-                android:id="@+id/btn_verificar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Subir foto"
-                android:textSize="20sp"
-                android:textColor="@color/white"
-                android:background="@drawable/button_ini"
-                app:fontFamily="@font/urbanist"
-                android:layout_marginTop="10dp"/>
-
-            <Button
-                android:id="@+id/btnSeleccion"
+                android:id="@+id/btnSeleccionar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar Imagen"
@@ -77,6 +66,17 @@
                 android:textColor="@color/buttons"
                 app:fontFamily="@font/urbanist"
                 android:background="@drawable/button3_style"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/btnSubir"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Subir foto"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_ini"
+                app:fontFamily="@font/urbanist"
                 android:layout_marginTop="10dp"/>
 
         </LinearLayout>

@@ -102,13 +102,13 @@ public class Detalleorganizacion extends AppCompatActivity {
             Glide.with(Detalleorganizacion.this)
                     .load(foto)
                     .override(400,300)
-                    .transform(new RoundedCorners(30))
+                    .transform(new RoundedCorners(50))
                     .into(perfilFoto);
         }else {
             Glide.with(Detalleorganizacion.this)
                     .load(R.drawable.base_perfil_foto_ong)
                     .override(400,300)
-                    .transform(new RoundedCorners(30))
+                    .transform(new RoundedCorners(70))
                     .into(perfilFoto);
         }
 

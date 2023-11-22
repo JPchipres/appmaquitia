@@ -96,8 +96,7 @@ public class login_osc extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d("LOGIN_OSC ->", "FOR->OK");
                         iniciarSesion(email, pass);
-                    }
-                    else{
+                    } else{
                         alertas.alertFalied(login_osc.this, "Credenciales Incorrectas", 2000);
                     }
                 }

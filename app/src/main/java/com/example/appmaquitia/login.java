@@ -98,7 +98,6 @@ public class login extends AppCompatActivity {
                 Log.d("LOGIN ->", "ONCOMPLETE");
                 for (QueryDocumentSnapshot doc : task.getResult()){
                     if (task.isSuccessful()) {
-                        Log.d("LOGIN ->", "FOR->OK");
                         iniciarSesion(email, pass);
                     }
                     else{

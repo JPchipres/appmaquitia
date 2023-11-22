@@ -8,9 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.appmaquitia.adaptadores.AsociacionesAdapter;
@@ -26,6 +29,7 @@ import com.google.firebase.firestore.Query;
 
 public class publicaciones extends AppCompatActivity implements Asociacioninterface, BottomNavigationView.OnNavigationItemSelectedListener {
     RecyclerView asociacionR;
+    EditText etBuscador;
     AsociacionesAdapter asociacionA;
     FirebaseFirestore asociacionF;
     BottomNavigationView navbar;
@@ -41,19 +45,47 @@ public class publicaciones extends AppCompatActivity implements Asociacioninterf
         asociacionR = findViewById(R.id.rv_asociaciones);
         asociacionR.setLayoutManager(new LinearLayoutManager(this));
         bottomNavigationView = findViewById(R.id.navbar);
+        etBuscador = (EditText) findViewById(R.id.etBuscador);
 
         Query query = asociacionF.collection("organizaciones");
         FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
                 .Builder<Asociacion>().setQuery(query,Asociacion.class).build();
-        asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this);
+        asociacionA = new AsociacionesAdapter(firestoreRecyclerOptions,this, this);
         asociacionA.notifyDataSetChanged();
         asociacionR.setAdapter(asociacionA);
 
         navbar = (BottomNavigationView) findViewById(R.id.navbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-    }
+        etBuscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                buscar(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+    public void buscar(String filtro) {
+        Query query = asociacionF.collection("organizaciones")
+                .orderBy("nombre") // Ordena por el campo que desees
+                .startAt(filtro)
+                .endAt(filtro + "\uf8ff");
+
+        FirestoreRecyclerOptions<Asociacion> firestoreRecyclerOptions = new FirestoreRecyclerOptions
+                .Builder<Asociacion>().setQuery(query, Asociacion.class).build();
+
+        asociacionA.updateOptions(firestoreRecyclerOptions); // Actualiza el adaptador con los nuevos resultados
+        asociacionA.notifyDataSetChanged();
+    }
     @Override
     protected void onStart() {
         super.onStart();
