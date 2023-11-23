@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class pagoexitoso extends AppCompatActivity {
 
@@ -13,7 +14,12 @@ public class pagoexitoso extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagoexitoso);
-        Intent i = new Intent(pagoexitoso.this, publicaciones.class);
-        startActivity(i);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                startActivity(new Intent(pagoexitoso.this, historialDonador.class));
+            }
+        },2000);
     }
 }

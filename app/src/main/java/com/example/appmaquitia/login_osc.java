@@ -59,7 +59,13 @@ public class login_osc extends AppCompatActivity {
                 String email = txtemail.getText().toString();
                 String pass = txtpass.getText().toString();
                 if (!email.isEmpty() && !pass.isEmpty()) {
-                    autenticar(email, pass);
+                    FirebaseUser cu = mAuth.getCurrentUser();
+                    if(cu != null) {
+                        mAuth.signOut();
+                        autenticar(email, pass);
+                    }else {
+                        autenticar(email, pass);
+                    }
                 } else {
                     alertas.alertWarning(login_osc.this, "Rellene todos los campos", 2000);
                 }
@@ -87,15 +93,13 @@ public class login_osc extends AppCompatActivity {
 
     public void autenticar(String email, String pass) {
 
-        Log.d("LOGIN_OSC ->", "AUTENTICAR");
         mFirestore.collection("organizaciones").whereEqualTo("correo", email).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Log.d("LOGIN_OSC ->", "ONCOMPLETE");
                 for (QueryDocumentSnapshot doc : task.getResult()){
                     if (task.isSuccessful()) {
-                        Log.d("LOGIN_OSC ->", "FOR->OK");
                         iniciarSesion(email, pass);
+
                     } else{
                         alertas.alertFalied(login_osc.this, "Credenciales Incorrectas", 2000);
                     }

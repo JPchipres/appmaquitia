@@ -6,15 +6,27 @@ public class Transaccion {
     private String userID;
     private String oscID;
     private String nombre;
+    private String userName;
     private String monto;
     private String fecha;
-    public Transaccion(String userID, String oscID, String nombre, String monto, String fecha) {
+    public Transaccion(String userID, String oscID, String nombre, String monto, String fecha, String userName) {
         this.userID = userID;
         this.oscID = oscID;
         this.nombre = nombre;
         this.monto = monto;
         this.fecha = fecha;
+        this.userName = userName;
+
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public Transaccion(){
 
     }

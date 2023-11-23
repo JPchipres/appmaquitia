@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.appmaquitia.adaptadores.TransaccionAdapter;
 import com.example.appmaquitia.modelos.Transaccion;
+import com.example.appmaquitia.modelos.alertas;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -70,6 +71,7 @@ public class historialDonador extends AppCompatActivity {
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
                             Toast.makeText(historialDonador.this, "No data found in Database", Toast.LENGTH_SHORT).show();
+                            alertas.alertWarning(historialDonador.this,"Aún no haz realizado donaciones",2000);
                         }
                     }
 
@@ -77,6 +79,7 @@ public class historialDonador extends AppCompatActivity {
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent i = new Intent(historialDonador.this, perfil_donador.class);
                 startActivity(i);
             }

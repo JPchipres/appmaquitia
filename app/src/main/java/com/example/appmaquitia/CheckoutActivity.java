@@ -32,9 +32,6 @@ import org.json.JSONObject;
 
 import com.example.appmaquitia.databinding.ActivityCheckoutBinding;
 
-/**
- * Checkout implementation for the app
- */
 public class CheckoutActivity extends AppCompatActivity {
 
     TextView txtnombre, txtfecha;
@@ -68,9 +65,11 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 op1.setEnabled(true);
                 price1.setSelected(true);
+                price1.setBackgroundResource(R.drawable.button3_style);
+                price1.setTextColor(R.color.buttons);
                 price2.setSelected(false);
                 price3.setSelected(false);
-                monto = "10";
+                monto = "100";
 
             }
         });
@@ -80,8 +79,10 @@ public class CheckoutActivity extends AppCompatActivity {
                 op1.setEnabled(true);
                 price1.setSelected(false);
                 price2.setSelected(true);
+                price2.setBackgroundResource(R.drawable.button3_style);
+                price2.setTextColor(R.color.buttons);
                 price3.setSelected(false);
-                monto = "50";
+                monto = "500";
             }
         });
         price3.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +92,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 price1.setSelected(false);
                 price2.setSelected(false);
                 price3.setSelected(true);
-                monto = "100";
+                price3.setBackgroundResource(R.drawable.button3_style);
+                price3.setTextColor(R.color.buttons);
+                monto = "1000";
             }
         });
         op1.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +110,12 @@ public class CheckoutActivity extends AppCompatActivity {
             }
         });
 
-
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }

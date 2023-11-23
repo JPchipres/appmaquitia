@@ -64,7 +64,14 @@ public class login extends AppCompatActivity {
                 String email = txtemail.getText().toString();
                 String pass = txtpass.getText().toString();
                 if(!email.isEmpty() && !pass.isEmpty()) {
-                    autenticar(email, pass);
+
+                    FirebaseUser cu = mAuth.getCurrentUser();
+                    if(cu != null) {
+                        mAuth.signOut();
+                        autenticar(email, pass);
+                    }else {
+                        autenticar(email, pass);
+                    }
                 }else {
                     alertas.alertWarning(login.this,"Rellene todos los campos",2000);
                 }
@@ -114,7 +121,7 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user.isEmailVerified()) {
-                        i = new Intent(getApplicationContext(), perfil_donador.class);
+                        i = new Intent(getApplicationContext(), publicaciones_favoritos.class);
                         startActivity(i);
                         finish();
                     } else {
