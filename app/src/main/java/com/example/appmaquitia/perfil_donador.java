@@ -132,6 +132,7 @@ public class perfil_donador extends AppCompatActivity implements BottomNavigatio
                             alertas.alertSuccess(perfil_donador.this,"Actualización exitosa",2000);
                             etNombre.setEnabled(false);
                             btnGuardar.setEnabled(false);
+                            ivPerfil.setEnabled(false);
                             btnGuardar.setVisibility(View.GONE);
                         }
                     });

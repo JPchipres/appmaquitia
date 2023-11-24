@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".codigo_otp">
+    tools:context=".registro_de_asociacion_imagen">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -136,6 +136,7 @@ public class perfil_osc extends AppCompatActivity implements BottomNavigationVie
                     telefonos.setEnabled(false);
                     topico.setEnabled(false);
                     actividades.setEnabled(false);
+                    cambiarFoto.setEnabled(false);
                     guardar.setVisibility(View.GONE);
                 }
             }

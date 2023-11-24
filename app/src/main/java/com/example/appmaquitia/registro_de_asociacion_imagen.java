@@ -58,6 +58,7 @@ public class registro_de_asociacion_imagen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                startActivity(new Intent(registro_de_asociacion_imagen.this, perfil_osc.class));
             }
         });
         seleccionarimg.setOnClickListener(new View.OnClickListener() {
